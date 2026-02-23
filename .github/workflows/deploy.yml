@@ -1,0 +1,14 @@
+name: Deploy n8n workflows
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'workflows/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test déploiement
+        run: echo "Le déploiement fonctionnera bientôt !"
