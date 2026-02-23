@@ -4,11 +4,19 @@ on:
   push:
     branches: [ main ]
     paths:
+      - 'exports/**'
       - 'workflows/**'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Test déploiement
-        run: echo "Le déploiement fonctionnera bientôt !"
+      - name: Code récupéré
+        uses: actions/checkout@v3
+      
+      - name: Afficher les fichiers modifiés
+        run: |
+          echo "Fichiers modifiés :"
+          git show --stat
+          echo "Contenu du dossier exports :"
+          ls -la exports/
