@@ -1,0 +1,102 @@
+{
+  "createdAt": "2026-02-23T18:36:06.130Z",
+  "updatedAt": "2026-02-23T18:45:53.000Z",
+  "id": "gWX4eaq4QwcdvYvZ",
+  "name": "csv_to_ecxell",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "891dceea-a141-49ba-88a1-b16db9f76a9e",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "xlsx",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        220,
+        0
+      ],
+      "id": "8251d0ca-7e55-477a-b09c-ebf59cb59e0e",
+      "name": "Convert to File"
+    }
+  ],
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "b4c1b193-c30e-4a9c-a153-0b356600200f",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "createdAt": "2026-02-23T18:36:06.133Z",
+      "updatedAt": "2026-02-23T18:36:06.133Z",
+      "role": "workflow:owner",
+      "workflowId": "gWX4eaq4QwcdvYvZ",
+      "projectId": "uLic4LQeiu2ehDtB",
+      "project": {
+        "createdAt": "2026-02-23T18:19:39.884Z",
+        "updatedAt": "2026-02-23T18:21:08.059Z",
+        "id": "uLic4LQeiu2ehDtB",
+        "name": "ANDRY HErinomena <a.herinomena11@gmail.com>",
+        "type": "personal",
+        "projectRelations": [
+          {
+            "createdAt": "2026-02-23T18:19:39.884Z",
+            "updatedAt": "2026-02-23T18:19:39.884Z",
+            "role": "project:personalOwner",
+            "userId": "01af5c13-6bdb-4bd2-a09b-9228169e64fa",
+            "projectId": "uLic4LQeiu2ehDtB",
+            "user": {
+              "createdAt": "2026-02-23T18:19:39.651Z",
+              "updatedAt": "2026-02-23T18:21:11.000Z",
+              "id": "01af5c13-6bdb-4bd2-a09b-9228169e64fa",
+              "email": "a.herinomena11@gmail.com",
+              "firstName": "ANDRY",
+              "lastName": "HErinomena",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-02-23T18:21:11.818Z",
+                "personalization_survey_n8n_version": "1.70.0"
+              },
+              "settings": {
+                "userActivated": false
+              },
+              "role": "global:owner",
+              "disabled": false,
+              "mfaEnabled": false,
+              "isPending": false,
+              "isOwner": true
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": []
+}
