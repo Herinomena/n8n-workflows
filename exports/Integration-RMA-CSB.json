@@ -1,6 +1,6 @@
 {
   "createdAt": "2026-02-24T05:38:33.301Z",
-  "updatedAt": "2026-02-24T06:39:17.000Z",
+  "updatedAt": "2026-02-24T07:05:03.000Z",
   "id": "NOKSlp8wdbA1ILwi",
   "name": "Integration_RMA_CSB",
   "active": false,
@@ -10,8 +10,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -460,
-        -20
+        -420,
+        180
       ],
       "id": "ac97f3d4-06d3-4061-9b6d-b00549a9f80a",
       "name": "When clicking ‘Test workflow’"
@@ -23,8 +23,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -240,
-        -20
+        -140,
+        180
       ],
       "id": "717716b3-743d-482e-b2fa-b890863d56c0",
       "name": "Periode"
@@ -38,10 +38,88 @@
       "typeVersion": 3,
       "position": [
         80,
-        -20
+        180
       ],
       "id": "6477c688-1d6a-4d2d-868a-a1ed1012bbd0",
       "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        660,
+        0
+      ],
+      "id": "2fbbd9be-e6e6-40ee-a503-289dfcabd982",
+      "name": "DHIS2_Pivot",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "sUbBPqmnXUqoCkOa",
+          "name": "conn_Dhis2_Pivot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        680,
+        200
+      ],
+      "id": "4778422a-4d6d-4244-9e46-eaac5535b834",
+      "name": "DHIS2_Pivot1",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "sUbBPqmnXUqoCkOa",
+          "name": "conn_Dhis2_Pivot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        680,
+        400
+      ],
+      "id": "3c3aedcc-ad41-442c-a198-621553ddbe4a",
+      "name": "DHIS2_Pivot2",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "sUbBPqmnXUqoCkOa",
+          "name": "conn_Dhis2_Pivot"
+        }
+      }
     },
     {
       "parameters": {
@@ -74,38 +152,12 @@
         0
       ],
       "id": "52c25ec0-d636-472b-bb81-ffdaa6fba02f",
-      "name": "DHIS2_Min",
+      "name": "DHIS2_Min_Ifanadiana",
       "alwaysOutputData": true,
       "credentials": {
         "httpBasicAuth": {
           "id": "JneMYHqJc9mqYpv5",
           "name": "conn_dhis_Min"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBasicAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{$json}}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        680,
-        0
-      ],
-      "id": "2fbbd9be-e6e6-40ee-a503-289dfcabd982",
-      "name": "DHIS2_Pivot",
-      "credentials": {
-        "httpBasicAuth": {
-          "id": "sUbBPqmnXUqoCkOa",
-          "name": "conn_Dhis2_Pivot"
         }
       }
     },
@@ -140,38 +192,12 @@
         200
       ],
       "id": "3ae868d9-10b1-42b0-ac4a-c4223db2b9c9",
-      "name": "DHIS2_Min1",
+      "name": "DHIS2_Min_Mananjary",
       "alwaysOutputData": true,
       "credentials": {
         "httpBasicAuth": {
           "id": "JneMYHqJc9mqYpv5",
           "name": "conn_dhis_Min"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBasicAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{$json}}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        680,
-        200
-      ],
-      "id": "4778422a-4d6d-4244-9e46-eaac5535b834",
-      "name": "DHIS2_Pivot1",
-      "credentials": {
-        "httpBasicAuth": {
-          "id": "sUbBPqmnXUqoCkOa",
-          "name": "conn_Dhis2_Pivot"
         }
       }
     },
@@ -206,38 +232,12 @@
         400
       ],
       "id": "deb400a9-f06b-472b-8a2f-443f36b1bd75",
-      "name": "DHIS2_Min2",
+      "name": "DHIS2_Min_Nosy_Varika",
       "alwaysOutputData": true,
       "credentials": {
         "httpBasicAuth": {
           "id": "JneMYHqJc9mqYpv5",
           "name": "conn_dhis_Min"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBasicAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{$json}}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        680,
-        400
-      ],
-      "id": "3c3aedcc-ad41-442c-a198-621553ddbe4a",
-      "name": "DHIS2_Pivot2",
-      "credentials": {
-        "httpBasicAuth": {
-          "id": "sUbBPqmnXUqoCkOa",
-          "name": "conn_Dhis2_Pivot"
         }
       }
     }
@@ -259,7 +259,17 @@
         [],
         [
           {
-            "node": "DHIS2_Min",
+            "node": "DHIS2_Min_Ifanadiana",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "DHIS2_Min_Mananjary",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "DHIS2_Min_Nosy_Varika",
             "type": "main",
             "index": 0
           }
@@ -277,7 +287,7 @@
         ]
       ]
     },
-    "DHIS2_Min": {
+    "DHIS2_Min_Ifanadiana": {
       "main": [
         [
           {
@@ -288,7 +298,7 @@
         ]
       ]
     },
-    "DHIS2_Min1": {
+    "DHIS2_Min_Mananjary": {
       "main": [
         [
           {
@@ -299,7 +309,7 @@
         ]
       ]
     },
-    "DHIS2_Min2": {
+    "DHIS2_Min_Nosy_Varika": {
       "main": [
         [
           {
@@ -317,7 +327,7 @@
   "staticData": null,
   "meta": null,
   "pinData": {},
-  "versionId": "21c3c0e6-da0d-4b3a-84a6-834a4377aa01",
+  "versionId": "7b1dbef2-2b49-4ca1-b79d-03c28733d3e2",
   "triggerCount": 0,
   "shared": [
     {
