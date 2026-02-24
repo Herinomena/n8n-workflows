@@ -1,8 +1,8 @@
 {
-  "createdAt": "2026-02-24T05:38:33.301Z",
-  "updatedAt": "2026-02-24T07:05:03.000Z",
-  "id": "NOKSlp8wdbA1ILwi",
-  "name": "Integration_RMA_CSB",
+  "createdAt": "2026-02-24T07:03:38.963Z",
+  "updatedAt": "2026-02-24T07:26:55.000Z",
+  "id": "jCzHYtDbWQg5GHyb",
+  "name": "Integrations_RMA_CHRD",
   "active": false,
   "nodes": [
     {
@@ -10,10 +10,10 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -420,
+        -780,
         180
       ],
-      "id": "ac97f3d4-06d3-4061-9b6d-b00549a9f80a",
+      "id": "2cc9ded3-43f8-42b0-a409-ccabca6133dc",
       "name": "When clicking ‘Test workflow’"
     },
     {
@@ -23,10 +23,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -140,
+        -500,
         180
       ],
-      "id": "717716b3-743d-482e-b2fa-b890863d56c0",
+      "id": "fb76bfd4-196c-41a7-8598-fb1ddafb11c3",
       "name": "Periode"
     },
     {
@@ -37,10 +37,10 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        80,
+        -280,
         180
       ],
-      "id": "6477c688-1d6a-4d2d-868a-a1ed1012bbd0",
+      "id": "1ec3ee9e-c8ac-40cb-9768-e469ef0accfe",
       "name": "Loop Over Items"
     },
     {
@@ -57,10 +57,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        660,
+        520,
         0
       ],
-      "id": "2fbbd9be-e6e6-40ee-a503-289dfcabd982",
+      "id": "1ef28ee9-c959-48f1-9ced-d07fba8c00f0",
       "name": "DHIS2_Pivot",
       "credentials": {
         "httpBasicAuth": {
@@ -83,10 +83,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        680,
+        540,
         200
       ],
-      "id": "4778422a-4d6d-4244-9e46-eaac5535b834",
+      "id": "981e876b-46a8-46cc-b266-90355cd1dcde",
       "name": "DHIS2_Pivot1",
       "credentials": {
         "httpBasicAuth": {
@@ -109,10 +109,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        680,
+        540,
         400
       ],
-      "id": "3c3aedcc-ad41-442c-a198-621553ddbe4a",
+      "id": "7c73b6f8-b875-4c8e-b29f-91ac4cced935",
       "name": "DHIS2_Pivot2",
       "credentials": {
         "httpBasicAuth": {
@@ -131,7 +131,7 @@
           "parameters": [
             {
               "name": "dataSet",
-              "value": "mQEM6Pdzg8p"
+              "value": "XH4MSdxFKe5"
             },
             {
               "name": "period",
@@ -139,7 +139,7 @@
             },
             {
               "name": "orgUnit",
-              "value": "D9UWDj19ljP,U1YeJp3NDNV,QHPyq70qulM,M38BJM8ju1A,WCqkkkKNJEi,Pi2y9HFBDRj,h0z1bKoHDrU,YCvVB1VwWi0,mBZLeZ7Irx6,hXuxS0MOq3b,z6kDxHwInUT,okDqhh9n4yT,pczrAub8lnt,EE6WwIMgQ0F,O1wNJut8eci,RRe6ic0AU1Z,ZPvH8UsgwYv,DDR2w1c1GyE,r4U7PhBKR7S,uWoBok9YyvB,FGM6Ric1YnC,c2AYc6zu00e,A3hiudw2Rr4,b5rHHqkmI2a"
+              "value": "GDBYpa6pDOe"
             }
           ]
         },
@@ -148,10 +148,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        360,
+        0,
         0
       ],
-      "id": "52c25ec0-d636-472b-bb81-ffdaa6fba02f",
+      "id": "f03cbc6b-f368-4d51-a92a-f8d5bd603ed3",
       "name": "DHIS2_Min_Ifanadiana",
       "alwaysOutputData": true,
       "credentials": {
@@ -171,7 +171,7 @@
           "parameters": [
             {
               "name": "dataSet",
-              "value": "mQEM6Pdzg8p"
+              "value": "XH4MSdxFKe5"
             },
             {
               "name": "period",
@@ -179,7 +179,7 @@
             },
             {
               "name": "orgUnit",
-              "value": "TheMkAkfvgn,BxpH1ND8KFP,Ht69V3vwfVs,SOYJNYkE3Ah,xFewURfeM6L,gGzLr4oo3Pm,JJPXmBBn47m,BbsaOL1ndvg,KXNLOAzcjfG,Qy7TBEcefE9,eQSREv9e1bq,Y8p37aLjrHn,Znyo1UWzmFH,AxTFbOBjP1K,Dzr57TxAG74,onLZ8h8Nng2,YxrZbfqDA6r,EYZ5Ej566ob,bnMM4PwDm3F,IQ82WcLTcGX,dSY2oZjJcwj,kraCyRAvVgQ,A38WhL0NPsX,ErLw9twd3q5,VW9Pm0uz6SX,ebRE2LEmvie,zMJxWJIgF5N,xIpy9Oaipvh,ZboIy43ZwzX,cPkdD7UhXmn,IRn2N8HJCVT,mHDPNIDOecN,MV5fSBnQpFC,R6evSAV8MdQ,AikfHtzeOOW,NA1FBm3XUuW,ngHZIXy1Cyw,juLcMFcd4Fv,NaHyGHPvH7A,tHaaamft4vA,A0YU5ksfXZS,INrXsjpFZU8,pfav1hH9Nuf,eHk9mLUogOz,aihwzCRcQS3,vPmCzlQD5a8,elIt2dLIHBw,I0zrAwM5gZL,nE3sJcoVkhr,ZpdAbOChH4T,FNRS263It3k"
+              "value": "cPkdD7UhXmn"
             }
           ]
         },
@@ -188,11 +188,11 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        360,
+        0,
         200
       ],
-      "id": "3ae868d9-10b1-42b0-ac4a-c4223db2b9c9",
-      "name": "DHIS2_Min_Mananjary",
+      "id": "27a61f10-5a5b-4c37-8dfc-677e7a5aaa7f",
+      "name": "DHIS2_Min_Manajary",
       "alwaysOutputData": true,
       "credentials": {
         "httpBasicAuth": {
@@ -211,7 +211,7 @@
           "parameters": [
             {
               "name": "dataSet",
-              "value": "mQEM6Pdzg8p"
+              "value": "XH4MSdxFKe5"
             },
             {
               "name": "period",
@@ -219,7 +219,7 @@
             },
             {
               "name": "orgUnit",
-              "value": "TheMkAkfvgn,BxpH1ND8KFP,Ht69V3vwfVs,SOYJNYkE3Ah,xFewURfeM6L,gGzLr4oo3Pm,JJPXmBBn47m,BbsaOL1ndvg,KXNLOAzcjfG,Qy7TBEcefE9,eQSREv9e1bq,Y8p37aLjrHn,Znyo1UWzmFH,AxTFbOBjP1K,Dzr57TxAG74,onLZ8h8Nng2,YxrZbfqDA6r,EYZ5Ej566ob,bnMM4PwDm3F,IQ82WcLTcGX,dSY2oZjJcwj,kraCyRAvVgQ,A38WhL0NPsX,ErLw9twd3q5,VW9Pm0uz6SX,ebRE2LEmvie,zMJxWJIgF5N,xIpy9Oaipvh,ZboIy43ZwzX,cPkdD7UhXmn,IRn2N8HJCVT,mHDPNIDOecN,MV5fSBnQpFC,R6evSAV8MdQ,AikfHtzeOOW,NA1FBm3XUuW,ngHZIXy1Cyw,juLcMFcd4Fv,NaHyGHPvH7A,tHaaamft4vA,A0YU5ksfXZS,INrXsjpFZU8,pfav1hH9Nuf,eHk9mLUogOz,aihwzCRcQS3,vPmCzlQD5a8,elIt2dLIHBw,I0zrAwM5gZL,nE3sJcoVkhr,ZpdAbOChH4T,FNRS263It3k"
+              "value": "GM6MGTic1DQ"
             }
           ]
         },
@@ -228,11 +228,11 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        360,
+        0,
         400
       ],
-      "id": "deb400a9-f06b-472b-8a2f-443f36b1bd75",
-      "name": "DHIS2_Min_Nosy_Varika",
+      "id": "31c20e7e-2eee-44f4-afde-9fb62117320f",
+      "name": "DHIS2_Min_Nosy_varika",
       "alwaysOutputData": true,
       "credentials": {
         "httpBasicAuth": {
@@ -240,6 +240,45 @@
           "name": "conn_dhis_Min"
         }
       }
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n\n    const newItem = { ...item.json };\n\n    // Modifier dataSet\n    newItem.dataSet = \"sTdqwhFX0qj\";\n\n    // Mettre completeDate à null\n    newItem.completeDate = null;\n\n    // Si dataValues existe, on peut aussi modifier dedans si nécessaire\n    if (newItem.dataValues && Array.isArray(newItem.dataValues)) {\n        newItem.dataValues = newItem.dataValues.map(dv => ({\n            ...dv\n        }));\n    }\n\n    return {\n        json: newItem\n    };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        260,
+        0
+      ],
+      "id": "85f7caef-b674-4023-96c2-bcf2d4696f6b",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n\n    const newItem = { ...item.json };\n\n    // Modifier dataSet\n    newItem.dataSet = \"sTdqwhFX0qj\";\n\n    // Mettre completeDate à null\n    newItem.completeDate = null;\n\n    // Si dataValues existe, on peut aussi modifier dedans si nécessaire\n    if (newItem.dataValues && Array.isArray(newItem.dataValues)) {\n        newItem.dataValues = newItem.dataValues.map(dv => ({\n            ...dv\n        }));\n    }\n\n    return {\n        json: newItem\n    };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        280,
+        200
+      ],
+      "id": "92e8f78a-228c-4915-b331-71a0e9a689d2",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n\n    const newItem = { ...item.json };\n\n    // Modifier dataSet\n    newItem.dataSet = \"sTdqwhFX0qj\";\n\n    // Mettre completeDate à null\n    newItem.completeDate = null;\n\n    // Si dataValues existe, on peut aussi modifier dedans si nécessaire\n    if (newItem.dataValues && Array.isArray(newItem.dataValues)) {\n        newItem.dataValues = newItem.dataValues.map(dv => ({\n            ...dv\n        }));\n    }\n\n    return {\n        json: newItem\n    };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        280,
+        400
+      ],
+      "id": "daeed832-afb5-4ae2-9ebf-b0fdbcf6d9e0",
+      "name": "Code2"
     }
   ],
   "connections": {
@@ -248,28 +287,6 @@
         [
           {
             "node": "Periode",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Loop Over Items": {
-      "main": [
-        [],
-        [
-          {
-            "node": "DHIS2_Min_Ifanadiana",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "DHIS2_Min_Mananjary",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "DHIS2_Min_Nosy_Varika",
             "type": "main",
             "index": 0
           }
@@ -287,7 +304,62 @@
         ]
       ]
     },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "DHIS2_Min_Ifanadiana",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "DHIS2_Min_Manajary",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "DHIS2_Min_Nosy_varika",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "DHIS2_Min_Ifanadiana": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DHIS2_Min_Manajary": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DHIS2_Min_Nosy_varika": {
+      "main": [
+        [
+          {
+            "node": "Code2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
       "main": [
         [
           {
@@ -298,7 +370,7 @@
         ]
       ]
     },
-    "DHIS2_Min_Mananjary": {
+    "Code1": {
       "main": [
         [
           {
@@ -309,7 +381,7 @@
         ]
       ]
     },
-    "DHIS2_Min_Nosy_Varika": {
+    "Code2": {
       "main": [
         [
           {
@@ -327,14 +399,14 @@
   "staticData": null,
   "meta": null,
   "pinData": {},
-  "versionId": "7b1dbef2-2b49-4ca1-b79d-03c28733d3e2",
+  "versionId": "b11e79e3-f7ca-4479-8ed7-ee719895be48",
   "triggerCount": 0,
   "shared": [
     {
-      "createdAt": "2026-02-24T05:38:33.304Z",
-      "updatedAt": "2026-02-24T05:38:33.304Z",
+      "createdAt": "2026-02-24T07:03:38.965Z",
+      "updatedAt": "2026-02-24T07:03:38.965Z",
       "role": "workflow:owner",
-      "workflowId": "NOKSlp8wdbA1ILwi",
+      "workflowId": "jCzHYtDbWQg5GHyb",
       "projectId": "uLic4LQeiu2ehDtB",
       "project": {
         "createdAt": "2026-02-23T18:19:39.884Z",
