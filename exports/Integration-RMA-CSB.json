@@ -351,7 +351,7 @@
             "projectId": "uLic4LQeiu2ehDtB",
             "user": {
               "createdAt": "2026-02-23T18:19:39.651Z",
-              "updatedAt": "2026-02-23T18:21:11.000Z",
+              "updatedAt": "2026-02-24T08:05:58.679Z",
               "id": "01af5c13-6bdb-4bd2-a09b-9228169e64fa",
               "email": "a.herinomena11@gmail.com",
               "firstName": "ANDRY",
@@ -362,7 +362,8 @@
                 "personalization_survey_n8n_version": "1.70.0"
               },
               "settings": {
-                "userActivated": false
+                "userActivated": false,
+                "isOnboarded": true
               },
               "role": "global:owner",
               "disabled": false,

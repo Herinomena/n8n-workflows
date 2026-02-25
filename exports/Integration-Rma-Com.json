@@ -1,0 +1,479 @@
+{
+  "createdAt": "2026-02-24T07:37:52.559Z",
+  "updatedAt": "2026-02-24T08:10:40.000Z",
+  "id": "ptqbHHjxLPiEJ7G3",
+  "name": "Integration_Rma_Com",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -980,
+        200
+      ],
+      "id": "b21ea13d-5a06-4aa1-9415-985b4dc5aef0",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -100,
+        180
+      ],
+      "id": "35edc584-1416-4f36-b98e-64e274a0062f",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        560,
+        -20
+      ],
+      "id": "266da585-1626-45a1-942c-ce7973d7480a",
+      "name": "DHIS2_Pivot",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "sUbBPqmnXUqoCkOa",
+          "name": "conn_Dhis2_Pivot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        560,
+        200
+      ],
+      "id": "a2d60133-70b2-4415-a7b3-e034bd1c5bb6",
+      "name": "DHIS2_Pivot1",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "sUbBPqmnXUqoCkOa",
+          "name": "conn_Dhis2_Pivot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        580,
+        480
+      ],
+      "id": "7945d595-d39e-4703-b44d-e61369a56159",
+      "name": "DHIS2_Pivot2",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "sUbBPqmnXUqoCkOa",
+          "name": "conn_Dhis2_Pivot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://ministere-sante.mg/api/dataValueSets?",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "dataSet",
+              "value": "qNTxFeMEaKj"
+            },
+            {
+              "name": "startDate",
+              "value": "={{ $('Merge').item.json.startDate }}"
+            },
+            {
+              "name": "endDate",
+              "value": "={{ $('Merge').item.json.endDate }}"
+            },
+            {
+              "name": "orgUnit",
+              "value": "NHGlRwg0Qwu,nhp8hOvQUT3,NhBFAojLAnq,nHeDldiT3lB,NhcIarFZ0gg,NhgHicA7zmx,NpOSpQvGHoL,nPKeJthEM73,NPoWFLdHHLc,nPUb0c5EcMk,nPX6RxV9I6v,NoTbIakXnYE,NPG9aF3lhTC,NOf5U0kPmmS,noGSitwu1YV,nOvkLuoAvaE,nPjsBwjNwN5,nObSjXaMtmC,NojOuDYO6d9,noTUS4NpOt9,npDsoxdC4tm,NoYX2eHiThV,nPErooJK6FG,NOKJwSSC9yV,NOUicYmzdkM,NoDz1A2X03y,nongBlHhnBk,Np9zQuuUkT0,NocwbwPY49A,nnEsZM0lafn,nndvKJAei1g,NNHu1fGVJeX,NNFHN9ImezB,nn8l1jOZutK,nn5sGwD1W6w,nMZFiAgwNXH,nmwxOi0CZg5,nmD33chxaBT,nMvTEvhWAVW,NmREmw5LWic,nMpQCEjkTXZ,NmKPRZcZMBG,nn1WJO9yWZm,NmzeU6VaV8i,nMx63czP2Ae,NmhBxQ7PYdC,nmVtteBwOYq,nmEMBbaJyWU,nMfP4PUaIbF,NMImB5RkIZB,NQWJDtbt7ea,NQuW4Rtnjsl,nqyNM2FCYcn,nqsyqKRlhol,nqza6A6H399,NR1bX1UHhZM,nqW6laUJNx2,nr04NAmCslA,nNYf4rK6blR,NnTT4ov2gsL,NOaoxq3vnc0,NNjaGNXVzqY,NO8yCUU6eVK,nO6tTqYb8Zb,NnPOlH7LT8U,nnvIsl7XJkC,NnQL2GIb7Cb,NJybOHL5Q60,NjyAADlaV9O,nJUaKfgD6hA,nJl5WgER8PU,nJNZtfJ8P4s,njoFUbxjdeD,NjOlN7ogDI1,NjVre8e5OVb,njOofTRHfIV,Njr8K7rHENE,nJjPiK1qn75,njSiTzCwC07,NJuWC7bKGo7,NjsjGX3mti8,niqxHXfJaZg,nJg2gFtkEQG,nit1VMYMSEc,nIU59blKoSz,nJ41cDAbDTK,njF5rCZeEin,NjFmT8vGYte,Niqsy6XdJfM,njIuCDYoiFv,NjgEEmvRRTt,nmcOsX9DPDd,NM7oUDc02Td,nma7brQLV5w,nmble1lI52U,nm6sSeyEVgk,nmbm3mA5SlU,nM9ANDSCXa0,nQifiunYfC0,NqNvtciAHQJ,nqlkol82K9z,nqQz5XyejUS,nq5GI3F2CCZ,nQeIQIluSLN,NqDMBxPTOXL,nQ6JraTvdjw,nQI8STvRBzM,nqCwln4FrWj,NQfkydB4svK,NpYyCqxphO3,nQbxcyqYyE2,nQbP8ETTnR4,NQH6cejrFIJ,NqbcZ5fhraz,NGk42ableWs,NgNK7cFJDLR,ngOUK2x3rO8,nGswNcrtBCW,NGuHJF8vef8,NGxXvp7qi48,NGjuCieFofW,nh1SDW0DuQP,NH6km4XsRdx,NiOIIht8nBW,nI8ROa8oOxH,niA2fAJNCjN,nIcna9odW5i,NIF2yn3SFhU,niiqdtu9lFU,NiGaS2wQ7nC,NioaQKw6eR8,nIhczINg82d,Ni6HLgy72nt,NiPVq9fdj9I,niPWWDnI4AE,NSArSb3qq97,nsfCG9MeMiH,nSBC7TetHbn,nSEHyISB71L,nsfzdkukzul,nrZui26yNY2,NRg3HxY4ule,nsaKH6KRA5s,NRoO17yGFjs,nRg2aJuvpvz,NRKjtCAkdVI,NRZcm1lEy5u,NrHPCBkktgL,NrNhl3lT6q9,NRuWD8BM1jD,NR788pi0I3e,NRqeU3F5LoU,Nram346jMbY,NRcJD3FZ5fX,nkDyu1NI3yv,nJZGBECBspE,NK3wDj5Cl2d,NJZo855zRWU,NJzE9cyipSO,nKBNG4TA9ye,nK56bOPbkUF,NjYKxeiEw9k,njZCD2mJwsz,NJyJhwtcocK,nhR0Pat5DlD,NHsAEr2hrhx,NHTwonuDKC6,nHTZ72jAFvv,NhPMW9k508q,NHvhM6egCml,NHVkAeLFPcK,ni2fhsEBQV4,nll5Vf4HO0u,nm0fEIqvkKG,Nlj6ztotjaY,nlLJxsMVKbi,nm0HDq47aqP,nlyV8TTcLAC,nL4inf71e6v,NLhVCk2cWFQ,nKX9oIy5HTw,NLbaZ2vV52C,nLJ2df5ihXt,nLcJCGOmAq5,Nle2yV3LLqH,nKzUk8iUYao,Nl3gjVEOoCS,nKiccllE1Gt,NKVKLTSXOa9,NlgNaSRnFOb,NlA2gFHEn2e,NkUoPHdmiA2,nkIbspPvmRh,nkoqILeLIGJ,NKnlmpvCHID"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        -20
+      ],
+      "id": "827e6ec4-1f5b-4d32-9eb9-ead7cd1b34b4",
+      "name": "DHIS2_Min_Ifanadiana",
+      "alwaysOutputData": true,
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "JneMYHqJc9mqYpv5",
+          "name": "conn_dhis_Min"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = [];\nconst today = new Date();\n\nfor (let i = 1; i <= 3; i++) {  // exclut le mois courant\n    const date = new Date(today.getFullYear(), today.getMonth() - i, 1);\n\n    const year = date.getFullYear();\n    const month = String(date.getMonth() + 1).padStart(2, '0');\n\n    const startDate = `${year}-${month}-01`;\n\n    results.push({\n        json: {\n            startDate: startDate\n        }\n    });\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -720,
+        60
+      ],
+      "id": "930df99d-6562-498f-a0c7-da0456994646",
+      "name": "startDate"
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = [];\nconst today = new Date();\n\nfor (let i = 1; i <= 3; i++) {  // exclut le mois courant\n    \n    // Premier jour du mois précédent\n    const date = new Date(today.getFullYear(), today.getMonth() - i, 1);\n\n    const year = date.getFullYear();\n    const month = String(date.getMonth() + 1).padStart(2, '0');\n\n    // Dernier jour du mois :\n    // astuce : jour 0 du mois suivant = dernier jour du mois courant\n    const lastDayDate = new Date(year, date.getMonth() + 1, 0);\n    const lastDay = String(lastDayDate.getDate()).padStart(2, '0');\n\n    const endDate = `${year}-${month}-${lastDay}`;\n\n    results.push({\n        json: {\n            endDate: endDate\n        }\n    });\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -720,
+        320
+      ],
+      "id": "17a912c6-9fdd-4776-9493-1af92351cc60",
+      "name": "endDate"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        -460,
+        180
+      ],
+      "id": "34bbcec0-ff56-4431-ac99-8540be8e47a7",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "url": "https://ministere-sante.mg/api/dataValueSets?",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "dataSet",
+              "value": "qNTxFeMEaKj"
+            },
+            {
+              "name": "startDate",
+              "value": "={{ $('Merge').item.json.startDate }}"
+            },
+            {
+              "name": "endDate",
+              "value": "={{ $('Merge').item.json.endDate }}"
+            },
+            {
+              "name": "orgUnit",
+              "value": "mX0r4qWG5tH,MWzOXZ0OCi4,mWYjd7l6HAr,MWwdcT8ymeW,mwvpja7dkl4,mWVArHmYzmj,MxSXZNqpJaj,mxqyYJGUoX7,mxvnCa9POAC,mxmc9MooAS6,mxvfUEPLrej,MXCn4tOX6pg,mx5QFM4WYkD,mxdIkypeYMD,mx3PD6YuOnN,MxINC7KeaaO,MxaayZVhVbB,mX3ergiSZpk,MxB53F0Df9d,MxzGEGPTgMm,my9f3adLxlj,mXXq72VIIoj,My3lP3uaw2O,My9BjOI1o6m,My8pyg8HifR,Mz62qH54bim,MZaTui7zLzI,Mz3aE1ccqiF,mzL9PBf0gGm,MZmi6Gkq4ba,mZJ87VyIelV,MyZGOELdGMX,myN1iOnWnxd,Mz1j1XfPoYJ,mYDNGPHWPTA,MYQCpwtIHn5,mYsCC2aH7vw,MyenqK5PsKr,mYnZimKXYL1,mZrPgkkaDIS,MZRojXcuGgp,MzvaEqWdQPi,MZXkSmDSsZf,MZTR7HdznnT,MZsiAMQbaA1,N0Qc5Wn4Yfj,n0YNSHx2OL8,N1B4my4Tsvs,N0zmv1SGHuy,N0LZ17vAx3m,N18L1cWSeJo,n0IMpUvRBcr,N0KKxsJuAE4,mzYJ74wMyRk,N00YPHlIWIK,n0hZNG2D5pj,n0CaLGUyPsm,n07Oyi0yGex,n1txNLmlNFJ,n1qhQckfF9d,n1tITOuWqTj,N1BN7OpevtW,n1nFDxPKQHB,n1Yf2oUdGxa,N1kFPk7nWuz,n2f6TQReLsU,N2glO686SML,N2Vq4SNsgaW,N2COVGsjAks,n24vq29Pf2r,n2CopSk7hqo,nBPtUO5rqTo,NBYjIGPPfUy,nc50KcJ1k6A,nBsZyTHOgSl,Nbx95yE0lU0,NBGp09sb15x,NCAA17HzDel,nc1gjp9uvKD,n3YMnl5xGAf,n4asbmLsCPe,N49r3uqo8Sz,N3OTwPrPUje,n4jQxG8HL3z,N4l4RM2tcZO,N4lpdPYcuTg,n4A8pKBKIe3,n37IcdBMLdA,n3mPb3TMKcA,n3elkRcB89d,n3DSsNHbfSO,OMu8OTiwiHK,N3wXl5Ga7we,N4FxgQCv8Dd,N4ZbZyrsK9s,N53LEDyqoAe,n4U5XIX8heB,n4XutwBF3aA,N4QjMbYPTvm,N4vAprEXdvy,N5PgoyDsfVR,n5cWuXGbkGw,N5ljK3DetCF,N5hpJLbp7nz,N5pvLe47hEy,n65KpwgJdlV,n6B1ZdlStCg,n5pYmtLcpXL,N5C2zCQp2X1,n5SOhaHQraj,n5yx0AEEFyd,n6A5hvyCHPi,n5Gron9ft7P,N5rE3wAeM7x,n7hHuAxfR1N,N7EKyN37EBG,N7JbF1rNR1S,n7aSwQUbIZL,N7jaCqlsCzu,N75spTdsZUt,n6ZGBgi7GKu,N7M9Qs0fAzl,n81hr8CBEbu,N7XV7YNThya,N7qlbph0EEs,n7UVSyMEGkf,n7mbudczRWY,n8evlB5Jypa,N8gdZv5P4qF,N8MRV85oyH7,n8b8EDPWbw7,N8ciEz9iOHa,N8VExStdiSH,N9MJRyNiQXJ,n9f9j5YSB59,n9oAldScBPF,n9k4eOamG9m,n9DlpdeghdJ,NaGqEmAW4kG,NaF9N1sMPiR,nAh1A2IPSG4,NAcVXQ6PNtz,NAahVvBdvK2,n9ui3TA9vGW,na2RyoE4BaO,NaCfz6ojNgx,n9q9cKYLdnb,nahNwLAZDBD,NaKLndVd7Gy,NAPB6q7D78y,NammUoGaIlW,nAhm4XcsoSA,NAiQE4iBV3y,NAosVzYWbcp,n5pYmtLcpXL,N5C2zCQp2X1,n5SOhaHQraj,n5yx0AEEFyd,n6A5hvyCHPi,n5Gron9ft7P,N5rE3wAeM7x,n7hHuAxfR1N,N7EKyN37EBG,N7JbF1rNR1S,n7aSwQUbIZL,N7jaCqlsCzu,N75spTdsZUt,n6ZGBgi7GKu,N7M9Qs0fAzl,n81hr8CBEbu,N7XV7YNThya,N7qlbph0EEs,n7UVSyMEGkf,n7mbudczRWY,n8evlB5Jypa,N8gdZv5P4qF,N8MRV85oyH7,n8b8EDPWbw7,N8ciEz9iOHa,N8VExStdiSH,N9MJRyNiQXJ,n9f9j5YSB59,n9oAldScBPF,n9k4eOamG9m,n9DlpdeghdJ,NaGqEmAW4kG,NaF9N1sMPiR,nAh1A2IPSG4,NAcVXQ6PNtz,NAahVvBdvK2,n9ui3TA9vGW,na2RyoE4BaO,NaCfz6ojNgx,n9q9cKYLdnb,nahNwLAZDBD,NaKLndVd7Gy,NAPB6q7D78y,NammUoGaIlW,nAhm4XcsoSA,NAiQE4iBV3y,NAosVzYWbcp,NB7eqXoE2R9,Nb4B3Eb0wTG,nAwYZvr4uXx,NAsl8Rx8H1z,nARV7hpZe81,nAQY3DLsuOv,narUrqXyfmL,naYQMideqXq,nAYTsq27Qme,NB5HPg4lZap,naPCltKBaZo,nB7r8fj1aJV,NBdT3iv0Jdd,NbCCrtINfJR,nbdmJge3hco,Nbe5nwNOWuH,NBCzon4kjkU,nBfPgpU2j2T,NBE8qSzMhFO,nB9tjQx7qLG,ncjBaP4NlNL,ncfTlufvAf6,nCedmqJkSab,ncHX7GhgdRw,nCLAqvfd0dC,NcAtlM2CxhN,NchF9oWaRrv,NCFWw5b1F3l,nD0F9ui8Nga,ncW6xCCNS7U,Ncv3dhm1WKr,NcPVtCNxJtS,ncp8UEmO0Nc,Ncui1OhIui1,NCNUmUdyxiv,ncNHTPuom6N,ncrGZtPNsdp,NDdK3PErBwi,nDak4FYY7by,Nd9lbxQv72E,Ndc6vwLpPL0,Nd2kI24Ysjw,ndFFkLmgpdh,NdR2GbJ4yux,NDPJDhY7drG,nDYKoSsgDae,NDSoOEPf9Xz,nDmpuJkb5Dx,NE0wSFcq85m,nDGGWGoGAQP,NDxMK7ByHjE,NDJYj6pnGtq,NdK05Nm1xRX,NB7eqXoE2R9,Nb4B3Eb0wTG,nAwYZvr4uXx,NAsl8Rx8H1z,nARV7hpZe81,nAQY3DLsuOv,narUrqXyfmL,naYQMideqXq,nAYTsq27Qme,NB5HPg4lZap,naPCltKBaZo,nB7r8fj1aJV,NBdT3iv0Jdd,NbCCrtINfJR,nbdmJge3hco,Nbe5nwNOWuH,NBCzon4kjkU,nBfPgpU2j2T,NBE8qSzMhFO,nB9tjQx7qLG,ncjBaP4NlNL,ncfTlufvAf6,nCedmqJkSab,ncHX7GhgdRw,nCLAqvfd0dC,NcAtlM2CxhN,NchF9oWaRrv,NCFWw5b1F3l,nD0F9ui8Nga,ncW6xCCNS7U,Ncv3dhm1WKr,NcPVtCNxJtS,ncp8UEmO0Nc,Ncui1OhIui1,NCNUmUdyxiv,ncNHTPuom6N,ncrGZtPNsdp,NDdK3PErBwi,nDak4FYY7by,Nd9lbxQv72E,Ndc6vwLpPL0,Nd2kI24Ysjw,ndFFkLmgpdh,NdR2GbJ4yux,NDPJDhY7drG,nDYKoSsgDae,NDSoOEPf9Xz,nDmpuJkb5Dx,NE0wSFcq85m,nDGGWGoGAQP,NDxMK7ByHjE,NDJYj6pnGtq,NdK05Nm1xRX,NeDLD0dIVsB,nE79oU4m59R,NE3IGibCrUT,NEeUGvFAfPL,nEGDI49riU7,NE1jB3WgICT,nEBeaVC82RV,nEOHhRftxUA,NEgTyyI1U7p,NElhFomB8Ed,NeMAfI6pnH8,neMKrGhZWb8,NeGfP3BAuLV,nf6IbtSfLoQ,Nf5oMnV3Yv4,neUyl2P9GNI,nF1QnIAFhBa,nFd1OOKdbcg,NFghlWBjqn9,Nf4MqPR6ji8,NevzzuLhwDL,NF3yUICZdNs,Net1iKNpH2C,NFB2xU2KZJR,NFEh6pdnT8Z,NEoyuaoQCYg,nF1q6IlqwEj,nFgQLDmJ6g0,NfiSknjddJk,nFkzKqsjV6w,NFkcfk9XjZ6,Nfgju48VnmP,NGg0rG3JWU8,nghGlnFwHao,ngDQVh3kT5U,nGFudKcFOs2;nGBQ8uWPxAf,NFt5dJzTdyX,Ng4fSETuV70,nFz0MA85kJa,NFU587IpTIP,NfmMrCvI9Qs,NGDGQL6L6gv,Ng9y3LRy7wt,ngCoDKKjYFk,NFY9MJ3D8X6,NGDf0XXst8N,nFN2AjTeCMc,nFS5aKnXxhk,nFxmB8IneUi,NfY6QL7XF3K,nFmDmVtAu8F"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        200
+      ],
+      "id": "ec92265c-eeea-4aca-a32a-5daaf8995796",
+      "name": "DHIS2_Min_Mananjary",
+      "alwaysOutputData": true,
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "JneMYHqJc9mqYpv5",
+          "name": "conn_dhis_Min"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://ministere-sante.mg/api/dataValueSets?",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "dataSet",
+              "value": "qNTxFeMEaKj"
+            },
+            {
+              "name": "startDate",
+              "value": "={{ $('Merge').item.json.startDate }}"
+            },
+            {
+              "name": "endDate",
+              "value": "={{ $('Merge').item.json.endDate }}"
+            },
+            {
+              "name": "orgUnit",
+              "value": "mX0r4qWG5tH,MWzOXZ0OCi4,mWYjd7l6HAr,MWwdcT8ymeW,mwvpja7dkl4,mWVArHmYzmj,MxSXZNqpJaj,mxqyYJGUoX7,mxvnCa9POAC,mxmc9MooAS6,mxvfUEPLrej,MXCn4tOX6pg,mx5QFM4WYkD,mxdIkypeYMD,mx3PD6YuOnN,MxINC7KeaaO,MxaayZVhVbB,mX3ergiSZpk,MxB53F0Df9d,MxzGEGPTgMm,my9f3adLxlj,mXXq72VIIoj,My3lP3uaw2O,My9BjOI1o6m,My8pyg8HifR,Mz62qH54bim,MZaTui7zLzI,Mz3aE1ccqiF,mzL9PBf0gGm,MZmi6Gkq4ba,mZJ87VyIelV,MyZGOELdGMX,myN1iOnWnxd,Mz1j1XfPoYJ,mYDNGPHWPTA,MYQCpwtIHn5,mYsCC2aH7vw,MyenqK5PsKr,mYnZimKXYL1,mZrPgkkaDIS,MZRojXcuGgp,MzvaEqWdQPi,MZXkSmDSsZf,MZTR7HdznnT,MZsiAMQbaA1,N0Qc5Wn4Yfj,n0YNSHx2OL8,N1B4my4Tsvs,N0zmv1SGHuy,N0LZ17vAx3m,N18L1cWSeJo,n0IMpUvRBcr,N0KKxsJuAE4,mzYJ74wMyRk,N00YPHlIWIK,n0hZNG2D5pj,n0CaLGUyPsm,n07Oyi0yGex,n1txNLmlNFJ,n1qhQckfF9d,n1tITOuWqTj,N1BN7OpevtW,n1nFDxPKQHB,n1Yf2oUdGxa,N1kFPk7nWuz,n2f6TQReLsU,N2glO686SML,N2Vq4SNsgaW,N2COVGsjAks,n24vq29Pf2r,n2CopSk7hqo,nBPtUO5rqTo,NBYjIGPPfUy,nc50KcJ1k6A,nBsZyTHOgSl,Nbx95yE0lU0,NBGp09sb15x,NCAA17HzDel,nc1gjp9uvKD,n3YMnl5xGAf,n4asbmLsCPe,N49r3uqo8Sz,N3OTwPrPUje,n4jQxG8HL3z,N4l4RM2tcZO,N4lpdPYcuTg,n4A8pKBKIe3,n37IcdBMLdA,n3mPb3TMKcA,n3elkRcB89d,n3DSsNHbfSO,OMu8OTiwiHK,N3wXl5Ga7we,N4FxgQCv8Dd,N4ZbZyrsK9s,N53LEDyqoAe,n4U5XIX8heB,n4XutwBF3aA,N4QjMbYPTvm,N4vAprEXdvy,N5PgoyDsfVR,n5cWuXGbkGw,N5ljK3DetCF,N5hpJLbp7nz,N5pvLe47hEy,n65KpwgJdlV,n6B1ZdlStCg,n5pYmtLcpXL,N5C2zCQp2X1,n5SOhaHQraj,n5yx0AEEFyd,n6A5hvyCHPi,n5Gron9ft7P,N5rE3wAeM7x,n7hHuAxfR1N,N7EKyN37EBG,N7JbF1rNR1S,n7aSwQUbIZL,N7jaCqlsCzu,N75spTdsZUt,n6ZGBgi7GKu,N7M9Qs0fAzl,n81hr8CBEbu,N7XV7YNThya,N7qlbph0EEs,n7UVSyMEGkf,n7mbudczRWY,n8evlB5Jypa,N8gdZv5P4qF,N8MRV85oyH7,n8b8EDPWbw7,N8ciEz9iOHa,N8VExStdiSH,N9MJRyNiQXJ,n9f9j5YSB59,n9oAldScBPF,n9k4eOamG9m,n9DlpdeghdJ,NaGqEmAW4kG,NaF9N1sMPiR,nAh1A2IPSG4,NAcVXQ6PNtz,NAahVvBdvK2,n9ui3TA9vGW,na2RyoE4BaO,NaCfz6ojNgx,n9q9cKYLdnb,nahNwLAZDBD,NaKLndVd7Gy,NAPB6q7D78y,NammUoGaIlW,nAhm4XcsoSA,NAiQE4iBV3y,NAosVzYWbcp,n5pYmtLcpXL,N5C2zCQp2X1,n5SOhaHQraj,n5yx0AEEFyd,n6A5hvyCHPi,n5Gron9ft7P,N5rE3wAeM7x,n7hHuAxfR1N,N7EKyN37EBG,N7JbF1rNR1S,n7aSwQUbIZL,N7jaCqlsCzu,N75spTdsZUt,n6ZGBgi7GKu,N7M9Qs0fAzl,n81hr8CBEbu,N7XV7YNThya,N7qlbph0EEs,n7UVSyMEGkf,n7mbudczRWY,n8evlB5Jypa,N8gdZv5P4qF,N8MRV85oyH7,n8b8EDPWbw7,N8ciEz9iOHa,N8VExStdiSH,N9MJRyNiQXJ,n9f9j5YSB59,n9oAldScBPF,n9k4eOamG9m,n9DlpdeghdJ,NaGqEmAW4kG,NaF9N1sMPiR,nAh1A2IPSG4,NAcVXQ6PNtz,NAahVvBdvK2,n9ui3TA9vGW,na2RyoE4BaO,NaCfz6ojNgx,n9q9cKYLdnb,nahNwLAZDBD,NaKLndVd7Gy,NAPB6q7D78y,NammUoGaIlW,nAhm4XcsoSA,NAiQE4iBV3y,NAosVzYWbcp,NB7eqXoE2R9,Nb4B3Eb0wTG,nAwYZvr4uXx,NAsl8Rx8H1z,nARV7hpZe81,nAQY3DLsuOv,narUrqXyfmL,naYQMideqXq,nAYTsq27Qme,NB5HPg4lZap,naPCltKBaZo,nB7r8fj1aJV,NBdT3iv0Jdd,NbCCrtINfJR,nbdmJge3hco,Nbe5nwNOWuH,NBCzon4kjkU,nBfPgpU2j2T,NBE8qSzMhFO,nB9tjQx7qLG,ncjBaP4NlNL,ncfTlufvAf6,nCedmqJkSab,ncHX7GhgdRw,nCLAqvfd0dC,NcAtlM2CxhN,NchF9oWaRrv,NCFWw5b1F3l,nD0F9ui8Nga,ncW6xCCNS7U,Ncv3dhm1WKr,NcPVtCNxJtS,ncp8UEmO0Nc,Ncui1OhIui1,NCNUmUdyxiv,ncNHTPuom6N,ncrGZtPNsdp,NDdK3PErBwi,nDak4FYY7by,Nd9lbxQv72E,Ndc6vwLpPL0,Nd2kI24Ysjw,ndFFkLmgpdh,NdR2GbJ4yux,NDPJDhY7drG,nDYKoSsgDae,NDSoOEPf9Xz,nDmpuJkb5Dx,NE0wSFcq85m,nDGGWGoGAQP,NDxMK7ByHjE,NDJYj6pnGtq,NdK05Nm1xRX,NB7eqXoE2R9,Nb4B3Eb0wTG,nAwYZvr4uXx,NAsl8Rx8H1z,nARV7hpZe81,nAQY3DLsuOv,narUrqXyfmL,naYQMideqXq,nAYTsq27Qme,NB5HPg4lZap,naPCltKBaZo,nB7r8fj1aJV,NBdT3iv0Jdd,NbCCrtINfJR,nbdmJge3hco,Nbe5nwNOWuH,NBCzon4kjkU,nBfPgpU2j2T,NBE8qSzMhFO,nB9tjQx7qLG,ncjBaP4NlNL,ncfTlufvAf6,nCedmqJkSab,ncHX7GhgdRw,nCLAqvfd0dC,NcAtlM2CxhN,NchF9oWaRrv,NCFWw5b1F3l,nD0F9ui8Nga,ncW6xCCNS7U,Ncv3dhm1WKr,NcPVtCNxJtS,ncp8UEmO0Nc,Ncui1OhIui1,NCNUmUdyxiv,ncNHTPuom6N,ncrGZtPNsdp,NDdK3PErBwi,nDak4FYY7by,Nd9lbxQv72E,Ndc6vwLpPL0,Nd2kI24Ysjw,ndFFkLmgpdh,NdR2GbJ4yux,NDPJDhY7drG,nDYKoSsgDae,NDSoOEPf9Xz,nDmpuJkb5Dx,NE0wSFcq85m,nDGGWGoGAQP,NDxMK7ByHjE,NDJYj6pnGtq,NdK05Nm1xRX,NeDLD0dIVsB,nE79oU4m59R,NE3IGibCrUT,NEeUGvFAfPL,nEGDI49riU7,NE1jB3WgICT,nEBeaVC82RV,nEOHhRftxUA,NEgTyyI1U7p,NElhFomB8Ed,NeMAfI6pnH8,neMKrGhZWb8,NeGfP3BAuLV,nf6IbtSfLoQ,Nf5oMnV3Yv4,neUyl2P9GNI,nF1QnIAFhBa,nFd1OOKdbcg,NFghlWBjqn9,Nf4MqPR6ji8,NevzzuLhwDL,NF3yUICZdNs,Net1iKNpH2C,NFB2xU2KZJR,NFEh6pdnT8Z,NEoyuaoQCYg,nF1q6IlqwEj,nFgQLDmJ6g0,NfiSknjddJk,nFkzKqsjV6w,NFkcfk9XjZ6,Nfgju48VnmP,NGg0rG3JWU8,nghGlnFwHao,ngDQVh3kT5U,nGFudKcFOs2;nGBQ8uWPxAf,NFt5dJzTdyX,Ng4fSETuV70,nFz0MA85kJa,NFU587IpTIP,NfmMrCvI9Qs,NGDGQL6L6gv,Ng9y3LRy7wt,ngCoDKKjYFk,NFY9MJ3D8X6,NGDf0XXst8N,nFN2AjTeCMc,nFS5aKnXxhk,nFxmB8IneUi,NfY6QL7XF3K,nFmDmVtAu8F"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        480
+      ],
+      "id": "334fa923-e389-401b-9e8e-f9a7f320bb8f",
+      "name": "DHIS2_Min_Nosy_Varika",
+      "alwaysOutputData": true,
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "JneMYHqJc9mqYpv5",
+          "name": "conn_dhis_Min"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "startDate",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "endDate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "DHIS2_Min_Ifanadiana",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "DHIS2_Min_Mananjary",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "DHIS2_Min_Nosy_Varika",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DHIS2_Min_Ifanadiana": {
+      "main": [
+        [
+          {
+            "node": "DHIS2_Pivot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "startDate": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "endDate": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DHIS2_Min_Mananjary": {
+      "main": [
+        [
+          {
+            "node": "DHIS2_Pivot1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DHIS2_Min_Nosy_Varika": {
+      "main": [
+        [
+          {
+            "node": "DHIS2_Pivot2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DHIS2_Pivot": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DHIS2_Pivot1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DHIS2_Pivot2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "82dfc685-c7a3-4dae-bb93-81f2b242a9d9",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "createdAt": "2026-02-24T07:37:52.562Z",
+      "updatedAt": "2026-02-24T07:37:52.562Z",
+      "role": "workflow:owner",
+      "workflowId": "ptqbHHjxLPiEJ7G3",
+      "projectId": "uLic4LQeiu2ehDtB",
+      "project": {
+        "createdAt": "2026-02-23T18:19:39.884Z",
+        "updatedAt": "2026-02-23T18:21:08.059Z",
+        "id": "uLic4LQeiu2ehDtB",
+        "name": "ANDRY HErinomena <a.herinomena11@gmail.com>",
+        "type": "personal",
+        "projectRelations": [
+          {
+            "createdAt": "2026-02-23T18:19:39.884Z",
+            "updatedAt": "2026-02-23T18:19:39.884Z",
+            "role": "project:personalOwner",
+            "userId": "01af5c13-6bdb-4bd2-a09b-9228169e64fa",
+            "projectId": "uLic4LQeiu2ehDtB",
+            "user": {
+              "createdAt": "2026-02-23T18:19:39.651Z",
+              "updatedAt": "2026-02-24T08:05:58.679Z",
+              "id": "01af5c13-6bdb-4bd2-a09b-9228169e64fa",
+              "email": "a.herinomena11@gmail.com",
+              "firstName": "ANDRY",
+              "lastName": "HErinomena",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-02-23T18:21:11.818Z",
+                "personalization_survey_n8n_version": "1.70.0"
+              },
+              "settings": {
+                "userActivated": false,
+                "isOnboarded": true
+              },
+              "role": "global:owner",
+              "disabled": false,
+              "mfaEnabled": false,
+              "isPending": false,
+              "isOwner": true
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": []
+}
