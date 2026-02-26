@@ -1,0 +1,312 @@
+{
+  "createdAt": "2026-02-26T05:05:56.197Z",
+  "updatedAt": "2026-02-26T05:42:58.000Z",
+  "id": "pKqtfIUODhs0z34C",
+  "name": "Integration_analytics_CSB",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "const dataSetId = \"qNTxFeMEaKj\";   // ton dataset cible\nconst completeDate = null;        // ← maintenant null\n\nconst dataValues = [];\nlet globalOrgUnit = null;\n\nfor (const item of $input.all()) {\n\n    const rows = item.json.rows || [];\n\n    for (const row of rows) {\n\n        const dataElement = row[0];\n        const orgUnit = row[1];\n        const period = row[2];\n        const value = row[3];\n\n        globalOrgUnit = orgUnit; \n\n        dataValues.push({\n            dataElement,\n            period,\n            orgUnit,\n            value\n        });\n    }\n}\n\nreturn [\n  {\n    json: {\n      dataSet: dataSetId,\n      completeDate: completeDate,\n      orgUnit: globalOrgUnit,\n      dataValues: dataValues\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        340
+      ],
+      "id": "f68c1d6d-d7c4-47fc-9068-344cdbbcd9dc",
+      "name": "Code3"
+    },
+    {
+      "parameters": {
+        "jsCode": "const dataSetId = \"qNTxFeMEaKj\";   // ton dataset cible\nconst completeDate = null;        // ← maintenant null\n\nconst dataValues = [];\nlet globalOrgUnit = null;\n\nfor (const item of $input.all()) {\n\n    const rows = item.json.rows || [];\n\n    for (const row of rows) {\n\n        const dataElement = row[0];\n        const orgUnit = row[1];\n        const period = row[2];\n        const value = row[3];\n\n        globalOrgUnit = orgUnit; \n\n        dataValues.push({\n            dataElement,\n            period,\n            orgUnit,\n            value\n        });\n    }\n}\n\nreturn [\n  {\n    json: {\n      dataSet: dataSetId,\n      completeDate: completeDate,\n      orgUnit: globalOrgUnit,\n      dataValues: dataValues\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ],
+      "id": "71ad3dcc-09f9-4646-9c53-dd5a2c382d7a",
+      "name": "Code"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -820,
+        180
+      ],
+      "id": "60106388-599b-43f0-a94c-0921e1f461fa",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        460,
+        340
+      ],
+      "id": "5b7bc633-7d6d-49af-a3ce-49df46038077",
+      "name": "DHIS2_Pivot2",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "sUbBPqmnXUqoCkOa",
+          "name": "conn_Dhis2_Pivot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        460,
+        0
+      ],
+      "id": "bed4ed6a-9d0e-49f8-a785-a0731b5b50a4",
+      "name": "DHIS2_Pivot",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "sUbBPqmnXUqoCkOa",
+          "name": "conn_Dhis2_Pivot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "batchSize": 6,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -300,
+        180
+      ],
+      "id": "99ff3031-98b3-4ee8-81c8-21704079ec67",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = [];\nconst today = new Date();\n\nfor (let i = 1; i <= 6; i++) {  // on commence à 1 pour exclure le mois courant\n    const date = new Date(today.getFullYear(), today.getMonth() - i, 1);\n\n    const year = date.getFullYear();\n    const month = String(date.getMonth() + 1).padStart(2, '0');\n\n    results.push({\n        json: {\n            period: `${year}${month}`\n        }\n    });\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -520,
+        180
+      ],
+      "id": "3a1a6991-6182-41f4-8dfe-94b0a9fa9797",
+      "name": "Periode"
+    },
+    {
+      "parameters": {
+        "url": "=https://ministere-sante.mg/api/analytics?dimension=dx:lq38tLcfEi7&dimension=ou:D9UWDj19ljP;U1YeJp3NDNV;QHPyq70qulM;M38BJM8ju1A;WCqkkkKNJEi;Pi2y9HFBDRj;h0z1bKoHDrU;YCvVB1VwWi0;mBZLeZ7Irx6;hXuxS0MOq3b;z6kDxHwInUT;okDqhh9n4yT;pczrAub8lnt;EE6WwIMgQ0F;O1wNJut8eci;RRe6ic0AU1Z;ZPvH8UsgwYv;DDR2w1c1GyE;r4U7PhBKR7S;uWoBok9YyvB;FGM6Ric1YnC;c2AYc6zu00e;A3hiudw2Rr4;GDBYpa6pDOe;b5rHHqkmI2a&dimension=pe:{{ $json.period }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e489e33a-f07e-46db-9c31-d0ff50c07c52",
+      "name": "DHIS2_Min_CSB_Ifanadiana",
+      "alwaysOutputData": true,
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "JneMYHqJc9mqYpv5",
+          "name": "conn_dhis_Min"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://ministere-sante.mg/api/analytics?dimension=dx:lq38tLcfEi7&dimension=ou:IcMiQU9QW3l;diSP8NlOblg;wbnWeWIxXV6;x2NG6OgByyW;lIaVCjLWXYc;TXeWDCjAmaR;dzaTeu7rWtd;deMUdqCZSnE;y7SK3kXA1PW;xbmgFbAsjs8;lOonT3K0lGy;rPZA4HOPTo3;kvL3R5nif8u;liNQWaRIkqb;ylSfYC22EEB;JhQYIlxVg2W;GM6MGTic1DQ;HchHLQUUAbh;cp2lO2PyVj4;kztyvGPnWR7;X4SRnrSYWwg;reZwG5541C7;W8fiZ2dIEmI;VlX1os6qq1m;xUGh6ct7mEH;wR4eOoT36S0;UvdkmxaONmH;jhMynEYfQcG;XayRHbpjHQH;xOW0AHGbhzz;ywdasLE91Ac&dimension=pe:{{ $json.period }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        0,
+        340
+      ],
+      "id": "57083903-8dd5-47bb-88a8-b3b2573a229d",
+      "name": "DHIS2_Min_CSB_Nosy varika",
+      "alwaysOutputData": true,
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "JneMYHqJc9mqYpv5",
+          "name": "conn_dhis_Min"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Code3": {
+      "main": [
+        [
+          {
+            "node": "DHIS2_Pivot2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "DHIS2_Pivot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Periode",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "DHIS2_Min_CSB_Ifanadiana",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "DHIS2_Min_CSB_Nosy varika",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Periode": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DHIS2_Min_CSB_Ifanadiana": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DHIS2_Min_CSB_Nosy varika": {
+      "main": [
+        [
+          {
+            "node": "Code3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "35ea96ca-ebac-47b7-8000-3422399ef860",
+  "triggerCount": 0,
+  "shared": [
+    {
+      "createdAt": "2026-02-26T05:05:56.199Z",
+      "updatedAt": "2026-02-26T05:05:56.199Z",
+      "role": "workflow:owner",
+      "workflowId": "pKqtfIUODhs0z34C",
+      "projectId": "uLic4LQeiu2ehDtB",
+      "project": {
+        "createdAt": "2026-02-23T18:19:39.884Z",
+        "updatedAt": "2026-02-23T18:21:08.059Z",
+        "id": "uLic4LQeiu2ehDtB",
+        "name": "ANDRY HErinomena <a.herinomena11@gmail.com>",
+        "type": "personal",
+        "projectRelations": [
+          {
+            "createdAt": "2026-02-23T18:19:39.884Z",
+            "updatedAt": "2026-02-23T18:19:39.884Z",
+            "role": "project:personalOwner",
+            "userId": "01af5c13-6bdb-4bd2-a09b-9228169e64fa",
+            "projectId": "uLic4LQeiu2ehDtB",
+            "user": {
+              "createdAt": "2026-02-23T18:19:39.651Z",
+              "updatedAt": "2026-02-24T08:05:58.679Z",
+              "id": "01af5c13-6bdb-4bd2-a09b-9228169e64fa",
+              "email": "a.herinomena11@gmail.com",
+              "firstName": "ANDRY",
+              "lastName": "HErinomena",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-02-23T18:21:11.818Z",
+                "personalization_survey_n8n_version": "1.70.0"
+              },
+              "settings": {
+                "userActivated": false,
+                "isOnboarded": true
+              },
+              "role": "global:owner",
+              "disabled": false,
+              "mfaEnabled": false,
+              "isPending": false,
+              "isOwner": true
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": []
+}

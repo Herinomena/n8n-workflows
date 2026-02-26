@@ -1,46 +1,35 @@
 {
-  "createdAt": "2026-02-24T05:38:33.301Z",
-  "updatedAt": "2026-02-24T07:05:03.000Z",
-  "id": "NOKSlp8wdbA1ILwi",
-  "name": "Integration_RMA_CSB",
+  "createdAt": "2026-02-24T08:16:36.217Z",
+  "updatedAt": "2026-02-26T05:06:25.000Z",
+  "id": "WjZWvKarZMQeHT5J",
+  "name": "Integration_analytics_District",
   "active": false,
   "nodes": [
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -420,
-        180
-      ],
-      "id": "ac97f3d4-06d3-4061-9b6d-b00549a9f80a",
-      "name": "When clicking ‘Test workflow’"
-    },
-    {
       "parameters": {
-        "jsCode": "const results = [];\nconst today = new Date();\n\nfor (let i = 1; i <= 3; i++) {  // on commence à 1 pour exclure le mois courant\n    const date = new Date(today.getFullYear(), today.getMonth() - i, 1);\n\n    const year = date.getFullYear();\n    const month = String(date.getMonth() + 1).padStart(2, '0');\n\n    results.push({\n        json: {\n            period: `${year}${month}`\n        }\n    });\n}\n\nreturn results;"
+        "jsCode": "const results = [];\nconst today = new Date();\n\nfor (let i = 1; i <= 6; i++) {  // on commence à 1 pour exclure le mois courant\n    const date = new Date(today.getFullYear(), today.getMonth() - i, 1);\n\n    const year = date.getFullYear();\n    const month = String(date.getMonth() + 1).padStart(2, '0');\n\n    results.push({\n        json: {\n            period: `${year}${month}`\n        }\n    });\n}\n\nreturn results;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -140,
-        180
+        -1460,
+        100
       ],
-      "id": "717716b3-743d-482e-b2fa-b890863d56c0",
+      "id": "3474bb8d-c818-4dac-82a7-393a863e97ff",
       "name": "Periode"
     },
     {
       "parameters": {
-        "batchSize": 3,
+        "batchSize": 6,
         "options": {}
       },
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        80,
-        180
+        -1240,
+        100
       ],
-      "id": "6477c688-1d6a-4d2d-868a-a1ed1012bbd0",
+      "id": "48238d86-0fdb-4d19-a917-44bde7453402",
       "name": "Loop Over Items"
     },
     {
@@ -57,10 +46,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        660,
-        0
+        -480,
+        -80
       ],
-      "id": "2fbbd9be-e6e6-40ee-a503-289dfcabd982",
+      "id": "38bb2a54-4ccd-43cc-b99d-724883284ee8",
       "name": "DHIS2_Pivot",
       "credentials": {
         "httpBasicAuth": {
@@ -83,10 +72,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        680,
-        200
+        -460,
+        120
       ],
-      "id": "4778422a-4d6d-4244-9e46-eaac5535b834",
+      "id": "f4979d9e-a61f-44c8-9ebc-8131fa5c839c",
       "name": "DHIS2_Pivot1",
       "credentials": {
         "httpBasicAuth": {
@@ -109,10 +98,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        680,
-        400
+        -460,
+        320
       ],
-      "id": "3c3aedcc-ad41-442c-a198-621553ddbe4a",
+      "id": "fa09150f-26c5-43bb-80d9-399f512ab4cc",
       "name": "DHIS2_Pivot2",
       "credentials": {
         "httpBasicAuth": {
@@ -123,35 +112,18 @@
     },
     {
       "parameters": {
-        "url": "https://ministere-sante.mg/api/dataValueSets?",
+        "url": "=https://ministere-sante.mg/api/analytics?dimension=dx:lq38tLcfEi7&dimension=ou:VtP4BdCeXIo&dimension=pe:{{ $json.period }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBasicAuth",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "dataSet",
-              "value": "mQEM6Pdzg8p"
-            },
-            {
-              "name": "period",
-              "value": "={{ $json.period }}"
-            },
-            {
-              "name": "orgUnit",
-              "value": "D9UWDj19ljP,U1YeJp3NDNV,QHPyq70qulM,M38BJM8ju1A,WCqkkkKNJEi,Pi2y9HFBDRj,h0z1bKoHDrU,YCvVB1VwWi0,mBZLeZ7Irx6,hXuxS0MOq3b,z6kDxHwInUT,okDqhh9n4yT,pczrAub8lnt,EE6WwIMgQ0F,O1wNJut8eci,RRe6ic0AU1Z,ZPvH8UsgwYv,DDR2w1c1GyE,r4U7PhBKR7S,uWoBok9YyvB,FGM6Ric1YnC,c2AYc6zu00e,A3hiudw2Rr4,b5rHHqkmI2a"
-            }
-          ]
-        },
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        360,
-        0
+        -940,
+        -80
       ],
-      "id": "52c25ec0-d636-472b-bb81-ffdaa6fba02f",
+      "id": "1864fb88-386d-43a3-939b-5a6deec77e5d",
       "name": "DHIS2_Min_Ifanadiana",
       "alwaysOutputData": true,
       "credentials": {
@@ -162,36 +134,69 @@
       }
     },
     {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1760,
+        100
+      ],
+      "id": "b5146463-1dde-4a98-963a-c2f0642cbb14",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
       "parameters": {
-        "url": "https://ministere-sante.mg/api/dataValueSets?",
+        "jsCode": "const dataSetId = \"qNTxFeMEaKj\";   // ton dataset cible\nconst completeDate = null;        // ← maintenant null\n\nconst dataValues = [];\nlet globalOrgUnit = null;\n\nfor (const item of $input.all()) {\n\n    const rows = item.json.rows || [];\n\n    for (const row of rows) {\n\n        const dataElement = row[0];\n        const orgUnit = row[1];\n        const period = row[2];\n        const value = row[3];\n\n        globalOrgUnit = orgUnit; \n\n        dataValues.push({\n            dataElement,\n            period,\n            orgUnit,\n            value\n        });\n    }\n}\n\nreturn [\n  {\n    json: {\n      dataSet: dataSetId,\n      completeDate: completeDate,\n      orgUnit: globalOrgUnit,\n      dataValues: dataValues\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -720,
+        -80
+      ],
+      "id": "b825f49a-6d5b-4356-8650-b4b2ce378b83",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "jsCode": "const dataSetId = \"qNTxFeMEaKj\";   // ton dataset cible\nconst completeDate = null;        // ← maintenant null\n\nconst dataValues = [];\nlet globalOrgUnit = null;\n\nfor (const item of $input.all()) {\n\n    const rows = item.json.rows || [];\n\n    for (const row of rows) {\n\n        const dataElement = row[0];\n        const orgUnit = row[1];\n        const period = row[2];\n        const value = row[3];\n\n        globalOrgUnit = orgUnit; \n\n        dataValues.push({\n            dataElement,\n            period,\n            orgUnit,\n            value\n        });\n    }\n}\n\nreturn [\n  {\n    json: {\n      dataSet: dataSetId,\n      completeDate: completeDate,\n      orgUnit: globalOrgUnit,\n      dataValues: dataValues\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -700,
+        120
+      ],
+      "id": "0cb086b9-e7ae-4767-b08f-2789ce68db34",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const dataSetId = \"qNTxFeMEaKj\";   // ton dataset cible\nconst completeDate = null;        // ← maintenant null\n\nconst dataValues = [];\nlet globalOrgUnit = null;\n\nfor (const item of $input.all()) {\n\n    const rows = item.json.rows || [];\n\n    for (const row of rows) {\n\n        const dataElement = row[0];\n        const orgUnit = row[1];\n        const period = row[2];\n        const value = row[3];\n\n        globalOrgUnit = orgUnit; \n\n        dataValues.push({\n            dataElement,\n            period,\n            orgUnit,\n            value\n        });\n    }\n}\n\nreturn [\n  {\n    json: {\n      dataSet: dataSetId,\n      completeDate: completeDate,\n      orgUnit: globalOrgUnit,\n      dataValues: dataValues\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -700,
+        320
+      ],
+      "id": "a1c18390-8189-431a-ba61-528323c25d46",
+      "name": "Code3"
+    },
+    {
+      "parameters": {
+        "url": "=https://ministere-sante.mg/api/analytics?dimension=dx:lq38tLcfEi7&dimension=ou:hBOXdumAvNc&dimension=pe:{{ $json.period }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBasicAuth",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "dataSet",
-              "value": "mQEM6Pdzg8p"
-            },
-            {
-              "name": "period",
-              "value": "={{ $json.period }}"
-            },
-            {
-              "name": "orgUnit",
-              "value": "TheMkAkfvgn,BxpH1ND8KFP,Ht69V3vwfVs,SOYJNYkE3Ah,xFewURfeM6L,gGzLr4oo3Pm,JJPXmBBn47m,BbsaOL1ndvg,KXNLOAzcjfG,Qy7TBEcefE9,eQSREv9e1bq,Y8p37aLjrHn,Znyo1UWzmFH,AxTFbOBjP1K,Dzr57TxAG74,onLZ8h8Nng2,YxrZbfqDA6r,EYZ5Ej566ob,bnMM4PwDm3F,IQ82WcLTcGX,dSY2oZjJcwj,kraCyRAvVgQ,A38WhL0NPsX,ErLw9twd3q5,VW9Pm0uz6SX,ebRE2LEmvie,zMJxWJIgF5N,xIpy9Oaipvh,ZboIy43ZwzX,cPkdD7UhXmn,IRn2N8HJCVT,mHDPNIDOecN,MV5fSBnQpFC,R6evSAV8MdQ,AikfHtzeOOW,NA1FBm3XUuW,ngHZIXy1Cyw,juLcMFcd4Fv,NaHyGHPvH7A,tHaaamft4vA,A0YU5ksfXZS,INrXsjpFZU8,pfav1hH9Nuf,eHk9mLUogOz,aihwzCRcQS3,vPmCzlQD5a8,elIt2dLIHBw,I0zrAwM5gZL,nE3sJcoVkhr,ZpdAbOChH4T,FNRS263It3k"
-            }
-          ]
-        },
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        360,
-        200
+        -940,
+        120
       ],
-      "id": "3ae868d9-10b1-42b0-ac4a-c4223db2b9c9",
+      "id": "cdbe5081-1899-4d8d-af9c-5fe6bcf14c83",
       "name": "DHIS2_Min_Mananjary",
       "alwaysOutputData": true,
       "credentials": {
@@ -203,36 +208,19 @@
     },
     {
       "parameters": {
-        "url": "https://ministere-sante.mg/api/dataValueSets?",
+        "url": "=https://ministere-sante.mg/api/analytics?dimension=dx:lq38tLcfEi7&dimension=ou:xofSjjKe6rZ&dimension=pe:{{ $json.period }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBasicAuth",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "dataSet",
-              "value": "mQEM6Pdzg8p"
-            },
-            {
-              "name": "period",
-              "value": "={{ $json.period }}"
-            },
-            {
-              "name": "orgUnit",
-              "value": "TheMkAkfvgn,BxpH1ND8KFP,Ht69V3vwfVs,SOYJNYkE3Ah,xFewURfeM6L,gGzLr4oo3Pm,JJPXmBBn47m,BbsaOL1ndvg,KXNLOAzcjfG,Qy7TBEcefE9,eQSREv9e1bq,Y8p37aLjrHn,Znyo1UWzmFH,AxTFbOBjP1K,Dzr57TxAG74,onLZ8h8Nng2,YxrZbfqDA6r,EYZ5Ej566ob,bnMM4PwDm3F,IQ82WcLTcGX,dSY2oZjJcwj,kraCyRAvVgQ,A38WhL0NPsX,ErLw9twd3q5,VW9Pm0uz6SX,ebRE2LEmvie,zMJxWJIgF5N,xIpy9Oaipvh,ZboIy43ZwzX,cPkdD7UhXmn,IRn2N8HJCVT,mHDPNIDOecN,MV5fSBnQpFC,R6evSAV8MdQ,AikfHtzeOOW,NA1FBm3XUuW,ngHZIXy1Cyw,juLcMFcd4Fv,NaHyGHPvH7A,tHaaamft4vA,A0YU5ksfXZS,INrXsjpFZU8,pfav1hH9Nuf,eHk9mLUogOz,aihwzCRcQS3,vPmCzlQD5a8,elIt2dLIHBw,I0zrAwM5gZL,nE3sJcoVkhr,ZpdAbOChH4T,FNRS263It3k"
-            }
-          ]
-        },
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        360,
-        400
+        -940,
+        320
       ],
-      "id": "deb400a9-f06b-472b-8a2f-443f36b1bd75",
-      "name": "DHIS2_Min_Nosy_Varika",
+      "id": "0c8dbaf1-3386-4b20-b481-47277655af63",
+      "name": "DHIS2_Min_Nosy varika",
       "alwaysOutputData": true,
       "credentials": {
         "httpBasicAuth": {
@@ -243,11 +231,11 @@
     }
   ],
   "connections": {
-    "When clicking ‘Test workflow’": {
+    "Periode": {
       "main": [
         [
           {
-            "node": "Periode",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
@@ -269,18 +257,7 @@
             "index": 0
           },
           {
-            "node": "DHIS2_Min_Nosy_Varika",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Periode": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items",
+            "node": "DHIS2_Min_Nosy varika",
             "type": "main",
             "index": 0
           }
@@ -288,6 +265,28 @@
       ]
     },
     "DHIS2_Min_Ifanadiana": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Periode",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
       "main": [
         [
           {
@@ -302,18 +301,55 @@
       "main": [
         [
           {
-            "node": "DHIS2_Pivot1",
+            "node": "Code1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "DHIS2_Min_Nosy_Varika": {
+    "DHIS2_Min_Nosy varika": {
+      "main": [
+        [
+          {
+            "node": "Code3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code3": {
       "main": [
         [
           {
             "node": "DHIS2_Pivot2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DHIS2_Pivot": {
+      "main": [
+        []
+      ]
+    },
+    "DHIS2_Pivot1": {
+      "main": [
+        []
+      ]
+    },
+    "DHIS2_Pivot2": {
+      "main": [
+        []
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "DHIS2_Pivot1",
             "type": "main",
             "index": 0
           }
@@ -327,14 +363,14 @@
   "staticData": null,
   "meta": null,
   "pinData": {},
-  "versionId": "7b1dbef2-2b49-4ca1-b79d-03c28733d3e2",
+  "versionId": "a7051126-2432-4d5e-9bab-130b6f7a76ac",
   "triggerCount": 0,
   "shared": [
     {
-      "createdAt": "2026-02-24T05:38:33.304Z",
-      "updatedAt": "2026-02-24T05:38:33.304Z",
+      "createdAt": "2026-02-24T08:16:36.219Z",
+      "updatedAt": "2026-02-24T08:16:36.219Z",
       "role": "workflow:owner",
-      "workflowId": "NOKSlp8wdbA1ILwi",
+      "workflowId": "WjZWvKarZMQeHT5J",
       "projectId": "uLic4LQeiu2ehDtB",
       "project": {
         "createdAt": "2026-02-23T18:19:39.884Z",
