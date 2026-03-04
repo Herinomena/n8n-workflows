@@ -7,6 +7,8 @@ services:
     restart: unless-stopped
     ports:
       - "5678:5678"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - n8n_data:/home/node/.n8n
       - /var/run/docker.sock:/var/run/docker.sock
@@ -20,7 +22,8 @@ services:
       - N8N_PROTOCOL=http
       - N8N_USER_FOLDER=/home/node/.n8n
       - EXECUTIONS_DATA_PRUNE=true
-      - EXECUTIONS_DATA_MAX_AGE=168
+      - EXECUTIONS_DATA_MAX_AGE=168o
+
 
 volumes:
   n8n_data:
