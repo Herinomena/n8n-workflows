@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  n8n:
+    image: n8nio/n8n
+   # image: n8nio/n8n:latest-debian 
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./workflows:/home/node/workflows
+      - /home/herinomena/proj_n8n/n8n-workflows:/home/node/n8n-workflows  
+      - ./exports:/home/node/exports
+    environment:
+      - N8N_SECURE_COOKIE=false
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - N8N_USER_FOLDER=/home/node/.n8n
+      - EXECUTIONS_DATA_PRUNE=true
+      - EXECUTIONS_DATA_MAX_AGE=168
+
+volumes:
+  n8n_data:
+    driver: local
