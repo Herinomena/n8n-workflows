@@ -1,0 +1,410 @@
+{
+  "id": "RMReiIcSKt70jUKR",
+  "name": "Integration_analytics_District",
+  "active": 0,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -784,
+        192
+      ],
+      "id": "91336118-efbf-4a65-957f-b6ed3985defb",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = [];\nconst today = new Date();\n\nfor (let i = 1; i <= 3; i++) {  // on commence à 1 pour exclure le mois courant\n    const date = new Date(today.getFullYear(), today.getMonth() - i, 1);\n\n    const year = date.getFullYear();\n    const month = String(date.getMonth() + 1).padStart(2, '0');\n\n    results.push({\n        json: {\n            period: `${year}${month}`\n        }\n    });\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -496,
+        192
+      ],
+      "id": "9d1f872f-7fef-460e-9a70-6d167646d77f",
+      "name": "Periode"
+    },
+    {
+      "parameters": {
+        "batchSize": 3,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -288,
+        192
+      ],
+      "id": "d68a3533-1ae1-42eb-961b-b70666a0ebb6",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        528,
+        0
+      ],
+      "id": "5874d8c7-9c04-41bd-9f6c-6446736d6a7f",
+      "name": "DHIS2_Pivot",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "p9cTlskWO88dMZER",
+          "name": "Conn_DHIS2_Pivot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        544,
+        208
+      ],
+      "id": "92e673fd-bae3-44f9-8ce1-88031dc28863",
+      "name": "DHIS2_Pivot1",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "p9cTlskWO88dMZER",
+          "name": "Conn_DHIS2_Pivot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        544,
+        400
+      ],
+      "id": "b39a8212-6b70-4f73-88a8-20ee615f6ca3",
+      "name": "DHIS2_Pivot2",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "p9cTlskWO88dMZER",
+          "name": "Conn_DHIS2_Pivot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://ministere-sante.mg/api/dataValueSets?",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "dataSet",
+              "value": "XH4MSdxFKe5"
+            },
+            {
+              "name": "period",
+              "value": "={{ $json.period }}"
+            },
+            {
+              "name": "orgUnit",
+              "value": "GDBYpa6pDOe"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e39de400-2ee8-43c5-bb3a-76187bf732f7",
+      "name": "DHIS2_Min_Ifanadiana",
+      "alwaysOutputData": true,
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "SYuBZNWp7QjG6Tsf",
+          "name": "Conn_DHIS2_Ministere"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://ministere-sante.mg/api/dataValueSets?",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "dataSet",
+              "value": "XH4MSdxFKe5"
+            },
+            {
+              "name": "period",
+              "value": "={{ $json.period }}"
+            },
+            {
+              "name": "orgUnit",
+              "value": "cPkdD7UhXmn"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        0,
+        208
+      ],
+      "id": "5ba3624c-cf14-4df6-924d-14ec2bbdfd31",
+      "name": "DHIS2_Min_Manajary",
+      "alwaysOutputData": true,
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "SYuBZNWp7QjG6Tsf",
+          "name": "Conn_DHIS2_Ministere"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://ministere-sante.mg/api/dataValueSets?",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "dataSet",
+              "value": "XH4MSdxFKe5"
+            },
+            {
+              "name": "period",
+              "value": "={{ $json.period }}"
+            },
+            {
+              "name": "orgUnit",
+              "value": "GM6MGTic1DQ"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        0,
+        400
+      ],
+      "id": "299f43c2-a6f1-4c60-91f0-79ecbfedd38a",
+      "name": "DHIS2_Min_Nosy_varika",
+      "alwaysOutputData": true,
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "SYuBZNWp7QjG6Tsf",
+          "name": "Conn_DHIS2_Ministere"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n\n    const newItem = { ...item.json };\n\n    // Modifier dataSet\n    newItem.dataSet = \"sTdqwhFX0qj\";\n\n    // Mettre completeDate à null\n    newItem.completeDate = null;\n\n    // Si dataValues existe, on peut aussi modifier dedans si nécessaire\n    if (newItem.dataValues && Array.isArray(newItem.dataValues)) {\n        newItem.dataValues = newItem.dataValues.map(dv => ({\n            ...dv\n        }));\n    }\n\n    return {\n        json: newItem\n    };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        272,
+        0
+      ],
+      "id": "eaefc229-090a-4669-8a00-ecb490b943b0",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n\n    const newItem = { ...item.json };\n\n    // Modifier dataSet\n    newItem.dataSet = \"sTdqwhFX0qj\";\n\n    // Mettre completeDate à null\n    newItem.completeDate = null;\n\n    // Si dataValues existe, on peut aussi modifier dedans si nécessaire\n    if (newItem.dataValues && Array.isArray(newItem.dataValues)) {\n        newItem.dataValues = newItem.dataValues.map(dv => ({\n            ...dv\n        }));\n    }\n\n    return {\n        json: newItem\n    };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        288,
+        208
+      ],
+      "id": "76be1102-df46-4a6b-b46e-5d90a2181f9d",
+      "name": "Code1"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n\n    const newItem = { ...item.json };\n\n    // Modifier dataSet\n    newItem.dataSet = \"sTdqwhFX0qj\";\n\n    // Mettre completeDate à null\n    newItem.completeDate = null;\n\n    // Si dataValues existe, on peut aussi modifier dedans si nécessaire\n    if (newItem.dataValues && Array.isArray(newItem.dataValues)) {\n        newItem.dataValues = newItem.dataValues.map(dv => ({\n            ...dv\n        }));\n    }\n\n    return {\n        json: newItem\n    };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        288,
+        400
+      ],
+      "id": "84e288e5-08eb-426a-a81b-d6c705487386",
+      "name": "Code2"
+    }
+  ],
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Periode",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Periode": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "DHIS2_Min_Ifanadiana",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "DHIS2_Min_Manajary",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "DHIS2_Min_Nosy_varika",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DHIS2_Min_Ifanadiana": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DHIS2_Min_Manajary": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DHIS2_Min_Nosy_varika": {
+      "main": [
+        [
+          {
+            "node": "Code2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "DHIS2_Pivot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "DHIS2_Pivot1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code2": {
+      "main": [
+        [
+          {
+            "node": "DHIS2_Pivot2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "pinData": {},
+  "versionId": "019c1ba5-95d3-4f81-bc6d-9d758185ae85",
+  "triggerCount": 0,
+  "meta": null,
+  "parentFolderId": null,
+  "createdAt": "2026-03-03 05:49:36.350",
+  "updatedAt": "2026-03-03 06:16:12.760",
+  "isArchived": 0,
+  "versionCounter": 12,
+  "description": null
+}

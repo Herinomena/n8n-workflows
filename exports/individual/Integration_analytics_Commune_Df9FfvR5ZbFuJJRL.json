@@ -1,0 +1,270 @@
+{
+  "id": "Df9FfvR5ZbFuJJRL",
+  "name": "Integration_analytics_Commune",
+  "active": 0,
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "const dataSetId = \"qNTxFeMEaKj\";   // ton dataset cible\nconst completeDate = null;        // ← maintenant null\n\nconst dataValues = [];\nlet globalOrgUnit = null;\n\nfor (const item of $input.all()) {\n\n    const rows = item.json.rows || [];\n\n    for (const row of rows) {\n\n        const dataElement = row[0];\n        const orgUnit = row[1];\n        const period = row[2];\n        const value = row[3];\n\n        globalOrgUnit = orgUnit; \n\n        dataValues.push({\n            dataElement,\n            period,\n            orgUnit,\n            value\n        });\n    }\n}\n\nreturn [\n  {\n    json: {\n      dataSet: dataSetId,\n      completeDate: completeDate,\n      orgUnit: globalOrgUnit,\n      dataValues: dataValues\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        352
+      ],
+      "id": "63745a38-405d-4540-bd98-2e2a90b2dcf0",
+      "name": "Code3"
+    },
+    {
+      "parameters": {
+        "jsCode": "const dataSetId = \"qNTxFeMEaKj\";   // ton dataset cible\nconst completeDate = null;        // ← maintenant null\n\nconst dataValues = [];\nlet globalOrgUnit = null;\n\nfor (const item of $input.all()) {\n\n    const rows = item.json.rows || [];\n\n    for (const row of rows) {\n\n        const dataElement = row[0];\n        const orgUnit = row[1];\n        const period = row[2];\n        const value = row[3];\n\n        globalOrgUnit = orgUnit; \n\n        dataValues.push({\n            dataElement,\n            period,\n            orgUnit,\n            value\n        });\n    }\n}\n\nreturn [\n  {\n    json: {\n      dataSet: dataSetId,\n      completeDate: completeDate,\n      orgUnit: globalOrgUnit,\n      dataValues: dataValues\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "ba92790b-a3dc-4875-bf63-f41846d0245b",
+      "name": "Code"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -816,
+        192
+      ],
+      "id": "8e3bd204-2a3f-4f55-85ca-175a76dfd44d",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        464,
+        352
+      ],
+      "id": "0c96c725-1c88-45e9-8e68-95866ed6eea5",
+      "name": "DHIS2_Pivot2",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "p9cTlskWO88dMZER",
+          "name": "Conn_DHIS2_Pivot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        464,
+        0
+      ],
+      "id": "c2d513f3-fa35-4070-9cce-4a2117ef7b50",
+      "name": "DHIS2_Pivot",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "p9cTlskWO88dMZER",
+          "name": "Conn_DHIS2_Pivot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "batchSize": 6,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -304,
+        192
+      ],
+      "id": "8cea30ee-25b6-4ebd-9b4d-fa9eaff111a9",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = [];\nconst today = new Date();\n\nfor (let i = 1; i <= 6; i++) {  // on commence à 1 pour exclure le mois courant\n    const date = new Date(today.getFullYear(), today.getMonth() - i, 1);\n\n    const year = date.getFullYear();\n    const month = String(date.getMonth() + 1).padStart(2, '0');\n\n    results.push({\n        json: {\n            period: `${year}${month}`\n        }\n    });\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -528,
+        192
+      ],
+      "id": "9bc0300c-7d2b-4793-9b3c-b97ad69523c1",
+      "name": "Periode"
+    },
+    {
+      "parameters": {
+        "url": "=https://ministere-sante.mg/api/analytics?dimension=dx:lq38tLcfEi7&dimension=ou:k3WrjJA0lAl;EJAuqgyM0TQ;WALimJEIpus;sE1tC31Jr1Z;LTkwgna8nWH;ETF5u6dEzRV;lcJ6Bn6Xwbr;vhRYxLPJeDi;usKgUaPXahQ;LgRsvkPQthm;tHhNGMv20B3;v0y8WKasENm;s5v62m0wukR;zCTwJPToyHS;fSMfRSl9h7r&dimension=pe:{{ $json.period }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "4cb56488-8432-4e36-97be-620e77b10f0a",
+      "name": "DHIS2_Min_Commune_Ifanadiana",
+      "alwaysOutputData": true,
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "SYuBZNWp7QjG6Tsf",
+          "name": "Conn_DHIS2_Ministere"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://ministere-sante.mg/api/analytics?dimension=dx:lq38tLcfEi7&dimension=ou:GYSCXYZyrek;IT92EGQN5FN;U00nCsiYB9S;QPACPpUC77X;erOl0D2daik;YoyYA1sPIr0;BQHvkzmyffh;mE5xB9TUGss;dQ4aXQtXbVx;cGXqEpgBovt;E6eLYKByJmd;hzZzd9siYaF;YTN1CUuKUUl;N5y82gledGB;Z2QJL736a3b;P1AKBUXiEsA;e0nxoW7wh5M;CQOywOI6An4;U5nHlgKm1fe&dimension=pe:{{ $json.period }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        0,
+        352
+      ],
+      "id": "fa4a0ade-3745-4d5f-958f-f7a4074c8c3d",
+      "name": "DHIS2_Min_Commune_Nosy varika",
+      "alwaysOutputData": true,
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "SYuBZNWp7QjG6Tsf",
+          "name": "Conn_DHIS2_Ministere"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Code3": {
+      "main": [
+        [
+          {
+            "node": "DHIS2_Pivot2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "DHIS2_Pivot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Periode",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "DHIS2_Min_Commune_Ifanadiana",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "DHIS2_Min_Commune_Nosy varika",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Periode": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DHIS2_Min_Commune_Ifanadiana": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DHIS2_Min_Commune_Nosy varika": {
+      "main": [
+        [
+          {
+            "node": "Code3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "pinData": {},
+  "versionId": "3a04d540-2dab-474e-ba90-fd96d7f528fb",
+  "triggerCount": 0,
+  "meta": null,
+  "parentFolderId": null,
+  "createdAt": "2026-03-03 05:50:37.328",
+  "updatedAt": "2026-03-03 06:17:33.563",
+  "isArchived": 0,
+  "versionCounter": 7,
+  "description": null
+}

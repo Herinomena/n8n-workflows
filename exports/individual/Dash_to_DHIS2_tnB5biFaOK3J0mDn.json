@@ -1,0 +1,97 @@
+{
+  "id": "tnB5biFaOK3J0mDn",
+  "name": "Dash_to_DHIS2",
+  "active": 0,
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -976,
+        -192
+      ],
+      "id": "53e4837f-7f27-4c19-8daf-a8b07d158f3c",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DROP DATABASE IF EXISTS base_pvt_locale;\nCREATE DATABASE base_pvt_locale;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.5,
+      "position": [
+        -656,
+        -400
+      ],
+      "id": "4a1baa59-bd51-40d4-94bd-9d2654f84cdd",
+      "name": "Nouvelle_Base_donnees",
+      "credentials": {
+        "mySql": {
+          "id": "IwEXWT3Ii7skCnQf",
+          "name": "MySQL account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "docker run --rm mysql:8.0 mysqldump -h 217.70.190.209 -P 3306 -u mysqlwb -p'Pivot**15' pivotdb > /tmp/backup_$(date +%Y%m%d_%H%M%S).sql",
+        "additionalOptions": {
+          "returnFullOutput": false
+        }
+      },
+      "type": "n8n-nodes-custom-exec.customExecNode",
+      "typeVersion": 1,
+      "position": [
+        -672,
+        -64
+      ],
+      "id": "8148cab9-ef15-4366-92c9-bc5929d49f51",
+      "name": "Custom Exec",
+      "alwaysOutputData": true
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Nouvelle_Base_donnees",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Custom Exec",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Nouvelle_Base_donnees": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "pinData": {},
+  "versionId": "dc80a743-355b-4a78-954b-f4cbba464c49",
+  "triggerCount": 0,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "parentFolderId": null,
+  "createdAt": "2026-03-03 06:26:54.364",
+  "updatedAt": "2026-03-03 10:53:51.546",
+  "isArchived": 0,
+  "versionCounter": 51,
+  "description": null
+}
