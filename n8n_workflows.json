@@ -1,0 +1,2661 @@
+{
+  "data": [
+    {
+      "updatedAt": "2026-03-04T13:17:03.007Z",
+      "createdAt": "2026-03-04T13:08:35.706Z",
+      "id": "29vw9LAA95zDC9G5",
+      "name": "Integration_Rma_Com",
+      "active": false,
+      "isArchived": false,
+      "nodes": [
+        {
+          "parameters": {},
+          "type": "n8n-nodes-base.manualTrigger",
+          "typeVersion": 1,
+          "position": [
+            -1248,
+            224
+          ],
+          "id": "15e8378f-e819-4693-9095-293eb8a86fa3",
+          "name": "When clicking ‘Test workflow’"
+        },
+        {
+          "parameters": {
+            "options": {}
+          },
+          "type": "n8n-nodes-base.splitInBatches",
+          "typeVersion": 3,
+          "position": [
+            -368,
+            208
+          ],
+          "id": "55ce6226-b8f0-4a87-8e09-46a676386b2b",
+          "name": "Loop Over Items"
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{$json}}",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            304,
+            0
+          ],
+          "id": "f47405c7-c0ee-4199-9785-851d0b9edfc1",
+          "name": "DHIS2_Pivot",
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "UVeaJ4eIQxUebty4",
+              "name": "Conn_DHIS2_Pivot"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{$json}}",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            304,
+            224
+          ],
+          "id": "e59792b8-247d-4203-9983-c35c43cc14f7",
+          "name": "DHIS2_Pivot1",
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "UVeaJ4eIQxUebty4",
+              "name": "Conn_DHIS2_Pivot"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{$json}}",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            320,
+            512
+          ],
+          "id": "42aba748-7750-47c3-992c-eb25836ece5c",
+          "name": "DHIS2_Pivot2",
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "UVeaJ4eIQxUebty4",
+              "name": "Conn_DHIS2_Pivot"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "url": "https://ministere-sante.mg/api/dataValueSets?",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendQuery": true,
+            "queryParameters": {
+              "parameters": [
+                {
+                  "name": "dataSet",
+                  "value": "qNTxFeMEaKj"
+                },
+                {
+                  "name": "startDate",
+                  "value": "={{ $('Merge').item.json.startDate }}"
+                },
+                {
+                  "name": "endDate",
+                  "value": "={{ $('Merge').item.json.endDate }}"
+                },
+                {
+                  "name": "orgUnit",
+                  "value": "NHGlRwg0Qwu,nhp8hOvQUT3,NhBFAojLAnq,nHeDldiT3lB,NhcIarFZ0gg,NhgHicA7zmx,NpOSpQvGHoL,nPKeJthEM73,NPoWFLdHHLc,nPUb0c5EcMk,nPX6RxV9I6v,NoTbIakXnYE,NPG9aF3lhTC,NOf5U0kPmmS,noGSitwu1YV,nOvkLuoAvaE,nPjsBwjNwN5,nObSjXaMtmC,NojOuDYO6d9,noTUS4NpOt9,npDsoxdC4tm,NoYX2eHiThV,nPErooJK6FG,NOKJwSSC9yV,NOUicYmzdkM,NoDz1A2X03y,nongBlHhnBk,Np9zQuuUkT0,NocwbwPY49A,nnEsZM0lafn,nndvKJAei1g,NNHu1fGVJeX,NNFHN9ImezB,nn8l1jOZutK,nn5sGwD1W6w,nMZFiAgwNXH,nmwxOi0CZg5,nmD33chxaBT,nMvTEvhWAVW,NmREmw5LWic,nMpQCEjkTXZ,NmKPRZcZMBG,nn1WJO9yWZm,NmzeU6VaV8i,nMx63czP2Ae,NmhBxQ7PYdC,nmVtteBwOYq,nmEMBbaJyWU,nMfP4PUaIbF,NMImB5RkIZB,NQWJDtbt7ea,NQuW4Rtnjsl,nqyNM2FCYcn,nqsyqKRlhol,nqza6A6H399,NR1bX1UHhZM,nqW6laUJNx2,nr04NAmCslA,nNYf4rK6blR,NnTT4ov2gsL,NOaoxq3vnc0,NNjaGNXVzqY,NO8yCUU6eVK,nO6tTqYb8Zb,NnPOlH7LT8U,nnvIsl7XJkC,NnQL2GIb7Cb,NJybOHL5Q60,NjyAADlaV9O,nJUaKfgD6hA,nJl5WgER8PU,nJNZtfJ8P4s,njoFUbxjdeD,NjOlN7ogDI1,NjVre8e5OVb,njOofTRHfIV,Njr8K7rHENE,nJjPiK1qn75,njSiTzCwC07,NJuWC7bKGo7,NjsjGX3mti8,niqxHXfJaZg,nJg2gFtkEQG,nit1VMYMSEc,nIU59blKoSz,nJ41cDAbDTK,njF5rCZeEin,NjFmT8vGYte,Niqsy6XdJfM,njIuCDYoiFv,NjgEEmvRRTt,nmcOsX9DPDd,NM7oUDc02Td,nma7brQLV5w,nmble1lI52U,nm6sSeyEVgk,nmbm3mA5SlU,nM9ANDSCXa0,nQifiunYfC0,NqNvtciAHQJ,nqlkol82K9z,nqQz5XyejUS,nq5GI3F2CCZ,nQeIQIluSLN,NqDMBxPTOXL,nQ6JraTvdjw,nQI8STvRBzM,nqCwln4FrWj,NQfkydB4svK,NpYyCqxphO3,nQbxcyqYyE2,nQbP8ETTnR4,NQH6cejrFIJ,NqbcZ5fhraz,NGk42ableWs,NgNK7cFJDLR,ngOUK2x3rO8,nGswNcrtBCW,NGuHJF8vef8,NGxXvp7qi48,NGjuCieFofW,nh1SDW0DuQP,NH6km4XsRdx,NiOIIht8nBW,nI8ROa8oOxH,niA2fAJNCjN,nIcna9odW5i,NIF2yn3SFhU,niiqdtu9lFU,NiGaS2wQ7nC,NioaQKw6eR8,nIhczINg82d,Ni6HLgy72nt,NiPVq9fdj9I,niPWWDnI4AE,NSArSb3qq97,nsfCG9MeMiH,nSBC7TetHbn,nSEHyISB71L,nsfzdkukzul,nrZui26yNY2,NRg3HxY4ule,nsaKH6KRA5s,NRoO17yGFjs,nRg2aJuvpvz,NRKjtCAkdVI,NRZcm1lEy5u,NrHPCBkktgL,NrNhl3lT6q9,NRuWD8BM1jD,NR788pi0I3e,NRqeU3F5LoU,Nram346jMbY,NRcJD3FZ5fX,nkDyu1NI3yv,nJZGBECBspE,NK3wDj5Cl2d,NJZo855zRWU,NJzE9cyipSO,nKBNG4TA9ye,nK56bOPbkUF,NjYKxeiEw9k,njZCD2mJwsz,NJyJhwtcocK,nhR0Pat5DlD,NHsAEr2hrhx,NHTwonuDKC6,nHTZ72jAFvv,NhPMW9k508q,NHvhM6egCml,NHVkAeLFPcK,ni2fhsEBQV4,nll5Vf4HO0u,nm0fEIqvkKG,Nlj6ztotjaY,nlLJxsMVKbi,nm0HDq47aqP,nlyV8TTcLAC,nL4inf71e6v,NLhVCk2cWFQ,nKX9oIy5HTw,NLbaZ2vV52C,nLJ2df5ihXt,nLcJCGOmAq5,Nle2yV3LLqH,nKzUk8iUYao,Nl3gjVEOoCS,nKiccllE1Gt,NKVKLTSXOa9,NlgNaSRnFOb,NlA2gFHEn2e,NkUoPHdmiA2,nkIbspPvmRh,nkoqILeLIGJ,NKnlmpvCHID"
+                }
+              ]
+            },
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            0,
+            0
+          ],
+          "id": "a2fd4397-9585-4968-a493-78cecd4b778d",
+          "name": "DHIS2_Min_Ifanadiana",
+          "alwaysOutputData": true,
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "pmwseXFBUqiCkCYK",
+              "name": "conn_DHIS2_Ministere"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "jsCode": "const results = [];\nconst today = new Date();\n\nfor (let i = 1; i <= 3; i++) {  // exclut le mois courant\n    const date = new Date(today.getFullYear(), today.getMonth() - i, 1);\n\n    const year = date.getFullYear();\n    const month = String(date.getMonth() + 1).padStart(2, '0');\n\n    const startDate = `${year}-${month}-01`;\n\n    results.push({\n        json: {\n            startDate: startDate\n        }\n    });\n}\n\nreturn results;"
+          },
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            -976,
+            80
+          ],
+          "id": "86ed7028-015f-4f2e-b8fa-23225be56d62",
+          "name": "startDate"
+        },
+        {
+          "parameters": {
+            "jsCode": "const results = [];\nconst today = new Date();\n\nfor (let i = 1; i <= 3; i++) {  // exclut le mois courant\n    \n    // Premier jour du mois précédent\n    const date = new Date(today.getFullYear(), today.getMonth() - i, 1);\n\n    const year = date.getFullYear();\n    const month = String(date.getMonth() + 1).padStart(2, '0');\n\n    // Dernier jour du mois :\n    // astuce : jour 0 du mois suivant = dernier jour du mois courant\n    const lastDayDate = new Date(year, date.getMonth() + 1, 0);\n    const lastDay = String(lastDayDate.getDate()).padStart(2, '0');\n\n    const endDate = `${year}-${month}-${lastDay}`;\n\n    results.push({\n        json: {\n            endDate: endDate\n        }\n    });\n}\n\nreturn results;"
+          },
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            -976,
+            352
+          ],
+          "id": "29644b32-570a-4e4e-8d78-eb72047c06b3",
+          "name": "endDate"
+        },
+        {
+          "parameters": {
+            "mode": "combine",
+            "combineBy": "combineByPosition",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.merge",
+          "typeVersion": 3,
+          "position": [
+            -720,
+            208
+          ],
+          "id": "b54243bb-7363-4273-a9f4-ccfc0cafeb26",
+          "name": "Merge"
+        },
+        {
+          "parameters": {
+            "url": "https://ministere-sante.mg/api/dataValueSets?",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendQuery": true,
+            "queryParameters": {
+              "parameters": [
+                {
+                  "name": "dataSet",
+                  "value": "qNTxFeMEaKj"
+                },
+                {
+                  "name": "startDate",
+                  "value": "={{ $('Merge').item.json.startDate }}"
+                },
+                {
+                  "name": "endDate",
+                  "value": "={{ $('Merge').item.json.endDate }}"
+                },
+                {
+                  "name": "orgUnit",
+                  "value": "mX0r4qWG5tH,MWzOXZ0OCi4,mWYjd7l6HAr,MWwdcT8ymeW,mwvpja7dkl4,mWVArHmYzmj,MxSXZNqpJaj,mxqyYJGUoX7,mxvnCa9POAC,mxmc9MooAS6,mxvfUEPLrej,MXCn4tOX6pg,mx5QFM4WYkD,mxdIkypeYMD,mx3PD6YuOnN,MxINC7KeaaO,MxaayZVhVbB,mX3ergiSZpk,MxB53F0Df9d,MxzGEGPTgMm,my9f3adLxlj,mXXq72VIIoj,My3lP3uaw2O,My9BjOI1o6m,My8pyg8HifR,Mz62qH54bim,MZaTui7zLzI,Mz3aE1ccqiF,mzL9PBf0gGm,MZmi6Gkq4ba,mZJ87VyIelV,MyZGOELdGMX,myN1iOnWnxd,Mz1j1XfPoYJ,mYDNGPHWPTA,MYQCpwtIHn5,mYsCC2aH7vw,MyenqK5PsKr,mYnZimKXYL1,mZrPgkkaDIS,MZRojXcuGgp,MzvaEqWdQPi,MZXkSmDSsZf,MZTR7HdznnT,MZsiAMQbaA1,N0Qc5Wn4Yfj,n0YNSHx2OL8,N1B4my4Tsvs,N0zmv1SGHuy,N0LZ17vAx3m,N18L1cWSeJo,n0IMpUvRBcr,N0KKxsJuAE4,mzYJ74wMyRk,N00YPHlIWIK,n0hZNG2D5pj,n0CaLGUyPsm,n07Oyi0yGex,n1txNLmlNFJ,n1qhQckfF9d,n1tITOuWqTj,N1BN7OpevtW,n1nFDxPKQHB,n1Yf2oUdGxa,N1kFPk7nWuz,n2f6TQReLsU,N2glO686SML,N2Vq4SNsgaW,N2COVGsjAks,n24vq29Pf2r,n2CopSk7hqo,nBPtUO5rqTo,NBYjIGPPfUy,nc50KcJ1k6A,nBsZyTHOgSl,Nbx95yE0lU0,NBGp09sb15x,NCAA17HzDel,nc1gjp9uvKD,n3YMnl5xGAf,n4asbmLsCPe,N49r3uqo8Sz,N3OTwPrPUje,n4jQxG8HL3z,N4l4RM2tcZO,N4lpdPYcuTg,n4A8pKBKIe3,n37IcdBMLdA,n3mPb3TMKcA,n3elkRcB89d,n3DSsNHbfSO,OMu8OTiwiHK,N3wXl5Ga7we,N4FxgQCv8Dd,N4ZbZyrsK9s,N53LEDyqoAe,n4U5XIX8heB,n4XutwBF3aA,N4QjMbYPTvm,N4vAprEXdvy,N5PgoyDsfVR,n5cWuXGbkGw,N5ljK3DetCF,N5hpJLbp7nz,N5pvLe47hEy,n65KpwgJdlV,n6B1ZdlStCg,n5pYmtLcpXL,N5C2zCQp2X1,n5SOhaHQraj,n5yx0AEEFyd,n6A5hvyCHPi,n5Gron9ft7P,N5rE3wAeM7x,n7hHuAxfR1N,N7EKyN37EBG,N7JbF1rNR1S,n7aSwQUbIZL,N7jaCqlsCzu,N75spTdsZUt,n6ZGBgi7GKu,N7M9Qs0fAzl,n81hr8CBEbu,N7XV7YNThya,N7qlbph0EEs,n7UVSyMEGkf,n7mbudczRWY,n8evlB5Jypa,N8gdZv5P4qF,N8MRV85oyH7,n8b8EDPWbw7,N8ciEz9iOHa,N8VExStdiSH,N9MJRyNiQXJ,n9f9j5YSB59,n9oAldScBPF,n9k4eOamG9m,n9DlpdeghdJ,NaGqEmAW4kG,NaF9N1sMPiR,nAh1A2IPSG4,NAcVXQ6PNtz,NAahVvBdvK2,n9ui3TA9vGW,na2RyoE4BaO,NaCfz6ojNgx,n9q9cKYLdnb,nahNwLAZDBD,NaKLndVd7Gy,NAPB6q7D78y,NammUoGaIlW,nAhm4XcsoSA,NAiQE4iBV3y,NAosVzYWbcp,n5pYmtLcpXL,N5C2zCQp2X1,n5SOhaHQraj,n5yx0AEEFyd,n6A5hvyCHPi,n5Gron9ft7P,N5rE3wAeM7x,n7hHuAxfR1N,N7EKyN37EBG,N7JbF1rNR1S,n7aSwQUbIZL,N7jaCqlsCzu,N75spTdsZUt,n6ZGBgi7GKu,N7M9Qs0fAzl,n81hr8CBEbu,N7XV7YNThya,N7qlbph0EEs,n7UVSyMEGkf,n7mbudczRWY,n8evlB5Jypa,N8gdZv5P4qF,N8MRV85oyH7,n8b8EDPWbw7,N8ciEz9iOHa,N8VExStdiSH,N9MJRyNiQXJ,n9f9j5YSB59,n9oAldScBPF,n9k4eOamG9m,n9DlpdeghdJ,NaGqEmAW4kG,NaF9N1sMPiR,nAh1A2IPSG4,NAcVXQ6PNtz,NAahVvBdvK2,n9ui3TA9vGW,na2RyoE4BaO,NaCfz6ojNgx,n9q9cKYLdnb,nahNwLAZDBD,NaKLndVd7Gy,NAPB6q7D78y,NammUoGaIlW,nAhm4XcsoSA,NAiQE4iBV3y,NAosVzYWbcp,NB7eqXoE2R9,Nb4B3Eb0wTG,nAwYZvr4uXx,NAsl8Rx8H1z,nARV7hpZe81,nAQY3DLsuOv,narUrqXyfmL,naYQMideqXq,nAYTsq27Qme,NB5HPg4lZap,naPCltKBaZo,nB7r8fj1aJV,NBdT3iv0Jdd,NbCCrtINfJR,nbdmJge3hco,Nbe5nwNOWuH,NBCzon4kjkU,nBfPgpU2j2T,NBE8qSzMhFO,nB9tjQx7qLG,ncjBaP4NlNL,ncfTlufvAf6,nCedmqJkSab,ncHX7GhgdRw,nCLAqvfd0dC,NcAtlM2CxhN,NchF9oWaRrv,NCFWw5b1F3l,nD0F9ui8Nga,ncW6xCCNS7U,Ncv3dhm1WKr,NcPVtCNxJtS,ncp8UEmO0Nc,Ncui1OhIui1,NCNUmUdyxiv,ncNHTPuom6N,ncrGZtPNsdp,NDdK3PErBwi,nDak4FYY7by,Nd9lbxQv72E,Ndc6vwLpPL0,Nd2kI24Ysjw,ndFFkLmgpdh,NdR2GbJ4yux,NDPJDhY7drG,nDYKoSsgDae,NDSoOEPf9Xz,nDmpuJkb5Dx,NE0wSFcq85m,nDGGWGoGAQP,NDxMK7ByHjE,NDJYj6pnGtq,NdK05Nm1xRX,NB7eqXoE2R9,Nb4B3Eb0wTG,nAwYZvr4uXx,NAsl8Rx8H1z,nARV7hpZe81,nAQY3DLsuOv,narUrqXyfmL,naYQMideqXq,nAYTsq27Qme,NB5HPg4lZap,naPCltKBaZo,nB7r8fj1aJV,NBdT3iv0Jdd,NbCCrtINfJR,nbdmJge3hco,Nbe5nwNOWuH,NBCzon4kjkU,nBfPgpU2j2T,NBE8qSzMhFO,nB9tjQx7qLG,ncjBaP4NlNL,ncfTlufvAf6,nCedmqJkSab,ncHX7GhgdRw,nCLAqvfd0dC,NcAtlM2CxhN,NchF9oWaRrv,NCFWw5b1F3l,nD0F9ui8Nga,ncW6xCCNS7U,Ncv3dhm1WKr,NcPVtCNxJtS,ncp8UEmO0Nc,Ncui1OhIui1,NCNUmUdyxiv,ncNHTPuom6N,ncrGZtPNsdp,NDdK3PErBwi,nDak4FYY7by,Nd9lbxQv72E,Ndc6vwLpPL0,Nd2kI24Ysjw,ndFFkLmgpdh,NdR2GbJ4yux,NDPJDhY7drG,nDYKoSsgDae,NDSoOEPf9Xz,nDmpuJkb5Dx,NE0wSFcq85m,nDGGWGoGAQP,NDxMK7ByHjE,NDJYj6pnGtq,NdK05Nm1xRX,NeDLD0dIVsB,nE79oU4m59R,NE3IGibCrUT,NEeUGvFAfPL,nEGDI49riU7,NE1jB3WgICT,nEBeaVC82RV,nEOHhRftxUA,NEgTyyI1U7p,NElhFomB8Ed,NeMAfI6pnH8,neMKrGhZWb8,NeGfP3BAuLV,nf6IbtSfLoQ,Nf5oMnV3Yv4,neUyl2P9GNI,nF1QnIAFhBa,nFd1OOKdbcg,NFghlWBjqn9,Nf4MqPR6ji8,NevzzuLhwDL,NF3yUICZdNs,Net1iKNpH2C,NFB2xU2KZJR,NFEh6pdnT8Z,NEoyuaoQCYg,nF1q6IlqwEj,nFgQLDmJ6g0,NfiSknjddJk,nFkzKqsjV6w,NFkcfk9XjZ6,Nfgju48VnmP,NGg0rG3JWU8,nghGlnFwHao,ngDQVh3kT5U,nGFudKcFOs2;nGBQ8uWPxAf,NFt5dJzTdyX,Ng4fSETuV70,nFz0MA85kJa,NFU587IpTIP,NfmMrCvI9Qs,NGDGQL6L6gv,Ng9y3LRy7wt,ngCoDKKjYFk,NFY9MJ3D8X6,NGDf0XXst8N,nFN2AjTeCMc,nFS5aKnXxhk,nFxmB8IneUi,NfY6QL7XF3K,nFmDmVtAu8F"
+                }
+              ]
+            },
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            0,
+            224
+          ],
+          "id": "6f806187-5b23-4316-8ed4-785a494fa693",
+          "name": "DHIS2_Min_Mananjary",
+          "alwaysOutputData": true,
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "pmwseXFBUqiCkCYK",
+              "name": "conn_DHIS2_Ministere"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "url": "https://ministere-sante.mg/api/dataValueSets?",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendQuery": true,
+            "queryParameters": {
+              "parameters": [
+                {
+                  "name": "dataSet",
+                  "value": "qNTxFeMEaKj"
+                },
+                {
+                  "name": "startDate",
+                  "value": "={{ $('Merge').item.json.startDate }}"
+                },
+                {
+                  "name": "endDate",
+                  "value": "={{ $('Merge').item.json.endDate }}"
+                },
+                {
+                  "name": "orgUnit",
+                  "value": "mX0r4qWG5tH,MWzOXZ0OCi4,mWYjd7l6HAr,MWwdcT8ymeW,mwvpja7dkl4,mWVArHmYzmj,MxSXZNqpJaj,mxqyYJGUoX7,mxvnCa9POAC,mxmc9MooAS6,mxvfUEPLrej,MXCn4tOX6pg,mx5QFM4WYkD,mxdIkypeYMD,mx3PD6YuOnN,MxINC7KeaaO,MxaayZVhVbB,mX3ergiSZpk,MxB53F0Df9d,MxzGEGPTgMm,my9f3adLxlj,mXXq72VIIoj,My3lP3uaw2O,My9BjOI1o6m,My8pyg8HifR,Mz62qH54bim,MZaTui7zLzI,Mz3aE1ccqiF,mzL9PBf0gGm,MZmi6Gkq4ba,mZJ87VyIelV,MyZGOELdGMX,myN1iOnWnxd,Mz1j1XfPoYJ,mYDNGPHWPTA,MYQCpwtIHn5,mYsCC2aH7vw,MyenqK5PsKr,mYnZimKXYL1,mZrPgkkaDIS,MZRojXcuGgp,MzvaEqWdQPi,MZXkSmDSsZf,MZTR7HdznnT,MZsiAMQbaA1,N0Qc5Wn4Yfj,n0YNSHx2OL8,N1B4my4Tsvs,N0zmv1SGHuy,N0LZ17vAx3m,N18L1cWSeJo,n0IMpUvRBcr,N0KKxsJuAE4,mzYJ74wMyRk,N00YPHlIWIK,n0hZNG2D5pj,n0CaLGUyPsm,n07Oyi0yGex,n1txNLmlNFJ,n1qhQckfF9d,n1tITOuWqTj,N1BN7OpevtW,n1nFDxPKQHB,n1Yf2oUdGxa,N1kFPk7nWuz,n2f6TQReLsU,N2glO686SML,N2Vq4SNsgaW,N2COVGsjAks,n24vq29Pf2r,n2CopSk7hqo,nBPtUO5rqTo,NBYjIGPPfUy,nc50KcJ1k6A,nBsZyTHOgSl,Nbx95yE0lU0,NBGp09sb15x,NCAA17HzDel,nc1gjp9uvKD,n3YMnl5xGAf,n4asbmLsCPe,N49r3uqo8Sz,N3OTwPrPUje,n4jQxG8HL3z,N4l4RM2tcZO,N4lpdPYcuTg,n4A8pKBKIe3,n37IcdBMLdA,n3mPb3TMKcA,n3elkRcB89d,n3DSsNHbfSO,OMu8OTiwiHK,N3wXl5Ga7we,N4FxgQCv8Dd,N4ZbZyrsK9s,N53LEDyqoAe,n4U5XIX8heB,n4XutwBF3aA,N4QjMbYPTvm,N4vAprEXdvy,N5PgoyDsfVR,n5cWuXGbkGw,N5ljK3DetCF,N5hpJLbp7nz,N5pvLe47hEy,n65KpwgJdlV,n6B1ZdlStCg,n5pYmtLcpXL,N5C2zCQp2X1,n5SOhaHQraj,n5yx0AEEFyd,n6A5hvyCHPi,n5Gron9ft7P,N5rE3wAeM7x,n7hHuAxfR1N,N7EKyN37EBG,N7JbF1rNR1S,n7aSwQUbIZL,N7jaCqlsCzu,N75spTdsZUt,n6ZGBgi7GKu,N7M9Qs0fAzl,n81hr8CBEbu,N7XV7YNThya,N7qlbph0EEs,n7UVSyMEGkf,n7mbudczRWY,n8evlB5Jypa,N8gdZv5P4qF,N8MRV85oyH7,n8b8EDPWbw7,N8ciEz9iOHa,N8VExStdiSH,N9MJRyNiQXJ,n9f9j5YSB59,n9oAldScBPF,n9k4eOamG9m,n9DlpdeghdJ,NaGqEmAW4kG,NaF9N1sMPiR,nAh1A2IPSG4,NAcVXQ6PNtz,NAahVvBdvK2,n9ui3TA9vGW,na2RyoE4BaO,NaCfz6ojNgx,n9q9cKYLdnb,nahNwLAZDBD,NaKLndVd7Gy,NAPB6q7D78y,NammUoGaIlW,nAhm4XcsoSA,NAiQE4iBV3y,NAosVzYWbcp,n5pYmtLcpXL,N5C2zCQp2X1,n5SOhaHQraj,n5yx0AEEFyd,n6A5hvyCHPi,n5Gron9ft7P,N5rE3wAeM7x,n7hHuAxfR1N,N7EKyN37EBG,N7JbF1rNR1S,n7aSwQUbIZL,N7jaCqlsCzu,N75spTdsZUt,n6ZGBgi7GKu,N7M9Qs0fAzl,n81hr8CBEbu,N7XV7YNThya,N7qlbph0EEs,n7UVSyMEGkf,n7mbudczRWY,n8evlB5Jypa,N8gdZv5P4qF,N8MRV85oyH7,n8b8EDPWbw7,N8ciEz9iOHa,N8VExStdiSH,N9MJRyNiQXJ,n9f9j5YSB59,n9oAldScBPF,n9k4eOamG9m,n9DlpdeghdJ,NaGqEmAW4kG,NaF9N1sMPiR,nAh1A2IPSG4,NAcVXQ6PNtz,NAahVvBdvK2,n9ui3TA9vGW,na2RyoE4BaO,NaCfz6ojNgx,n9q9cKYLdnb,nahNwLAZDBD,NaKLndVd7Gy,NAPB6q7D78y,NammUoGaIlW,nAhm4XcsoSA,NAiQE4iBV3y,NAosVzYWbcp,NB7eqXoE2R9,Nb4B3Eb0wTG,nAwYZvr4uXx,NAsl8Rx8H1z,nARV7hpZe81,nAQY3DLsuOv,narUrqXyfmL,naYQMideqXq,nAYTsq27Qme,NB5HPg4lZap,naPCltKBaZo,nB7r8fj1aJV,NBdT3iv0Jdd,NbCCrtINfJR,nbdmJge3hco,Nbe5nwNOWuH,NBCzon4kjkU,nBfPgpU2j2T,NBE8qSzMhFO,nB9tjQx7qLG,ncjBaP4NlNL,ncfTlufvAf6,nCedmqJkSab,ncHX7GhgdRw,nCLAqvfd0dC,NcAtlM2CxhN,NchF9oWaRrv,NCFWw5b1F3l,nD0F9ui8Nga,ncW6xCCNS7U,Ncv3dhm1WKr,NcPVtCNxJtS,ncp8UEmO0Nc,Ncui1OhIui1,NCNUmUdyxiv,ncNHTPuom6N,ncrGZtPNsdp,NDdK3PErBwi,nDak4FYY7by,Nd9lbxQv72E,Ndc6vwLpPL0,Nd2kI24Ysjw,ndFFkLmgpdh,NdR2GbJ4yux,NDPJDhY7drG,nDYKoSsgDae,NDSoOEPf9Xz,nDmpuJkb5Dx,NE0wSFcq85m,nDGGWGoGAQP,NDxMK7ByHjE,NDJYj6pnGtq,NdK05Nm1xRX,NB7eqXoE2R9,Nb4B3Eb0wTG,nAwYZvr4uXx,NAsl8Rx8H1z,nARV7hpZe81,nAQY3DLsuOv,narUrqXyfmL,naYQMideqXq,nAYTsq27Qme,NB5HPg4lZap,naPCltKBaZo,nB7r8fj1aJV,NBdT3iv0Jdd,NbCCrtINfJR,nbdmJge3hco,Nbe5nwNOWuH,NBCzon4kjkU,nBfPgpU2j2T,NBE8qSzMhFO,nB9tjQx7qLG,ncjBaP4NlNL,ncfTlufvAf6,nCedmqJkSab,ncHX7GhgdRw,nCLAqvfd0dC,NcAtlM2CxhN,NchF9oWaRrv,NCFWw5b1F3l,nD0F9ui8Nga,ncW6xCCNS7U,Ncv3dhm1WKr,NcPVtCNxJtS,ncp8UEmO0Nc,Ncui1OhIui1,NCNUmUdyxiv,ncNHTPuom6N,ncrGZtPNsdp,NDdK3PErBwi,nDak4FYY7by,Nd9lbxQv72E,Ndc6vwLpPL0,Nd2kI24Ysjw,ndFFkLmgpdh,NdR2GbJ4yux,NDPJDhY7drG,nDYKoSsgDae,NDSoOEPf9Xz,nDmpuJkb5Dx,NE0wSFcq85m,nDGGWGoGAQP,NDxMK7ByHjE,NDJYj6pnGtq,NdK05Nm1xRX,NeDLD0dIVsB,nE79oU4m59R,NE3IGibCrUT,NEeUGvFAfPL,nEGDI49riU7,NE1jB3WgICT,nEBeaVC82RV,nEOHhRftxUA,NEgTyyI1U7p,NElhFomB8Ed,NeMAfI6pnH8,neMKrGhZWb8,NeGfP3BAuLV,nf6IbtSfLoQ,Nf5oMnV3Yv4,neUyl2P9GNI,nF1QnIAFhBa,nFd1OOKdbcg,NFghlWBjqn9,Nf4MqPR6ji8,NevzzuLhwDL,NF3yUICZdNs,Net1iKNpH2C,NFB2xU2KZJR,NFEh6pdnT8Z,NEoyuaoQCYg,nF1q6IlqwEj,nFgQLDmJ6g0,NfiSknjddJk,nFkzKqsjV6w,NFkcfk9XjZ6,Nfgju48VnmP,NGg0rG3JWU8,nghGlnFwHao,ngDQVh3kT5U,nGFudKcFOs2;nGBQ8uWPxAf,NFt5dJzTdyX,Ng4fSETuV70,nFz0MA85kJa,NFU587IpTIP,NfmMrCvI9Qs,NGDGQL6L6gv,Ng9y3LRy7wt,ngCoDKKjYFk,NFY9MJ3D8X6,NGDf0XXst8N,nFN2AjTeCMc,nFS5aKnXxhk,nFxmB8IneUi,NfY6QL7XF3K,nFmDmVtAu8F"
+                }
+              ]
+            },
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            0,
+            512
+          ],
+          "id": "4014b805-5223-4224-a6a3-1a1b21ce9a1c",
+          "name": "DHIS2_Min_Nosy_Varika",
+          "alwaysOutputData": true,
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "pmwseXFBUqiCkCYK",
+              "name": "conn_DHIS2_Ministere"
+            }
+          }
+        }
+      ],
+      "connections": {
+        "When clicking ‘Test workflow’": {
+          "main": [
+            [
+              {
+                "node": "startDate",
+                "type": "main",
+                "index": 0
+              },
+              {
+                "node": "endDate",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Loop Over Items": {
+          "main": [
+            [],
+            [
+              {
+                "node": "DHIS2_Min_Ifanadiana",
+                "type": "main",
+                "index": 0
+              },
+              {
+                "node": "DHIS2_Min_Mananjary",
+                "type": "main",
+                "index": 0
+              },
+              {
+                "node": "DHIS2_Min_Nosy_Varika",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Min_Ifanadiana": {
+          "main": [
+            [
+              {
+                "node": "DHIS2_Pivot",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "startDate": {
+          "main": [
+            [
+              {
+                "node": "Merge",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "endDate": {
+          "main": [
+            [
+              {
+                "node": "Merge",
+                "type": "main",
+                "index": 1
+              }
+            ]
+          ]
+        },
+        "Merge": {
+          "main": [
+            [
+              {
+                "node": "Loop Over Items",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Min_Mananjary": {
+          "main": [
+            [
+              {
+                "node": "DHIS2_Pivot1",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Min_Nosy_Varika": {
+          "main": [
+            [
+              {
+                "node": "DHIS2_Pivot2",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Pivot": {
+          "main": [
+            [
+              {
+                "node": "Loop Over Items",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Pivot1": {
+          "main": [
+            [
+              {
+                "node": "Loop Over Items",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Pivot2": {
+          "main": [
+            [
+              {
+                "node": "Loop Over Items",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "settings": {
+        "executionOrder": "v1",
+        "binaryMode": "separate",
+        "availableInMCP": false
+      },
+      "staticData": null,
+      "meta": null,
+      "pinData": {},
+      "versionId": "239d3579-6749-47a7-bd01-44ba182e572a",
+      "activeVersionId": null,
+      "triggerCount": 0,
+      "shared": [
+        {
+          "updatedAt": "2026-03-04T13:08:35.708Z",
+          "createdAt": "2026-03-04T13:08:35.708Z",
+          "role": "workflow:owner",
+          "workflowId": "29vw9LAA95zDC9G5",
+          "projectId": "ALqsZgjbH7k1av6W"
+        }
+      ],
+      "activeVersion": null,
+      "tags": []
+    },
+    {
+      "updatedAt": "2026-03-04T13:09:02.263Z",
+      "createdAt": "2026-03-04T13:09:02.263Z",
+      "id": "6hXq57ceCkztXSFj",
+      "name": "Integrations_RMA_CHRD",
+      "active": false,
+      "isArchived": false,
+      "nodes": [
+        {
+          "parameters": {},
+          "type": "n8n-nodes-base.manualTrigger",
+          "typeVersion": 1,
+          "position": [
+            -784,
+            192
+          ],
+          "id": "fb024eb7-2195-4ad9-a717-6420ab66b29d",
+          "name": "When clicking ‘Test workflow’"
+        },
+        {
+          "parameters": {
+            "jsCode": "const results = [];\nconst today = new Date();\n\nfor (let i = 1; i <= 3; i++) {  // on commence à 1 pour exclure le mois courant\n    const date = new Date(today.getFullYear(), today.getMonth() - i, 1);\n\n    const year = date.getFullYear();\n    const month = String(date.getMonth() + 1).padStart(2, '0');\n\n    results.push({\n        json: {\n            period: `${year}${month}`\n        }\n    });\n}\n\nreturn results;"
+          },
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            -496,
+            192
+          ],
+          "id": "b262c19c-90e0-47c8-820b-e0f9ca23ef84",
+          "name": "Periode"
+        },
+        {
+          "parameters": {
+            "batchSize": 3,
+            "options": {}
+          },
+          "type": "n8n-nodes-base.splitInBatches",
+          "typeVersion": 3,
+          "position": [
+            -288,
+            192
+          ],
+          "id": "694982b5-0614-4e67-a49e-5a4237bd67c1",
+          "name": "Loop Over Items"
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{$json}}",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            528,
+            0
+          ],
+          "id": "05bf3e7b-d74a-4ca7-af26-6bfb69e39177",
+          "name": "DHIS2_Pivot"
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{$json}}",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            544,
+            208
+          ],
+          "id": "dc6f73de-e1cb-4c7c-a4fb-b0fd744e88e8",
+          "name": "DHIS2_Pivot1"
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{$json}}",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            544,
+            400
+          ],
+          "id": "4602f239-db9d-4f85-ab47-236c03519c99",
+          "name": "DHIS2_Pivot2"
+        },
+        {
+          "parameters": {
+            "url": "https://ministere-sante.mg/api/dataValueSets?",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendQuery": true,
+            "queryParameters": {
+              "parameters": [
+                {
+                  "name": "dataSet",
+                  "value": "XH4MSdxFKe5"
+                },
+                {
+                  "name": "period",
+                  "value": "={{ $json.period }}"
+                },
+                {
+                  "name": "orgUnit",
+                  "value": "GDBYpa6pDOe"
+                }
+              ]
+            },
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            0,
+            0
+          ],
+          "id": "10bd703d-ec9d-4a54-abce-901e9200bf33",
+          "name": "DHIS2_Min_Ifanadiana",
+          "alwaysOutputData": true
+        },
+        {
+          "parameters": {
+            "url": "https://ministere-sante.mg/api/dataValueSets?",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendQuery": true,
+            "queryParameters": {
+              "parameters": [
+                {
+                  "name": "dataSet",
+                  "value": "XH4MSdxFKe5"
+                },
+                {
+                  "name": "period",
+                  "value": "={{ $json.period }}"
+                },
+                {
+                  "name": "orgUnit",
+                  "value": "cPkdD7UhXmn"
+                }
+              ]
+            },
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            0,
+            208
+          ],
+          "id": "e26ac692-64d2-4eae-93f3-73a70d776af4",
+          "name": "DHIS2_Min_Manajary",
+          "alwaysOutputData": true
+        },
+        {
+          "parameters": {
+            "url": "https://ministere-sante.mg/api/dataValueSets?",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendQuery": true,
+            "queryParameters": {
+              "parameters": [
+                {
+                  "name": "dataSet",
+                  "value": "XH4MSdxFKe5"
+                },
+                {
+                  "name": "period",
+                  "value": "={{ $json.period }}"
+                },
+                {
+                  "name": "orgUnit",
+                  "value": "GM6MGTic1DQ"
+                }
+              ]
+            },
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            0,
+            400
+          ],
+          "id": "58eed817-8b16-4984-a9d1-d8e290731714",
+          "name": "DHIS2_Min_Nosy_varika",
+          "alwaysOutputData": true
+        },
+        {
+          "parameters": {
+            "jsCode": "return items.map(item => {\n\n    const newItem = { ...item.json };\n\n    // Modifier dataSet\n    newItem.dataSet = \"sTdqwhFX0qj\";\n\n    // Mettre completeDate à null\n    newItem.completeDate = null;\n\n    // Si dataValues existe, on peut aussi modifier dedans si nécessaire\n    if (newItem.dataValues && Array.isArray(newItem.dataValues)) {\n        newItem.dataValues = newItem.dataValues.map(dv => ({\n            ...dv\n        }));\n    }\n\n    return {\n        json: newItem\n    };\n});"
+          },
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            272,
+            0
+          ],
+          "id": "44b0b6e8-6927-4fd1-a724-89179d556959",
+          "name": "Code"
+        },
+        {
+          "parameters": {
+            "jsCode": "return items.map(item => {\n\n    const newItem = { ...item.json };\n\n    // Modifier dataSet\n    newItem.dataSet = \"sTdqwhFX0qj\";\n\n    // Mettre completeDate à null\n    newItem.completeDate = null;\n\n    // Si dataValues existe, on peut aussi modifier dedans si nécessaire\n    if (newItem.dataValues && Array.isArray(newItem.dataValues)) {\n        newItem.dataValues = newItem.dataValues.map(dv => ({\n            ...dv\n        }));\n    }\n\n    return {\n        json: newItem\n    };\n});"
+          },
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            288,
+            208
+          ],
+          "id": "41ccf8b7-af57-4ad7-af4d-5446456cbb46",
+          "name": "Code1"
+        },
+        {
+          "parameters": {
+            "jsCode": "return items.map(item => {\n\n    const newItem = { ...item.json };\n\n    // Modifier dataSet\n    newItem.dataSet = \"sTdqwhFX0qj\";\n\n    // Mettre completeDate à null\n    newItem.completeDate = null;\n\n    // Si dataValues existe, on peut aussi modifier dedans si nécessaire\n    if (newItem.dataValues && Array.isArray(newItem.dataValues)) {\n        newItem.dataValues = newItem.dataValues.map(dv => ({\n            ...dv\n        }));\n    }\n\n    return {\n        json: newItem\n    };\n});"
+          },
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            288,
+            400
+          ],
+          "id": "35942cd2-b637-4a52-b67c-951919118c32",
+          "name": "Code2"
+        }
+      ],
+      "connections": {
+        "When clicking ‘Test workflow’": {
+          "main": [
+            [
+              {
+                "node": "Periode",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Periode": {
+          "main": [
+            [
+              {
+                "node": "Loop Over Items",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Loop Over Items": {
+          "main": [
+            [],
+            [
+              {
+                "node": "DHIS2_Min_Ifanadiana",
+                "type": "main",
+                "index": 0
+              },
+              {
+                "node": "DHIS2_Min_Manajary",
+                "type": "main",
+                "index": 0
+              },
+              {
+                "node": "DHIS2_Min_Nosy_varika",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Min_Ifanadiana": {
+          "main": [
+            [
+              {
+                "node": "Code",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Min_Manajary": {
+          "main": [
+            [
+              {
+                "node": "Code1",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Min_Nosy_varika": {
+          "main": [
+            [
+              {
+                "node": "Code2",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Code": {
+          "main": [
+            [
+              {
+                "node": "DHIS2_Pivot",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Code1": {
+          "main": [
+            [
+              {
+                "node": "DHIS2_Pivot1",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Code2": {
+          "main": [
+            [
+              {
+                "node": "DHIS2_Pivot2",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "settings": {
+        "executionOrder": "v1",
+        "binaryMode": "separate",
+        "availableInMCP": false
+      },
+      "staticData": null,
+      "meta": null,
+      "pinData": {},
+      "versionId": "105e089d-1562-49f3-862a-a1d28ad5584e",
+      "activeVersionId": null,
+      "triggerCount": 0,
+      "shared": [
+        {
+          "updatedAt": "2026-03-04T13:09:02.264Z",
+          "createdAt": "2026-03-04T13:09:02.264Z",
+          "role": "workflow:owner",
+          "workflowId": "6hXq57ceCkztXSFj",
+          "projectId": "ALqsZgjbH7k1av6W"
+        }
+      ],
+      "activeVersion": null,
+      "tags": []
+    },
+    {
+      "updatedAt": "2026-03-04T13:12:18.990Z",
+      "createdAt": "2026-03-04T13:08:18.789Z",
+      "id": "TSmx0r19iWx2B0b6",
+      "name": "Integration_RMA_CSB",
+      "active": false,
+      "isArchived": false,
+      "nodes": [
+        {
+          "parameters": {},
+          "type": "n8n-nodes-base.manualTrigger",
+          "typeVersion": 1,
+          "position": [
+            -784,
+            192
+          ],
+          "id": "0d46e0b7-d2d5-4f37-9d97-d3062d0bd207",
+          "name": "When clicking ‘Test workflow’"
+        },
+        {
+          "parameters": {
+            "jsCode": "const results = [];\nconst today = new Date();\n\nfor (let i = 1; i <= 3; i++) {  // on commence à 1 pour exclure le mois courant\n    const date = new Date(today.getFullYear(), today.getMonth() - i, 1);\n\n    const year = date.getFullYear();\n    const month = String(date.getMonth() + 1).padStart(2, '0');\n\n    results.push({\n        json: {\n            period: `${year}${month}`\n        }\n    });\n}\n\nreturn results;"
+          },
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            -496,
+            192
+          ],
+          "id": "db7ab506-98ec-48a4-9672-632e76ede302",
+          "name": "Periode"
+        },
+        {
+          "parameters": {
+            "batchSize": 3,
+            "options": {}
+          },
+          "type": "n8n-nodes-base.splitInBatches",
+          "typeVersion": 3,
+          "position": [
+            -288,
+            192
+          ],
+          "id": "79f0e420-7add-482b-8272-204722f44f80",
+          "name": "Loop Over Items"
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{$json}}",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            304,
+            0
+          ],
+          "id": "2937888f-d102-40c2-9b39-76ae6e89fc10",
+          "name": "DHIS2_Pivot",
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "UVeaJ4eIQxUebty4",
+              "name": "Conn_DHIS2_Pivot"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{$json}}",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            320,
+            208
+          ],
+          "id": "8f895a1d-fc97-473f-8c76-84a47177c45a",
+          "name": "DHIS2_Pivot1",
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "UVeaJ4eIQxUebty4",
+              "name": "Conn_DHIS2_Pivot"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{$json}}",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            320,
+            400
+          ],
+          "id": "ac73d878-2b34-41b2-9722-6d96b55907ce",
+          "name": "DHIS2_Pivot2",
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "UVeaJ4eIQxUebty4",
+              "name": "Conn_DHIS2_Pivot"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "url": "https://ministere-sante.mg/api/dataValueSets?",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendQuery": true,
+            "queryParameters": {
+              "parameters": [
+                {
+                  "name": "dataSet",
+                  "value": "mQEM6Pdzg8p"
+                },
+                {
+                  "name": "period",
+                  "value": "={{ $json.period }}"
+                },
+                {
+                  "name": "orgUnit",
+                  "value": "D9UWDj19ljP,U1YeJp3NDNV,QHPyq70qulM,M38BJM8ju1A,WCqkkkKNJEi,Pi2y9HFBDRj,h0z1bKoHDrU,YCvVB1VwWi0,mBZLeZ7Irx6,hXuxS0MOq3b,z6kDxHwInUT,okDqhh9n4yT,pczrAub8lnt,EE6WwIMgQ0F,O1wNJut8eci,RRe6ic0AU1Z,ZPvH8UsgwYv,DDR2w1c1GyE,r4U7PhBKR7S,uWoBok9YyvB,FGM6Ric1YnC,c2AYc6zu00e,A3hiudw2Rr4,b5rHHqkmI2a"
+                }
+              ]
+            },
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            0,
+            0
+          ],
+          "id": "283465e4-b154-4b1f-9d0e-8c7021a587a9",
+          "name": "DHIS2_Min_Ifanadiana",
+          "alwaysOutputData": true,
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "pmwseXFBUqiCkCYK",
+              "name": "conn_DHIS2_Ministere"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "url": "https://ministere-sante.mg/api/dataValueSets?",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendQuery": true,
+            "queryParameters": {
+              "parameters": [
+                {
+                  "name": "dataSet",
+                  "value": "mQEM6Pdzg8p"
+                },
+                {
+                  "name": "period",
+                  "value": "={{ $json.period }}"
+                },
+                {
+                  "name": "orgUnit",
+                  "value": "TheMkAkfvgn,BxpH1ND8KFP,Ht69V3vwfVs,SOYJNYkE3Ah,xFewURfeM6L,gGzLr4oo3Pm,JJPXmBBn47m,BbsaOL1ndvg,KXNLOAzcjfG,Qy7TBEcefE9,eQSREv9e1bq,Y8p37aLjrHn,Znyo1UWzmFH,AxTFbOBjP1K,Dzr57TxAG74,onLZ8h8Nng2,YxrZbfqDA6r,EYZ5Ej566ob,bnMM4PwDm3F,IQ82WcLTcGX,dSY2oZjJcwj,kraCyRAvVgQ,A38WhL0NPsX,ErLw9twd3q5,VW9Pm0uz6SX,ebRE2LEmvie,zMJxWJIgF5N,xIpy9Oaipvh,ZboIy43ZwzX,cPkdD7UhXmn,IRn2N8HJCVT,mHDPNIDOecN,MV5fSBnQpFC,R6evSAV8MdQ,AikfHtzeOOW,NA1FBm3XUuW,ngHZIXy1Cyw,juLcMFcd4Fv,NaHyGHPvH7A,tHaaamft4vA,A0YU5ksfXZS,INrXsjpFZU8,pfav1hH9Nuf,eHk9mLUogOz,aihwzCRcQS3,vPmCzlQD5a8,elIt2dLIHBw,I0zrAwM5gZL,nE3sJcoVkhr,ZpdAbOChH4T,FNRS263It3k"
+                }
+              ]
+            },
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            0,
+            208
+          ],
+          "id": "6050fa23-4943-418d-9069-2748666f465a",
+          "name": "DHIS2_Min_Mananjary",
+          "alwaysOutputData": true,
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "pmwseXFBUqiCkCYK",
+              "name": "conn_DHIS2_Ministere"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "url": "https://ministere-sante.mg/api/dataValueSets?",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendQuery": true,
+            "queryParameters": {
+              "parameters": [
+                {
+                  "name": "dataSet",
+                  "value": "mQEM6Pdzg8p"
+                },
+                {
+                  "name": "period",
+                  "value": "={{ $json.period }}"
+                },
+                {
+                  "name": "orgUnit",
+                  "value": "TheMkAkfvgn,BxpH1ND8KFP,Ht69V3vwfVs,SOYJNYkE3Ah,xFewURfeM6L,gGzLr4oo3Pm,JJPXmBBn47m,BbsaOL1ndvg,KXNLOAzcjfG,Qy7TBEcefE9,eQSREv9e1bq,Y8p37aLjrHn,Znyo1UWzmFH,AxTFbOBjP1K,Dzr57TxAG74,onLZ8h8Nng2,YxrZbfqDA6r,EYZ5Ej566ob,bnMM4PwDm3F,IQ82WcLTcGX,dSY2oZjJcwj,kraCyRAvVgQ,A38WhL0NPsX,ErLw9twd3q5,VW9Pm0uz6SX,ebRE2LEmvie,zMJxWJIgF5N,xIpy9Oaipvh,ZboIy43ZwzX,cPkdD7UhXmn,IRn2N8HJCVT,mHDPNIDOecN,MV5fSBnQpFC,R6evSAV8MdQ,AikfHtzeOOW,NA1FBm3XUuW,ngHZIXy1Cyw,juLcMFcd4Fv,NaHyGHPvH7A,tHaaamft4vA,A0YU5ksfXZS,INrXsjpFZU8,pfav1hH9Nuf,eHk9mLUogOz,aihwzCRcQS3,vPmCzlQD5a8,elIt2dLIHBw,I0zrAwM5gZL,nE3sJcoVkhr,ZpdAbOChH4T,FNRS263It3k"
+                }
+              ]
+            },
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            0,
+            400
+          ],
+          "id": "4613f0bd-aec8-48d8-a115-9db46ac1fefb",
+          "name": "DHIS2_Min_Nosy_Varika",
+          "alwaysOutputData": true,
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "pmwseXFBUqiCkCYK",
+              "name": "conn_DHIS2_Ministere"
+            }
+          }
+        }
+      ],
+      "connections": {
+        "When clicking ‘Test workflow’": {
+          "main": [
+            [
+              {
+                "node": "Periode",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Loop Over Items": {
+          "main": [
+            [],
+            [
+              {
+                "node": "DHIS2_Min_Nosy_Varika",
+                "type": "main",
+                "index": 0
+              },
+              {
+                "node": "DHIS2_Min_Ifanadiana",
+                "type": "main",
+                "index": 0
+              },
+              {
+                "node": "DHIS2_Min_Mananjary",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Periode": {
+          "main": [
+            [
+              {
+                "node": "Loop Over Items",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Min_Ifanadiana": {
+          "main": [
+            [
+              {
+                "node": "DHIS2_Pivot",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Min_Mananjary": {
+          "main": [
+            [
+              {
+                "node": "DHIS2_Pivot1",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Min_Nosy_Varika": {
+          "main": [
+            [
+              {
+                "node": "DHIS2_Pivot2",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "settings": {
+        "executionOrder": "v1",
+        "binaryMode": "separate",
+        "availableInMCP": false
+      },
+      "staticData": null,
+      "meta": null,
+      "pinData": {},
+      "versionId": "04153845-fea5-46a5-b5c4-003a0ed0b1b6",
+      "activeVersionId": null,
+      "triggerCount": 0,
+      "shared": [
+        {
+          "updatedAt": "2026-03-04T13:08:18.800Z",
+          "createdAt": "2026-03-04T13:08:18.800Z",
+          "role": "workflow:owner",
+          "workflowId": "TSmx0r19iWx2B0b6",
+          "projectId": "ALqsZgjbH7k1av6W"
+        }
+      ],
+      "activeVersion": null,
+      "tags": []
+    },
+    {
+      "updatedAt": "2026-03-04T13:18:08.396Z",
+      "createdAt": "2026-03-04T13:09:24.010Z",
+      "id": "Vbo7lBZEqhleh2Vq",
+      "name": "Integration_analytics_CSB",
+      "active": false,
+      "isArchived": false,
+      "nodes": [
+        {
+          "parameters": {
+            "jsCode": "const dataSetId = \"qNTxFeMEaKj\";   // ton dataset cible\nconst completeDate = null;        // ← maintenant null\n\nconst dataValues = [];\nlet globalOrgUnit = null;\n\nfor (const item of $input.all()) {\n\n    const rows = item.json.rows || [];\n\n    for (const row of rows) {\n\n        const dataElement = row[0];\n        const orgUnit = row[1];\n        const period = row[2];\n        const value = row[3];\n\n        globalOrgUnit = orgUnit; \n\n        dataValues.push({\n            dataElement,\n            period,\n            orgUnit,\n            value\n        });\n    }\n}\n\nreturn [\n  {\n    json: {\n      dataSet: dataSetId,\n      completeDate: completeDate,\n      orgUnit: globalOrgUnit,\n      dataValues: dataValues\n    }\n  }\n];"
+          },
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            224,
+            352
+          ],
+          "id": "b91ac579-be40-4c47-87b9-de7c8112ec25",
+          "name": "Code3"
+        },
+        {
+          "parameters": {
+            "jsCode": "const dataSetId = \"qNTxFeMEaKj\";   // ton dataset cible\nconst completeDate = null;        // ← maintenant null\n\nconst dataValues = [];\nlet globalOrgUnit = null;\n\nfor (const item of $input.all()) {\n\n    const rows = item.json.rows || [];\n\n    for (const row of rows) {\n\n        const dataElement = row[0];\n        const orgUnit = row[1];\n        const period = row[2];\n        const value = row[3];\n\n        globalOrgUnit = orgUnit; \n\n        dataValues.push({\n            dataElement,\n            period,\n            orgUnit,\n            value\n        });\n    }\n}\n\nreturn [\n  {\n    json: {\n      dataSet: dataSetId,\n      completeDate: completeDate,\n      orgUnit: globalOrgUnit,\n      dataValues: dataValues\n    }\n  }\n];"
+          },
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            224,
+            0
+          ],
+          "id": "9b8039c2-dad2-4ab0-b2b4-10464fc7352a",
+          "name": "Code"
+        },
+        {
+          "parameters": {},
+          "type": "n8n-nodes-base.manualTrigger",
+          "typeVersion": 1,
+          "position": [
+            -816,
+            192
+          ],
+          "id": "44a349ac-9a6e-409c-b4db-a54c343a7eee",
+          "name": "When clicking ‘Test workflow’"
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{$json}}",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            464,
+            352
+          ],
+          "id": "32e77110-8a12-4f1c-b7de-7bda45459d0b",
+          "name": "DHIS2_Pivot2",
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "UVeaJ4eIQxUebty4",
+              "name": "Conn_DHIS2_Pivot"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{$json}}",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            464,
+            0
+          ],
+          "id": "000b4c90-9e02-44a9-b30c-2ded69a98923",
+          "name": "DHIS2_Pivot",
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "UVeaJ4eIQxUebty4",
+              "name": "Conn_DHIS2_Pivot"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "batchSize": 6,
+            "options": {}
+          },
+          "type": "n8n-nodes-base.splitInBatches",
+          "typeVersion": 3,
+          "position": [
+            -304,
+            192
+          ],
+          "id": "c3d89c59-3da8-4bd0-91a3-90742597d856",
+          "name": "Loop Over Items"
+        },
+        {
+          "parameters": {
+            "jsCode": "const results = [];\nconst today = new Date();\n\nfor (let i = 1; i <= 6; i++) {  // on commence à 1 pour exclure le mois courant\n    const date = new Date(today.getFullYear(), today.getMonth() - i, 1);\n\n    const year = date.getFullYear();\n    const month = String(date.getMonth() + 1).padStart(2, '0');\n\n    results.push({\n        json: {\n            period: `${year}${month}`\n        }\n    });\n}\n\nreturn results;"
+          },
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            -528,
+            192
+          ],
+          "id": "249c4fbe-5e8b-47c2-b62e-847056103213",
+          "name": "Periode"
+        },
+        {
+          "parameters": {
+            "url": "=https://ministere-sante.mg/api/analytics?dimension=dx:lq38tLcfEi7&dimension=ou:D9UWDj19ljP;U1YeJp3NDNV;QHPyq70qulM;M38BJM8ju1A;WCqkkkKNJEi;Pi2y9HFBDRj;h0z1bKoHDrU;YCvVB1VwWi0;mBZLeZ7Irx6;hXuxS0MOq3b;z6kDxHwInUT;okDqhh9n4yT;pczrAub8lnt;EE6WwIMgQ0F;O1wNJut8eci;RRe6ic0AU1Z;ZPvH8UsgwYv;DDR2w1c1GyE;r4U7PhBKR7S;uWoBok9YyvB;FGM6Ric1YnC;c2AYc6zu00e;A3hiudw2Rr4;GDBYpa6pDOe;b5rHHqkmI2a&dimension=pe:{{ $json.period }}",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            0,
+            0
+          ],
+          "id": "b08d3d71-fd82-4fe0-b03f-1a76e6acfd42",
+          "name": "DHIS2_Min_CSB_Ifanadiana",
+          "alwaysOutputData": true,
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "pmwseXFBUqiCkCYK",
+              "name": "conn_DHIS2_Ministere"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "url": "=https://ministere-sante.mg/api/analytics?dimension=dx:lq38tLcfEi7&dimension=ou:IcMiQU9QW3l;diSP8NlOblg;wbnWeWIxXV6;x2NG6OgByyW;lIaVCjLWXYc;TXeWDCjAmaR;dzaTeu7rWtd;deMUdqCZSnE;y7SK3kXA1PW;xbmgFbAsjs8;lOonT3K0lGy;rPZA4HOPTo3;kvL3R5nif8u;liNQWaRIkqb;ylSfYC22EEB;JhQYIlxVg2W;GM6MGTic1DQ;HchHLQUUAbh;cp2lO2PyVj4;kztyvGPnWR7;X4SRnrSYWwg;reZwG5541C7;W8fiZ2dIEmI;VlX1os6qq1m;xUGh6ct7mEH;wR4eOoT36S0;UvdkmxaONmH;jhMynEYfQcG;XayRHbpjHQH;xOW0AHGbhzz;ywdasLE91Ac&dimension=pe:{{ $json.period }}",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            0,
+            352
+          ],
+          "id": "e3b17098-ebfe-43d1-9bd0-0e6cd367d7fc",
+          "name": "DHIS2_Min_CSB_Nosy varika",
+          "alwaysOutputData": true,
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "pmwseXFBUqiCkCYK",
+              "name": "conn_DHIS2_Ministere"
+            }
+          }
+        }
+      ],
+      "connections": {
+        "Code3": {
+          "main": [
+            [
+              {
+                "node": "DHIS2_Pivot2",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Code": {
+          "main": [
+            [
+              {
+                "node": "DHIS2_Pivot",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "When clicking ‘Test workflow’": {
+          "main": [
+            [
+              {
+                "node": "Periode",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Loop Over Items": {
+          "main": [
+            [],
+            [
+              {
+                "node": "DHIS2_Min_CSB_Ifanadiana",
+                "type": "main",
+                "index": 0
+              },
+              {
+                "node": "DHIS2_Min_CSB_Nosy varika",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Periode": {
+          "main": [
+            [
+              {
+                "node": "Loop Over Items",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Min_CSB_Ifanadiana": {
+          "main": [
+            [
+              {
+                "node": "Code",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Min_CSB_Nosy varika": {
+          "main": [
+            [
+              {
+                "node": "Code3",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "settings": {
+        "executionOrder": "v1",
+        "binaryMode": "separate",
+        "availableInMCP": false
+      },
+      "staticData": null,
+      "meta": null,
+      "pinData": {},
+      "versionId": "78b29fc8-b2e1-4d11-8fb6-dc4101b8e5b1",
+      "activeVersionId": null,
+      "triggerCount": 0,
+      "shared": [
+        {
+          "updatedAt": "2026-03-04T13:09:24.012Z",
+          "createdAt": "2026-03-04T13:09:24.012Z",
+          "role": "workflow:owner",
+          "workflowId": "Vbo7lBZEqhleh2Vq",
+          "projectId": "ALqsZgjbH7k1av6W"
+        }
+      ],
+      "activeVersion": null,
+      "tags": []
+    },
+    {
+      "updatedAt": "2026-03-04T13:04:58.242Z",
+      "createdAt": "2026-03-03T13:27:25.729Z",
+      "id": "grO7uRY70aIXmXK1",
+      "name": "Dashboard_dhis2",
+      "active": false,
+      "isArchived": false,
+      "nodes": [
+        {
+          "parameters": {},
+          "type": "n8n-nodes-base.manualTrigger",
+          "typeVersion": 1,
+          "position": [
+            -768,
+            -48
+          ],
+          "id": "93c63be2-0e3f-4655-9d98-a0d976df8444",
+          "name": "When clicking ‘Execute workflow’"
+        },
+        {
+          "parameters": {
+            "command": "/bin/sh -c \"cd /home/node/n8n-workflows && ./backup_final.sh\"",
+            "cwd": "",
+            "timeout": 6000000,
+            "ignoreErrors": true,
+            "additionalOptions": {}
+          },
+          "type": "n8n-nodes-custom-exec.customExecNode",
+          "typeVersion": 1,
+          "position": [
+            -528,
+            -144
+          ],
+          "id": "84012a12-3390-46e5-8b9f-62b06590093b",
+          "name": "backup_base",
+          "alwaysOutputData": true
+        },
+        {
+          "parameters": {
+            "operation": "executeQuery",
+            "query": "DROP DATABASE IF EXISTS base_pvt_locale;\nCREATE DATABASE base_pvt_locale;",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.mySql",
+          "typeVersion": 2.5,
+          "position": [
+            -528,
+            80
+          ],
+          "id": "0a6e478b-22ce-4465-9647-40af4dc97d2e",
+          "name": "create_base",
+          "credentials": {
+            "mySql": {
+              "id": "ctcXw2Ic6qtzkgLd",
+              "name": "MySQL account"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "command": "/bin/sh /home/node/n8n-workflows/restore-force-to-local.sh",
+            "cwd": "",
+            "timeout": 6000000,
+            "additionalOptions": {}
+          },
+          "type": "n8n-nodes-custom-exec.customExecNode",
+          "typeVersion": 1,
+          "position": [
+            -320,
+            80
+          ],
+          "id": "2d498260-b69d-4fe4-98a5-c7d10508892e",
+          "name": "restore_base"
+        },
+        {
+          "parameters": {
+            "operation": "executeQuery",
+            "query": "alter table care_center add orgunit varchar(255);\n\nselect * from care_center;\n\nSET SQL_SAFE_UPDATES = 0;\nUPDATE care_center \nSET \n    orgunit = (CASE\n        WHEN name = 'Ifanadiana' THEN 'GDBYpa6pDOe'\n        WHEN name = 'CSB2 Ambohimiera' THEN 'D9UWDj19ljP'\n        WHEN name = 'CSB2 Ampasinambo' THEN 'U1YeJp3NDNV'\n        WHEN name = 'CSB1 Ambalavolo' THEN 'QHPyq70qulM'\n        WHEN name = 'CSB1 Ambodiara Sud' THEN 'M38BJM8ju1A'\n        WHEN name = 'CSB1 Ambodimanga Nord' THEN 'WCqkkkKNJEi'\n        WHEN name = 'CSB1 Analamarina' THEN 'Pi2y9HFBDRj'\n        WHEN name = 'CSB1 Mahasoa' THEN 'h0z1bKoHDrU'\n        WHEN name = 'CSB1 Maromanana' THEN 'YCvVB1VwWi0'\n        WHEN name = 'CSB2 Ambohimanga Sud' THEN 'mBZLeZ7Irx6'\n        WHEN name = 'CSB2 Analampasina' THEN 'hXuxS0MOq3b'\n        WHEN name = 'CSB2 Androrangavola' THEN 'z6kDxHwInUT'\n        WHEN name = 'CSB2 Antaretra' THEN 'okDqhh9n4yT'\n        WHEN name = 'CSB2 Atsindra' THEN 'pczrAub8lnt'\n        WHEN name = 'CSB2 Fasintsara' THEN 'EE6WwIMgQ0F'\n        WHEN name = 'CSB2 Ifanadiana' THEN 'O1wNJut8eci'\n        WHEN name = 'CSB2 Kelilalina' THEN 'RRe6ic0AU1Z'\n        WHEN name = 'CSB2 Maroharatra' THEN 'ZPvH8UsgwYv'\n        WHEN name = 'CSB2 Marotoko' THEN 'DDR2w1c1GyE'\n        WHEN name = 'CSB2 Ranomafana' THEN 'r4U7PhBKR7S'\n        WHEN name = 'CSB2 Tsaratanana' THEN 'uWoBok9YyvB'\n        WHEN name = 'CSB2 Ambiabe' THEN 'FGM6Ric1YnC'\n        WHEN name = 'CSB SALFA Ambohimanga' THEN 'c2AYc6zu00e'\n\t\t/*Fokontany dans district Ifanadina*/\n        WHEN name = 'Ambilanivatomena' THEN 'niqxHXfJaZg'\n        WHEN name = 'Amboatrotroka' THEN 'nJg2gFtkEQG'\n        WHEN name = 'Ambodiara' THEN 'nit1VMYMSEc'\n        WHEN name = 'Ambodirotra' THEN 'nIU59blKoSz'\n        WHEN name = 'Ampasimbe' THEN 'nJ41cDAbDTK'\n        WHEN name = 'Andonabe' THEN 'njF5rCZeEin'\n        WHEN name = 'Andranomaitso' THEN 'NjFmT8vGYte'\n        WHEN name = 'Antaretra' THEN 'Niqsy6XdJfM'\n        WHEN name = 'Betampona' THEN 'njIuCDYoiFv'\n        WHEN name = 'Morafeno' THEN 'NjgEEmvRRTt'\n        WHEN name = 'Ambiabe' THEN 'NhBFAojLAnq'\n        WHEN name = 'Ambinanindranotelo' THEN 'nHeDldiT3lB'\n        WHEN name = 'Ambodiara' THEN 'NGk42ableWs'\n        WHEN name = 'Ambodirafia' THEN 'NgNK7cFJDLR'\n        WHEN name = 'Amboraka' THEN 'ngOUK2x3rO8'\n        WHEN name = 'Andranofolahina' THEN 'nGswNcrtBCW'\n        WHEN name = 'Ankaboka' THEN 'NhcIarFZ0gg'\n        WHEN name = 'Antafotenina' THEN 'NGuHJF8vef8'\n        WHEN name = 'Fenoarivo' THEN 'NGxXvp7qi48'\n        WHEN name = 'Maromena' THEN 'nh1SDW0DuQP'\n        WHEN name = 'Sahafitoroka' THEN 'NH6km4XsRdx'\n        WHEN name = 'Ambaladingana' THEN 'NiOIIht8nBW'\n        WHEN name = 'Ambodipaiso Atsimo' THEN 'niA2fAJNCjN'\n        WHEN name = 'Ambodipaiso Avaratra' THEN 'nI8ROa8oOxH'\n        WHEN name = 'Ambodivoahangy' THEN 'nIcna9odW5i'\n        WHEN name = 'Ambohinihaonana' THEN 'NIF2yn3SFhU'\n        WHEN name = 'Ampitabe' THEN 'niiqdtu9lFU'\n        WHEN name = 'Andranomainty' THEN 'NiGaS2wQ7nC'\n        WHEN name = 'Anosy' THEN 'NioaQKw6eR8'\n        WHEN name = 'Fotsialanana' THEN 'nIhczINg82d'\n        WHEN name = 'Kelilalina' THEN 'Ni6HLgy72nt'\n        WHEN name = 'Kianjanomby' THEN 'NiPVq9fdj9I'\n        WHEN name = 'Mandrivany' THEN 'niPWWDnI4AE'\n        WHEN name = 'Sahavatana' THEN 'NhgHicA7zmx'\n        WHEN name = 'Ranomafana' THEN 'NhPMW9k508q'\n        WHEN name = 'Ambatolahy' THEN 'nhR0Pat5DlD'\n        WHEN name = 'Tsaramandroso' THEN 'NHVkAeLFPcK'\n        WHEN name = 'Ambodiaviavy' THEN 'NHsAEr2hrhx'\n        WHEN name = 'Menarano' THEN 'nHTZ72jAFvv'\n        WHEN name = 'Ampasimpotsy' THEN 'NHTwonuDKC6'\n        WHEN name = 'Vohimarina' THEN 'ni2fhsEBQV4'\n        WHEN name = 'Sahadrazana' THEN 'NHvhM6egCml'\n        WHEN name = 'Ambalafatakana Atsin' THEN 'NLhVCk2cWFQ'\n        WHEN name = 'Ambalafary II' THEN 'nL4inf71e6v'\n        WHEN name = 'Ambohimasina' THEN 'Nl3gjVEOoCS'\n        WHEN name = 'Befary' THEN 'NlA2gFHEn2e'\n        WHEN name = 'Ambodirafia Atsinana' THEN 'nKzUk8iUYao'\n        WHEN name = 'Ambatoharanankely' THEN 'NLbaZ2vV52C'\n        WHEN name = 'Ambodimanga Atsinana' THEN 'nLcJCGOmAq5'\n        WHEN name = 'Ambatoharanana' THEN 'nKX9oIy5HTw'\n        WHEN name = 'Vatofotsy' THEN 'nkoqILeLIGJ'\n        WHEN name = 'Ambodigoavy' THEN 'nLJ2df5ihXt'\n        WHEN name = 'Antaralava' THEN 'NlgNaSRnFOb'\n        WHEN name = 'Ambohipo' THEN 'nKiccllE1Gt'\n        WHEN name = 'Sahofika' THEN 'NkUoPHdmiA2'\n        WHEN name = 'Ambodimanga Andrefan' THEN 'Nle2yV3LLqH'\n        WHEN name = 'Vohitrarivo' THEN 'NKnlmpvCHID'\n        WHEN name = 'Ambohitsara' THEN 'nSBC7TetHbn'\n        WHEN name = 'Tsaratanana' THEN 'nkIbspPvmRh'\n        WHEN name = 'Ambiabe' THEN 'NhBFAojLAnq'\n        WHEN name = 'Ankaboka' THEN 'NhcIarFZ0gg'\n        WHEN name = 'Ambinanindranotelo' THEN 'nHeDldiT3lB'\n        WHEN name = 'Sahavatana' THEN 'NhgHicA7zmx'\n        WHEN name = 'Ambalafasina' THEN 'NHGlRwg0Qwu'\n        WHEN name = 'Ambalatenina' THEN 'nhp8hOvQUT3'\n        WHEN name = 'CHU Tambohobe' THEN 'qp3nkyQVIJr'\n        WHEN name = 'CHU Andrainjato' THEN 'V3EhAam5l2Q'\n        WHEN name = 'BMH' THEN 'HPXKJ8Hxdal'\n        WHEN name = 'SALFA Ivory' THEN 'VtrXusJAQnG'\n        WHEN name = 'AMADIA' THEN 'SxX0ogcWoKn'\n        WHEN name = 'CHU Manarapenitra' THEN 'NxvONWZ2HJr'\n        WHEN name = 'Centre AMIE' THEN 'ZRL2mIN2TTW'\n        WHEN name = 'Centre Cardiologie Mahamasina' THEN 'YYlanBtnrzy'\n        WHEN name = 'Clinique Ankadifotsy' THEN 'itMg9Lzca1Q'\n        WHEN name = 'CHU HJRA ' THEN 'GeWcZ2h2EDg'\n        WHEN name = 'CHU HJRB' THEN 'yazLmP4UYnM'\n        WHEN name = 'HOMI' THEN 'hDDnFrRplzj'\n        WHEN name = 'IMM' THEN 'ggSPtKppKh5'\n        WHEN name = 'Laboratoire Ankadifotsy' THEN 'itMg9Lzca1Q'\n        WHEN name = 'Maxillo Befelatanana' THEN 'wGgiOdG7oKf'\n        WHEN name = 'Medecin du Monde' THEN 'v6Pe4njyi7V'\n        WHEN name = 'CHU MET' THEN 'dZKkzO1qqcn'\n        WHEN name = 'Polyclinique Ilafy' THEN 'Ppug6I5QfT1'\n        WHEN name = 'Stomatologie Befelatanana' THEN 'g4UPuWyoZry'\n        WHEN name = 'Antananarivo' THEN 'FAuW9yTuH1C'\n        WHEN name = 'Tsaratanana' THEN 'NqbcZ5fhraz'\n        WHEN name = 'Sahamarana' THEN 'NocwbwPY49A'\n        WHEN name = 'Ambilanibe' THEN 'NOf5U0kPmmS'\n        WHEN name = 'Ambodiara' THEN 'noGSitwu1YV'\n        WHEN name = 'Mandroalina' THEN 'NOKJwSSC9yV'\n        WHEN name = 'Morarano' THEN 'nongBlHhnBk'\n        WHEN name = 'Ambalaherana' THEN 'NoTbIakXnYE'\n        WHEN name = 'Marosatroka' THEN 'NOUicYmzdkM'\n        WHEN name = 'Ambodirafia' THEN 'nOvkLuoAvaE'\n        WHEN name = 'Faliarivo' THEN 'NoYX2eHiThV'\n        WHEN name = 'Nosimboahangy' THEN 'Np9zQuuUkT0'\n        WHEN name = 'Antanjona' THEN 'npDsoxdC4tm'\n        WHEN name = 'Fasintsara Andakana' THEN 'nPErooJK6FG'\n        WHEN name = 'Ambatofamokonana' THEN 'NPG9aF3lhTC'\n        WHEN name = 'Ambodivoasary' THEN 'nPjsBwjNwN5'\n        WHEN name = 'Androrangavola Nord' THEN 'noTUS4NpOt9'\n        WHEN name = 'Ambohimanga Sud' THEN 'nObSjXaMtmC'\n\tWHEN name = 'Masoarovana' THEN 'NoDz1A2X03y'\n        WHEN name = 'Ambohimiranty' THEN 'NojOuDYO6d9'\n        WHEN name = 'BMH' THEN 'C0P53amren2'\n        WHEN name = 'SALFA Ivory' THEN 'VtrXusJAQnG'\n        WHEN name = 'AMADIA' THEN 'OFeXZYCKSS3'\n        WHEN name = 'OSIER' THEN 'A3hiudw2Rr4'\n\tWHEN name = 'Ambalatabaka' THEN 'nJUaKfgD6hA'\n        WHEN name = 'Ambalavaona' THEN 'nJl5WgER8PU'\n        WHEN name = 'Ambodiara Nord' THEN 'NQuW4Rtnjsl'\n        WHEN name = 'Ambodifontsina' THEN 'njoFUbxjdeD'\n\tWHEN name = 'Ambodiroranga' THEN 'NjOlN7ogDI1'\n        WHEN name = 'Ambohimahavelonabetoho' THEN 'NjVre8e5OVb'\n        WHEN name = 'Ambohimisafy' THEN 'njOofTRHfIV'\n        WHEN name = 'Ampasimpotsy' THEN 'Njr8K7rHENE'\n        WHEN name = 'Androrangavola' THEN 'nJjPiK1qn75'\n        WHEN name = 'Lavakianja Sud' THEN 'njSiTzCwC07'\n        WHEN name = 'Mandriampotsy' THEN 'NJuWC7bKGo7'\n        WHEN name = 'Nosibe Sud' THEN 'NjsjGX3mti8'\n        WHEN name = 'Ambalavia' THEN 'nkDyu1NI3yv'\n        WHEN name = 'Ambarijatsy' THEN 'nJZGBECBspE'\n        WHEN name = 'Ambatomitratraka' THEN 'NK3wDj5Cl2d'\n        WHEN name = 'Amboatrotroka' THEN 'NJZo855zRWU'\n        WHEN name = 'Ambodiara Sud' THEN 'NJzE9cyipSO'\n        WHEN name = 'Ambodijiro' THEN 'nKBNG4TA9ye'\n        WHEN name = 'Ambohimahavelona' THEN 'nK56bOPbkUF'\n        WHEN name = 'Kianjanomby' THEN 'NjYKxeiEw9k'\n        WHEN name = 'Mandiafasina' THEN 'njZCD2mJwsz'\n        WHEN name = 'Marotoko' THEN 'NJyJhwtcocK'\n        WHEN name = 'Ambaro' THEN 'nNYf4rK6blR'\n        WHEN name = 'Ambohimalaza' THEN 'NnTT4ov2gsL'\n        WHEN name = 'Ambohimiarina' THEN 'NOaoxq3vnc0'\n        WHEN name = 'Analampasina' THEN 'NNjaGNXVzqY'\n        WHEN name = 'Analavory' THEN 'NO8yCUU6eVK'\n        WHEN name = 'Androrangavola' THEN 'nO6tTqYb8Zb'\n        WHEN name = 'Betampona Nord' THEN 'nRg2aJuvpvz'\n        WHEN name = 'Manjiriana Sud' THEN 'nnvIsl7XJkC'\n        WHEN name = 'Matsitsirano' THEN 'NnQL2GIb7Cb'\n        WHEN name = 'Ambatomanjaka' THEN 'nq5GI3F2CCZ'\n        WHEN name = 'Ambinanisery' THEN 'nq5GI3F2CCZ'\n        WHEN name = 'Ambodivoahangy' THEN 'NqDMBxPTOXL'\n        WHEN name = 'Ambohinihaonana' THEN 'nQ6JraTvdjw'\n        WHEN name = 'Ambohitsara' THEN 'nQI8STvRBzM'\n        WHEN name = 'Antenimbelona' THEN 'nqCwln4FrWj'\n        WHEN name = 'Befotaka' THEN 'NQfkydB4svK'\n        WHEN name = 'Fasintsara' THEN 'NpYyCqxphO3'\n        WHEN name = 'Marovoraka' THEN 'nQbxcyqYyE2'\n        WHEN name = 'Tsarakianja' THEN 'nQbP8ETTnR4'\n        WHEN name = 'Tsararivotra' THEN 'NQH6cejrFIJ'\n        WHEN name = 'Tsaratanana' THEN 'NqbcZ5fhraz'\n        WHEN name = 'CMM Maxilo' THEN 'r4U7PhBKR7S'\n        WHEN name = 'Ampasinambo' THEN 'nqsyqKRlhol'\n        WHEN name = 'Sakavanana' THEN 'nqW6laUJNx2'\n        WHEN name = 'Ambalapaiso' THEN 'NQWJDtbt7ea'\n        WHEN name = 'Volobe' THEN 'nr04NAmCslA'\n        WHEN name = 'Fiadanana Avaratra' THEN 'nqza6A6H399'\n        WHEN name = 'Ampasimbola I' THEN 'nqyNM2FCYcn'\n        WHEN name = 'Ambodiara Avaratra' THEN 'NQuW4Rtnjsl'\n        WHEN name = 'Morarano' THEN 'NR1bX1UHhZM'\n        WHEN name = 'Ambalavolo' THEN 'NSArSb3qq97'\n        WHEN name = 'Ambodimanga' THEN 'nsfCG9MeMiH'\n        WHEN name = 'Ambohitsara Est' THEN 'nSBC7TetHbn'\n        WHEN name = 'Ampasimadinika' THEN 'nSEHyISB71L'\n        WHEN name = 'Ampasimadinikakely' THEN 'NRg3HxY4ule'\n        WHEN name = 'Antanjomanga' THEN 'NRoO17yGFjs'\n        WHEN name = 'Mahatsara' THEN 'NRKjtCAkdVI'\n        WHEN name = 'Malazamasina Avaratra' THEN 'NRZcm1lEy5u'\n        WHEN name = 'Malazamasina Atsimo' THEN 'NrHPCBkktgL'\n        WHEN name = 'Malemiambo' THEN 'NrNhl3lT6q9'\n        WHEN name = 'Manakana' THEN 'nqlkol82K9z'\n        WHEN name = 'Maroharatra' THEN 'NR788pi0I3e'\n        WHEN name = 'Sahomby' THEN 'NRqeU3F5LoU'\n        WHEN name = 'Soanierana' THEN 'Nram346jMbY'\n        WHEN name = 'Tanambao Est' THEN 'NRcJD3FZ5fX'\n        WHEN name = 'Ampasimpotsy' THEN 'nsaKH6KRA5s'\n        WHEN name = 'Betampoma Avaratra' THEN 'nRg2aJuvpvz'\n        WHEN name = 'Ambinanindrano' THEN 'nrZui26yNY2'\n        WHEN name = 'Ambatovory' THEN 'nmcOsX9DPDd'\n        WHEN name = 'Ampitomita' THEN 'NM7oUDc02Td'\n        WHEN name = 'Apitabe' THEN 'nmble1lI52U'\n        WHEN name = 'Atsindra' THEN 'nm6sSeyEVgk'\n        WHEN name = 'Befotaka' THEN 'nmbm3mA5SlU'\n        WHEN name = 'Kianjavato' THEN 'nM9ANDSCXa0'\n        WHEN name = 'Anivorano' THEN 'nma7brQLV5w'\n        WHEN name = 'Ambinanitomarosana' THEN 'nnEsZM0lafn'\n        WHEN name = 'Ambohidaza' THEN 'nmwxOi0CZg5'\n        WHEN name = 'Ambohimiera' THEN 'nmD33chxaBT'\n        WHEN name = 'Ambohimilanja' THEN 'nMvTEvhWAVW'\n        WHEN name = 'Ambolo' THEN 'NNFHN9ImezB'\n        WHEN name = 'Ampatsona' THEN 'NmREmw5LWic'\n        WHEN name = 'Andemaka Avaratra' THEN 'nMpQCEjkTXZ'\n        WHEN name = 'Antarambakana' THEN 'nn8l1jOZutK'\n        WHEN name = 'Antobilava' THEN 'nn1WJO9yWZm'\n        WHEN name = 'Faliarivo' THEN 'NmzeU6VaV8i'\n        WHEN name = 'Fiadanana Avaratra' THEN 'nMx63czP2Ae'\n        WHEN name = 'Manarinony' THEN 'NmhBxQ7PYdC'\n        WHEN name = 'Marofotsy' THEN 'nmVtteBwOYq'\n        WHEN name = 'Maromanana' THEN 'nn5sGwD1W6w'\n        WHEN name = 'Sasomangana' THEN 'nmEMBbaJyWU'\n        WHEN name = 'Tsinjorano' THEN 'nMfP4PUaIbF'\n        WHEN name = 'Vohimena' THEN 'NMImB5RkIZB'\n        WHEN name = 'Androrangavola' THEN 'NmKPRZcZMBG'\n        WHEN name = 'Ambodimanga Avaratra' THEN 'nMZFiAgwNXH'\n        WHEN name = 'Ambohimahavelona' THEN 'NNHu1fGVJeX'\n        WHEN name = 'Centre Psychiatrie Anjanamasina' THEN 'OpXj5l7kFvr'\n        WHEN name = 'IPM' THEN 'NYxXWodbIYW'\n        WHEN name = 'SALFA Ambohibao' THEN 'SgWnOw5e50q'\n        WHEN name = 'CHAINE DE L\\'ESPOIR' THEN 'Tt4JyhZcSJi'\n        WHEN name = 'AKBARALY' THEN 'LcZ0vQWbesp'\n        WHEN name = 'CHU Fenoarivo' THEN 'GVLXfdgkbNX'\n        WHEN name = 'Centre AMADIA' THEN 'f1SgPiwZOi2'\n        WHEN name = 'CHU Ambohimiandra' THEN 'fX7kMn24cUH'\n        WHEN name = 'Centre Neuroscience Antsakaviro' THEN 'CxhibrASVvF'\n        WHEN name = 'CSB2 Ambahy' THEN 'IcMiQU9QW3l'\n        WHEN name = 'Ambahy' THEN 'OdjaF3ujIk6'\n        WHEN name = 'CHRD Nosy Varika' THEN 'GM6MGTic1DQ'\n\t\t/*CSB district Mananjary*/\n\tWHEN name = 'CSB1 Morarano Toby' THEN 'TheMkAkfvgn'\n        WHEN name = 'CSB2 Ambinanifitoerana' THEN 'BxpH1ND8KFP'\n        WHEN name = 'CSB1 Manakana Antsindra' THEN 'Ht69V3vwfVs'\n        WHEN name = 'CSB2 Ambodinonoka' THEN 'SOYJNYkE3Ah'\n        WHEN name = 'CSB2 Ambohimiarina II' THEN 'xFewURfeM6L'\n        WHEN name = 'CSB1 Bemoka' THEN 'gGzLr4oo3Pm'\n        WHEN name = 'CSB1 Lavakianja' THEN 'JJPXmBBn47m'\n        WHEN name = 'CSB2 Ambohinihaonana' THEN 'BbsaOL1ndvg'\n        WHEN name = 'CSB2 Ambohitsara Est' THEN 'KXNLOAzcjfG'\n        WHEN name = 'FSP_EKAR Ambohitsara Est' THEN 'Qy7TBEcefE9'\n        WHEN name = 'CSB1 Seranana' THEN 'eQSREv9e1bq'\n        WHEN name = 'CSB2 Andonabe' THEN 'Y8p37aLjrHn'\n        WHEN name = 'CSB2 Andranambolavo' THEN 'Znyo1UWzmFH'\n        WHEN name = 'CSB1 Ambodiaviavy' THEN 'AxTFbOBjP1K'\n        WHEN name = 'CSB2 Andranomavo' THEN 'Dzr57TxAG74'\n        WHEN name = 'CSB1 Marohita' THEN 'onLZ8h8Nng2'\n        WHEN name = 'CSB1 Ambalamainty' THEN 'YxrZbfqDA6r'\n        WHEN name = 'CSB2 Anosimparihy' THEN 'EYZ5Ej566ob'\n        WHEN name = 'CSB2 Antsenavolo' THEN 'IQ82WcLTcGX'\n        WHEN name = 'CSB2 Kianjavato' THEN 'dSY2oZjJcwj'\n        WHEN name = 'CSB1 Mahavoky Sud' THEN 'kraCyRAvVgQ'\n        WHEN name = 'CSB2 Mahatsara lefaka' THEN 'A38WhL0NPsX'\n        WHEN name = 'CSB2 Mahatsara Sud' THEN 'ErLw9twd3q5'\n        WHEN name = 'CSB2 Mahavoky Nord' THEN 'VW9Pm0uz6SX'\n        WHEN name = 'FSP_Ekar Mahavoky Nord' THEN 'ebRE2LEmvie'\n        WHEN name = 'CSB1 Tanandava' THEN 'zMJxWJIgF5N'\n        WHEN name = 'CSB2 Mahela' THEN 'xIpy9Oaipvh'\n        WHEN name = 'CSB2 Manakana Nord' THEN 'ZboIy43ZwzX'\n        WHEN name = 'CHRR Mananjary' THEN 'cPkdD7UhXmn'\n        WHEN name = 'CSBU Mananjary' THEN 'IRn2N8HJCVT'\n        WHEN name = 'FSP OSIEMI Mananjary' THEN 'mHDPNIDOecN'\n        WHEN name = 'FSP_ EKAR Tanambao' THEN 'MV5fSBnQpFC'\n        WHEN name = 'FSP_CIC Mananjary' THEN 'po50HfgI1yh'\n        WHEN name = 'FSP_Fanantenane' THEN 'R6evSAV8MdQ'\n        WHEN name = 'FSP_Garnison Mananjary' THEN 'LPdCs9G0OWq'\n        WHEN name = 'FSP_JIRAMA Mananjary' THEN 'nzi1NXvfM7p'\n        WHEN name = 'FSP_Maison Centrale Mananjary' THEN 'AikfHtzeOOW'\n        WHEN name = 'CSB2 Marofototra' THEN 'NA1FBm3XUuW'\n        WHEN name = 'CSB2 Marokarima' THEN 'ngHZIXy1Cyw'\n        WHEN name = 'FSP_SALFA Ambaladara' THEN 'juLcMFcd4Fv'\n        WHEN name = 'CSB1 Ambohimandroso' THEN 'NaHyGHPvH7A'\n        WHEN name = 'CSB2 Marosangy' THEN 'tHaaamft4vA'\n        WHEN name = 'CSB2 Morafeno' THEN 'A0YU5ksfXZS'\n        WHEN name = 'CSB2 Namorona' THEN 'INrXsjpFZU8'\n        WHEN name = 'CSB2 Sandrohy' THEN 'pfav1hH9Nuf'\n        WHEN name = 'CSB2 Tsaravary' THEN 'eHk9mLUogOz'\n        WHEN name = 'FSP_EKAR Marovahy' THEN 'aihwzCRcQS3'\n        WHEN name = 'CSB2 Tsiatosika' THEN 'vPmCzlQD5a8'\n        WHEN name = 'FSP_EKAR Tsiatosika' THEN 'elIt2dLIHBw'\n        WHEN name = 'CSB2 Vatohandrina' THEN 'CSB2 Vatohandrina'\n        WHEN name = 'CSB1 Tsaravinany' THEN 'I0zrAwM5gZL'\n        WHEN name = 'CSB1 Tsaravinany' THEN 'nE3sJcoVkhr'\n        WHEN name = 'CSB2 Vohilava' THEN 'ZpdAbOChH4T'\n        WHEN name = 'FSP_EKAR Vohilava' THEN 'FNRS263It3k'\n\t\t/*Fokontany Mananjary*/\n        WHEN name = 'Ambodibakoly' THEN 'mX0r4qWG5tH'\n        WHEN name = 'Ambodihasina' THEN 'MWzOXZ0OCi4'\n        WHEN name = 'Morarano Toby' THEN 'mWYjd7l6HAr'\n        WHEN name = 'Ambalahosy Nord' THEN 'MWwdcT8ymeW'\n        WHEN name = 'Ambinanifitoerana' THEN 'mwvpja7dkl4'\n        WHEN name = 'Anosivolo' THEN 'mWVArHmYzmj'\n        WHEN name = 'Analamarina' THEN 'MxSXZNqpJaj'\n        WHEN name = 'Fiadanana' THEN 'mxqyYJGUoX7'\n        WHEN name = 'Lavakianja' THEN 'mxvnCa9POAC'\n        WHEN name = 'Manakana Antsindra' THEN 'mxmc9MooAS6'\n        WHEN name = 'Morafeno' THEN 'mxvfUEPLrej'\n        WHEN name = 'Ambalatenina' THEN 'MXCn4tOX6pg'\n        WHEN name = 'Ambatoharanana' THEN 'mx5QFM4WYkD'\n        WHEN name = 'Ambodiara' THEN 'mxdIkypeYMD'\n        WHEN name = 'Amboditambitsy' THEN 'mx3PD6YuOnN'\n        WHEN name = 'Ambodivandrozana' THEN 'MxINC7KeaaO'\n        WHEN name = 'Ambohitsara Nord' THEN 'MxaayZVhVbB'\n        WHEN name = 'Tsarakianja Sud' THEN 'mX3ergiSZpk'\n        WHEN name = 'Tsaramiadana' THEN 'MxB53F0Df9d'\n        WHEN name = 'Ambinanifasina' THEN 'MxzGEGPTgMm'\n        WHEN name = 'Ambodiara' THEN 'my9f3adLxlj'\n        WHEN name = 'Ambohimiarina II' THEN 'mXXq72VIIoj'\n        WHEN name = 'Ampasimazava' THEN 'My3lP3uaw2O'\n        WHEN name = 'Irondro' THEN 'My9BjOI1o6m'\n        WHEN name = 'Sahasondroka' THEN 'My8pyg8HifR'\n        WHEN name = 'Ambololona' THEN 'Mz62qH54bim'\n        WHEN name = 'Ankazotelo' THEN 'MZaTui7zLzI'\n        WHEN name = 'Bemoka' THEN 'Mz3aE1ccqiF'\n        WHEN name = 'Ambalapaiso' THEN 'mzL9PBf0gGm'\n        WHEN name = 'Ambodimanga' THEN 'MZmi6Gkq4ba'\n        WHEN name = 'Lavakianja' THEN 'mZJ87VyIelV'\n        WHEN name = 'Ambodivoangy' THEN 'MyZGOELdGMX'\n        WHEN name = 'Ambohimahavelona' THEN 'myN1iOnWnxd'\n        WHEN name = 'Ambohimiadana' THEN 'Mz1j1XfPoYJ'\n        WHEN name = 'Ampasimadinika' THEN 'mYDNGPHWPTA'\n        WHEN name = 'Androrangabe' THEN 'MYQCpwtIHn5'\n        WHEN name = 'Androrangavola' THEN 'mYsCC2aH7vw'\n        WHEN name = 'Ankalaitra' THEN 'MyenqK5PsKr'\n        WHEN name = 'Maromandia Ouest' THEN 'mYnZimKXYL1'\n        WHEN name = 'Ambodipaiso' THEN 'mZrPgkkaDIS'\n        WHEN name = 'Ambohitsara Est' THEN 'MZRojXcuGgp'\n        WHEN name = 'Ampahatany' THEN 'MzvaEqWdQPi'\n        WHEN name = 'Ampatakana' THEN 'MZXkSmDSsZf'\n        WHEN name = 'Iamboala' THEN 'MZTR7HdznnT'\n        WHEN name = 'Manambatana' THEN 'MZsiAMQbaA1'\n        WHEN name = 'Ambatoringitra' THEN 'N0Qc5Wn4Yfj'\n        WHEN name = 'Ambohitsara' THEN 'n0YNSHx2OL8'\n        WHEN name = 'Ankosibe' THEN 'N1B4my4Tsvs'\n        WHEN name = 'Maholiafo' THEN 'N0zmv1SGHuy'\n        WHEN name = 'Seranana' THEN 'N0LZ17vAx3m'\n        WHEN name = 'Tanambao Tsy' THEN 'N18L1cWSeJo'\n        WHEN name = 'Ambodisaina' THEN 'n0IMpUvRBcr'\n        WHEN name = 'Andoharokana' THEN 'N0KKxsJuAE4'\n        WHEN name = 'Andonabe' THEN 'mzYJ74wMyRk'\n        WHEN name = 'Androrangavola' THEN 'N00YPHlIWIK'\n        WHEN name = 'Mahasoa' THEN 'n0hZNG2D5pj'\n        WHEN name = 'Mahatsara II' THEN 'n0CaLGUyPsm'\n        WHEN name = 'Morafeno' THEN 'n07Oyi0yGex'\n        WHEN name = 'Ambodivoangy' THEN 'n1txNLmlNFJ'\n        WHEN name = 'Ambohimiarina I' THEN 'n1qhQckfF9d'\n        WHEN name = 'Ampitabe' THEN 'n1tITOuWqTj'\n        WHEN name = 'Andranambolava' THEN 'N1BN7OpevtW'\n        WHEN name = 'Marohita' THEN 'n1nFDxPKQHB'\n        WHEN name = 'Marovany' THEN 'n1Yf2oUdGxa'\n        WHEN name = 'Menagisy' THEN 'N1kFPk7nWuz'\n        WHEN name = 'Ambodiaviavy' THEN 'n2f6TQReLsU'\n        WHEN name = 'Antapadrano' THEN 'N2glO686SML'\n        WHEN name = 'Vohilava Kely' THEN 'N2Vq4SNsgaW'\n        WHEN name = 'Ambalatany' THEN 'N2COVGsjAks'\n        WHEN name = 'Andranomavo' THEN 'n24vq29Pf2r'\n        WHEN name = 'Maromitety' THEN 'n2CopSk7hqo'\n        WHEN name = 'Ambalavotaka' THEN 'nBPtUO5rqTo'\n        WHEN name = 'Ambaro' THEN 'NBYjIGPPfUy'\n        WHEN name = 'Ambohimiarina' THEN 'nc50KcJ1k6A'\n        WHEN name = 'Ampangalana Sud' THEN 'nBsZyTHOgSl'\n        WHEN name = 'Ankatafana' THEN 'Nbx95yE0lU0'\n        WHEN name = 'Marohita I' THEN 'NBGp09sb15x'\n        WHEN name = 'Marohita II' THEN 'NCAA17HzDel'\n        WHEN name = 'Maropaika' THEN 'nc1gjp9uvKD'\n        WHEN name = 'Ambalamainty' THEN 'n4jQxG8HL3z'\n        WHEN name = 'Befotaka' THEN 'N4l4RM2tcZO'\n        WHEN name = 'Sandranava' THEN 'N4lpdPYcuTg'\n        WHEN name = 'Ambatoharanana' THEN 'n3YMnl5xGAf'\n        WHEN name = 'Ambodiamba' THEN 'n4asbmLsCPe'\n        WHEN name = 'Ambodiapaly' THEN 'N49r3uqo8Sz'\n        WHEN name = 'Ambodirafia' THEN 'N3OTwPrPUje'\n        WHEN name = 'Ampotsimavo' THEN 'n4A8pKBKIe3'\n        WHEN name = 'Anosimparihy' THEN 'n37IcdBMLdA'\n        WHEN name = 'Bac Namorona' THEN 'n3mPb3TMKcA'\n        WHEN name = 'Iaborano' THEN 'n3elkRcB89d'\n        WHEN name = 'Maromanitra' THEN 'n3DSsNHbfSO'\n        WHEN name = 'Nihaonana' THEN 'OMu8OTiwiHK'\n        WHEN name = 'Tsarafidy' THEN 'N3wXl5Ga7we'\n        WHEN name = 'Ambatomainty' THEN 'N4ZbZyrsK9s'\n        WHEN name = 'Ambatomalama' THEN 'N53LEDyqoAe'\n        WHEN name = 'Ambodivolomborona' THEN 'n4U5XIX8heB'\n        WHEN name = 'Ambohitsara Sud' THEN 'n4XutwBF3aA'\n        WHEN name = 'Antaretra' THEN 'N4QjMbYPTvm'\n        WHEN name = 'Antaviranambo' THEN 'N4vAprEXdvy'\n        WHEN name = 'Ambatofaritana' THEN 'N5PgoyDsfVR'\n        WHEN name = 'Ambodiakatra' THEN 'n5cWuXGbkGw'\n        WHEN name = 'Ambodibonary' THEN 'N5ljK3DetCF'\n        WHEN name = 'Ambodimanga' THEN 'N5hpJLbp7nz'\n        WHEN name = 'Ambodivoangy' THEN 'N5pvLe47hEy'\n        WHEN name = 'Ambohitsara' THEN 'n65KpwgJdlV'\n        WHEN name = 'Andranomavo' THEN 'n6B1ZdlStCg'\n        WHEN name = 'Ankazotokana' THEN 'n5pYmtLcpXL'\n        WHEN name = 'Antsenavolo' THEN 'N5C2zCQp2X1'\n        WHEN name = 'Betampona' THEN 'n5SOhaHQraj'\n        WHEN name = 'Madiolamba' THEN 'n5yx0AEEFyd'\n        WHEN name = 'Morafeno' THEN 'n6A5hvyCHPi'\n        WHEN name = 'Sahafotahina' THEN 'n5Gron9ft7P'\n        WHEN name = 'Tsararano' THEN 'N5rE3wAeM7x'\n        WHEN name = 'Ambalahosy' THEN 'n7hHuAxfR1N'\n        WHEN name = 'Ambodibonary' THEN 'N7EKyN37EBG'\n        WHEN name = 'Ambodifandramana' THEN 'N7JbF1rNR1S'\n        WHEN name = 'Ambohitsara' THEN 'n7aSwQUbIZL'\n        WHEN name = 'Ambolotara' THEN 'N7jaCqlsCzu'\n        WHEN name = 'Fotoboitra' THEN 'N75spTdsZUt'\n        WHEN name = 'Kianjavato' THEN 'n6ZGBgi7GKu'\n        WHEN name = 'Vohipotsy' THEN 'N7M9Qs0fAzl'\n        WHEN name = 'Antanjondava' THEN 'n81hr8CBEbu'\n        WHEN name = 'Mahavoky Sud' THEN 'N7XV7YNThya'\n        WHEN name = 'Amberomanitra' THEN 'N7qlbph0EEs'\n        WHEN name = 'Amboditandroho' THEN 'n7UVSyMEGkf'\n        WHEN name = 'Mahatsara Iefaka' THEN 'n7mbudczRWY'\n        WHEN name = 'Amboanato' THEN 'n8evlB5Jypa'\n        WHEN name = 'Anjanavorona' THEN 'N8gdZv5P4qF'\n        WHEN name = 'Iamborano' THEN 'N8MRV85oyH7'\n        WHEN name = 'Lavakianja' THEN 'n8b8EDPWbw7'\n        WHEN name = 'Manapotsy' THEN 'N8ciEz9iOHa'\n        WHEN name = 'Ranomainty' THEN 'N8VExStdiSH'\n        WHEN name = 'Ambodiriana Ifanantara' THEN 'N9MJRyNiQXJ'\n        WHEN name = 'Anivorano' THEN 'n9f9j5YSB59'\n        WHEN name = 'Lavakianja' THEN 'n9oAldScBPF'\n        WHEN name = 'Mahatsara Avaratra' THEN 'n9k4eOamG9m'\n        WHEN name = 'Mahavoky Nord' THEN 'n9DlpdeghdJ'\n        WHEN name = 'Ambodimanga' THEN 'NaGqEmAW4kG'\n        WHEN name = 'Ampasimanjeva' THEN 'NaF9N1sMPiR'\n        WHEN name = 'Nosibe' THEN 'nAh1A2IPSG4'\n        WHEN name = 'Tanandava' THEN 'NAcVXQ6PNtz'\n        WHEN name = 'Ambalahady' THEN 'NAahVvBdvK2'\n        WHEN name = 'Ambatosada' THEN 'n9ui3TA9vGW'\n        WHEN name = 'Andranomahitsy' THEN 'na2RyoE4BaO'\n        WHEN name = 'Anilavinany' THEN 'NaCfz6ojNgx'\n        WHEN name = 'Mahela' THEN 'n9q9cKYLdnb'\n        WHEN name = 'Ambohimiarina' THEN 'nahNwLAZDBD'\n        WHEN name = 'Andranomadio' THEN 'NaKLndVd7Gy'\n        WHEN name = 'Androrangavola' THEN 'NAPB6q7D78y'\n        WHEN name = 'Madiofasina' THEN 'NammUoGaIlW'\n        WHEN name = 'Manakana Nord' THEN 'nAhm4XcsoSA'\n        WHEN name = 'Sahandovoka' THEN 'NAiQE4iBV3y'\n        WHEN name = 'Sakave' THEN 'NAosVzYWbcp'\n        WHEN name = 'Ambatolambo' THEN 'NB7eqXoE2R9'\n        WHEN name = 'Ambonaramena' THEN 'Nb4B3Eb0wTG'\n        WHEN name = 'Ampasimandrorona' THEN 'nAwYZvr4uXx'\n        WHEN name = 'Analananjavidy' THEN 'NAsl8Rx8H1z'\n        WHEN name = 'Andovosira' THEN 'nARV7hpZe81'\n        WHEN name = 'Ankadirano' THEN 'nAQY3DLsuOv'\n        WHEN name = 'Anosinakoho' THEN 'narUrqXyfmL'\n        WHEN name = 'Fangato' THEN 'naYQMideqXq'\n        WHEN name = 'Mahatsinjo' THEN 'nAYTsq27Qme'\n        WHEN name = 'Marofinaritra' THEN 'NB5HPg4lZap'\n        WHEN name = 'Masindrano' THEN 'naPCltKBaZo'\n        WHEN name = 'Tanambao' THEN 'nB7r8fj1aJV'\n        WHEN name = 'Ambatoafo' THEN 'NBdT3iv0Jdd'\n        WHEN name = 'Ambohinihaonana' THEN 'NbCCrtINfJR'\n        WHEN name = 'Ambohitsara II' THEN 'nbdmJge3hco'\n        WHEN name = 'Ampasimadinika' THEN 'Nbe5nwNOWuH'\n        WHEN name = 'Ampasimbola' THEN 'NBCzon4kjkU'\n        WHEN name = 'Antaviranambo' THEN 'nBfPgpU2j2T'\n        WHEN name = 'Madiotomitra' THEN 'NBE8qSzMhFO'\n        WHEN name = 'Marofototra' THEN 'nB9tjQx7qLG'\n        WHEN name = 'Ambaladara' THEN 'ncjBaP4NlNL'\n        WHEN name = 'Ambohimanarivo' THEN 'ncfTlufvAf6'\n        WHEN name = 'Ankarimalaza' THEN 'nCedmqJkSab'\n        WHEN name = 'Antanjona' THEN 'ncHX7GhgdRw'\n        WHEN name = 'Marohandrina' THEN 'nCLAqvfd0dC'\n        WHEN name = 'Marokarima' THEN 'NcAtlM2CxhN'\n        WHEN name = 'Maromandia' THEN 'NchF9oWaRrv'\n        WHEN name = 'Tsaramiadana' THEN 'NCFWw5b1F3l'\n        WHEN name = 'Ambalafary' THEN 'nD0F9ui8Nga'\n        WHEN name = 'Ambohimahasoa' THEN 'ncW6xCCNS7U'\n        WHEN name = 'Iankana' THEN 'Ncv3dhm1WKr'\n        WHEN name = 'Ambalakondro' THEN 'NcPVtCNxJtS'\n        WHEN name = 'Ampatrivolo' THEN 'ncp8UEmO0Nc'\n        WHEN name = 'Androranga' THEN 'Ncui1OhIui1'\n        WHEN name = 'Befotaka' THEN 'NCNUmUdyxiv'\n        WHEN name = 'Marosangy' THEN 'ncNHTPuom6N'\n        WHEN name = 'Marovato Sud' THEN 'ncrGZtPNsdp'\n        WHEN name = 'Ambodivandrika' THEN 'NDdK3PErBwi'\n        WHEN name = 'Antaramasoandro' THEN 'nDak4FYY7by'\n        WHEN name = 'Manakana' THEN 'Nd9lbxQv72E'\n        WHEN name = 'Mandroromody' THEN 'Ndc6vwLpPL0'\n        WHEN name = 'Morafeno' THEN 'Nd2kI24Ysjw'\n        WHEN name = 'Tanambao Kely' THEN 'ndFFkLmgpdh'\n        WHEN name = 'Ambinany Mahatsara' THEN 'NdR2GbJ4yux'\n        WHEN name = 'Ambinany Tanambao' THEN 'NDPJDhY7drG'\n        WHEN name = 'Fangato' THEN 'nDYKoSsgDae'\n        WHEN name = 'Mahasoa' THEN 'NDSoOEPf9Xz'\n        WHEN name = 'Masindrano Kely' THEN 'nDmpuJkb5Dx'\n        WHEN name = 'Nakitaina' THEN 'NE0wSFcq85m'\n        WHEN name = 'Namorona Magnotro' THEN 'nDGGWGoGAQP'\n        WHEN name = 'Sakarivo' THEN 'NDxMK7ByHjE'\n        WHEN name = 'Valagnady' THEN 'NDJYj6pnGtq'\n        WHEN name = 'Vohitrindry' THEN 'NdK05Nm1xRX'\n        WHEN name = 'Ambalona' THEN 'NeDLD0dIVsB'\n        WHEN name = 'Ambodimarohita' THEN 'nE79oU4m59R'\n        WHEN name = 'Maroamboka' THEN 'NE3IGibCrUT'\n        WHEN name = 'Sahanavaka I' THEN 'NEeUGvFAfPL'\n        WHEN name = 'Sahanavaka II' THEN 'nEGDI49riU7'\n        WHEN name = 'Sandrohy' THEN 'NE1jB3WgICT'\n        WHEN name = 'Tanambao Sud' THEN 'nEBeaVC82RV'\n        WHEN name = 'Ambodikizy' THEN 'nEOHhRftxUA'\n        WHEN name = 'Ampasimbola' THEN 'NEgTyyI1U7p'\n        WHEN name = 'Marofody' THEN 'NElhFomB8Ed'\n        WHEN name = 'Sarina' THEN 'NeMAfI6pnH8'\n        WHEN name = 'Tanambao Marofody' THEN 'neMKrGhZWb8'\n        WHEN name = 'Tsaravary' THEN 'NeGfP3BAuLV'\n        WHEN name = 'Ambalaromba' THEN 'nf6IbtSfLoQ'\n        WHEN name = 'Ambatoharanana' THEN 'Nf5oMnV3Yv4'\n        WHEN name = 'Ambohimiarina' THEN 'neUyl2P9GNI'\n        WHEN name = 'Andranomaresaka' THEN 'nF1QnIAFhBa'\n        WHEN name = 'Andranomavo II' THEN 'nFd1OOKdbcg'\n        WHEN name = 'Andranomiteka' THEN 'NFghlWBjqn9'\n        WHEN name = 'Anivorano' THEN 'Nf4MqPR6ji8'\n        WHEN name = 'Ankarongana' THEN 'NevzzuLhwDL'\n        WHEN name = 'Anosimparihy' THEN 'NF3yUICZdNs'\n        WHEN name = 'Betampona' THEN 'Net1iKNpH2C'\n        WHEN name = 'Manakana I' THEN 'NFB2xU2KZJR'\n        WHEN name = 'Tsarahafatra' THEN 'NFEh6pdnT8Z'\n        WHEN name = 'Tsiatosika' THEN 'NEoyuaoQCYg'\n        WHEN name = 'Volomborona' THEN 'nF1q6IlqwEj'\n        WHEN name = 'Faralambo' THEN 'nFgQLDmJ6g0'\n        WHEN name = 'Manarilefona' THEN 'NfiSknjddJk'\n        WHEN name = 'Mandrialina' THEN 'nFkzKqsjV6w'\n        WHEN name = 'Sahafanany' THEN 'NFkcfk9XjZ6'\n        WHEN name = 'Ampasinambo Nord' THEN 'NGg0rG3JWU8'\n        WHEN name = 'Analamazava' THEN 'nghGlnFwHao'\n        WHEN name = 'Sandravakoka' THEN 'ngDQVh3kT5U'\n        WHEN name = 'Tanambao Nord' THEN 'nGFudKcFOs2'\n        WHEN name = 'Amabalanaomby II' THEN 'nGBQ8uWPxAf'\n        WHEN name = 'Ambakoana' THEN 'NFt5dJzTdyX'\n        WHEN name = 'Ambalamanasa' THEN 'Ng4fSETuV70'\n        WHEN name = 'Ambalanaomby I' THEN 'nFz0MA85kJa'\n        WHEN name = 'Ambodiara' THEN 'NFU587IpTIP'\n        WHEN name = 'Ambodimanga' THEN 'NfmMrCvI9Qs'\n        WHEN name = 'Ambodinato' THEN 'NGDGQL6L6gv'\n        WHEN name = 'Ambodivandrika' THEN 'Ng9y3LRy7wt'\n        WHEN name = 'Ambodivato' THEN 'ngCoDKKjYFk'\n        WHEN name = 'Ampasimazava' THEN 'NFY9MJ3D8X6'\n        WHEN name = 'Ampitabe' THEN 'NGDf0XXst8N'\n        WHEN name = 'Iambojiro' THEN 'nFN2AjTeCMc'\n        WHEN name = 'Lavakianja' THEN 'nFS5aKnXxhk'\n        WHEN name = 'Mahazava' THEN 'nFxmB8IneUi'\n        WHEN name = 'Tanambao Be' THEN 'NfY6QL7XF3K'\n        WHEN name = 'Vohilava' THEN 'nFmDmVtAu8F'\n\t\t/*CSB dans district Nosy Varika*/\n\tWHEN name = 'CSB2 Ambahy' THEN 'IcMiQU9QW3l'\n        WHEN name = 'CSB2 Ambakobe' THEN 'diSP8NlOblg'\n        WHEN name = 'CSB2 Ambodiara' THEN 'wbnWeWIxXV6'\n        WHEN name = 'CSB2 Ambodilafa' THEN 'x2NG6OgByyW'\n        WHEN name = 'FSP_EKAR Ambodilafa' THEN 'lIaVCjLWXYc'\n        WHEN name = 'CSB2 Ambodirian\\'Isahafary' THEN 'TXeWDCjAmaR'\n        WHEN name = 'CSB1 Ambodivoahangy' THEN 'dzaTeu7rWtd'\n        WHEN name = 'CSB1 Anivorano I' THEN 'deMUdqCZSnE'\n        WHEN name = 'CSB2 Ampasinambo' THEN 'y7SK3kXA1PW'\n        WHEN name = 'CSB2 Andara' THEN 'xbmgFbAsjs8'\n        WHEN name = 'CSB2 Androrangavola' THEN 'lOonT3K0lGy'\n        WHEN name = 'CSB2 Angodongodona' THEN 'rPZA4HOPTo3'\n        WHEN name = 'CSB2 Antanambao I' THEN 'kvL3R5nif8u'\n        WHEN name = 'CSB2 Befody' THEN 'liNQWaRIkqb'\n        WHEN name = 'CSB2 Fanivelona' THEN 'ylSfYC22EEB'\n        WHEN name = 'CSB2 Fiadanana' THEN 'JhQYIlxVg2W'\n        WHEN name = 'CHRD2 Nosy Varika' THEN 'GM6MGTic1DQ'\n        WHEN name = 'CSB1 Ampahomanitra' THEN 'HchHLQUUAbh'\n        WHEN name = 'CSB2 Tsararivotra' THEN 'cp2lO2PyVj4'\n        WHEN name = 'FSP_ EKAR Tsararivotra' THEN 'kztyvGPnWR7'\n        WHEN name = 'FSP_ SAF Fjkm Nosy Varika' THEN 'X4SRnrSYWwg'\n        WHEN name = 'CSB2 Sahavato' THEN 'reZwG5541C7'\n        WHEN name = 'FSP_ EKAR Sahavato' THEN 'W8fiZ2dIEmI'\n        WHEN name = 'CSB1 Ambalakondro' THEN 'VlX1os6qq1m'\n        WHEN name = 'CSB1 Ampasimbola' THEN 'xUGh6ct7mEH'\n        WHEN name = 'CSB2 Soavina Est' THEN 'wR4eOoT36S0'\n        WHEN name = 'CPMI Soavina Est' THEN 'UvdkmxaONmH'\n        WHEN name = 'CSB2 Vohidroa' THEN 'jhMynEYfQcG'\n        WHEN name = 'CSB1 Andranomavo' THEN 'XayRHbpjHQH'\n        WHEN name = 'CSB2 Vohilavakely' THEN 'xOW0AHGbhzz'\n        WHEN name = 'CSB1 Mandroromody II' THEN 'GnLPZLWBA34'\n        WHEN name = 'CSB2 Vohitrandriana' THEN 'ywdasLE91Ac'\n        /*Fokontany Nosy Varika*/\n        WHEN name = 'Ambahy' THEN 'OdjaF3ujIk6'\n        WHEN name = 'Ambodisandroy' THEN 'ODPrzYS25bK'\n        WHEN name = 'Ambodivandrika' THEN 'OdRZQH95lzl'\n        WHEN name = 'Ampasimaneva' THEN 'ODProKteJFU'\n        WHEN name = 'Ampiakarana' THEN 'hhUrezbCUZK'\n        WHEN name = 'Analanolona' THEN 'odQXZ77YRvC'\n        WHEN name = 'Fenoarivo' THEN 'ODm2QDO0umn'\n        WHEN name = 'Mahafihetsika' THEN 'odmIEB6y4AU'\n        WHEN name = 'Maromby' THEN 'oDrPOnvCP8J'\n        WHEN name = 'Sahorana' THEN 'oDrkppebMIS'\n        WHEN name = 'Ambakobe' THEN 'oMkWmD6ihQu'\n        WHEN name = 'Ambodimanga' THEN 'Omps4DO7gAm'\n        WHEN name = 'Ampasinambo' THEN 'OMsCmNmYnYG'\n        WHEN name = 'Bekazaha' THEN 'oMt26YEtAMH'\n        WHEN name = 'Maroatova' THEN 'omucJyQpbao'\n        WHEN name = 'Sahamahitsy' THEN 'oMRGHuNy1Wo'\n        WHEN name = 'Sahamanerana' THEN 'omRklrU2Pd5'\n        WHEN name = 'Sakafotsy' THEN 'omlx4k5NSBy'\n        WHEN name = 'Ambatoharanana' THEN 'OInVCFOUtQT'\n        WHEN name = 'Ambodiara' THEN 'OiIHprh6YXQ'\n        WHEN name = 'Ambodilafakely' THEN 'oiIOSdlkQgR'\n        WHEN name = 'Marosakaiza' THEN 'OIlkFFwk3K0'\n        WHEN name = 'Tanambao I' THEN 'OIt1FzU1k8r'\n        WHEN name = 'Vohimasina' THEN 'oITbhe4DvcW'\n        WHEN name = 'Vohitromby' THEN 'OIN1jMzv75A'\n        WHEN name = 'Ambalahasina' THEN 'oEGPNXJ1O6g'\n        WHEN name = 'Ambinanitranomaro' THEN 'OEvQxPScWDr'\n        WHEN name = 'Ambodilafa' THEN 'oeCJmYQn4JE'\n        WHEN name = 'Ambodimanga' THEN 'OEDGfXe8VuM'\n        WHEN name = 'Ambohitsara' THEN 'oeGe0JEbJwD'\n        WHEN name = 'Ampasimbola' THEN 'oepcod1aICk'\n        WHEN name = 'Antanjomanga' THEN 'OEquv7qCTKT'\n        WHEN name = 'Farafasina' THEN 'OETICVfw8KV'\n        WHEN name = 'Marovato' THEN 'oEuH2lim5Ba'\n        WHEN name = 'Sakambatobe' THEN 'OEuo4IAD35e'\n        WHEN name = 'Tsaravinany' THEN 'OEvLaLfxhp4'\n        WHEN name = 'Vohimasina I' THEN 'OEvTmbbV3F6'\n        WHEN name = 'Ambalafatakana' THEN 'OFpCCoXTQd0'\n        WHEN name = 'Ambalakafe' THEN 'oFmNf0rE5jd'\n        WHEN name = 'Ambodirian \\'Isahafary' THEN 'oEX2lg3fWMn'\n        WHEN name = 'Ambodiroranga' THEN 'OfdErrwYxpd'\n        WHEN name = 'Ampanasana' THEN 'oFNJVG8wSiQ'\n        WHEN name = 'Ampitabe' THEN 'oFqofCay5Lz'\n        WHEN name = 'Andranomaitso' THEN 'oF6uxSrG0IX'\n        WHEN name = 'Androranga' THEN 'ofWAgDod1Am'\n        WHEN name = 'Antanambao Sahafony' THEN 'OFSI6oT1EJh'\n        WHEN name = 'Manakana' THEN 'oeXgaVBa6TF'\n        WHEN name = 'Manandriana' THEN 'oFS7l8i6Osi'\n        WHEN name = 'Marofaria' THEN 'OFmmCaoDw4W'\n        WHEN name = 'Menagisy' THEN 'oF0rpn0hwvQ'\n        WHEN name = 'Sahanikasy' THEN 'OFEEKLHTgjr'\n        WHEN name = 'Sahavakoana' THEN 'oFEadTcmdaJ'\n        WHEN name = 'Vohimaro' THEN 'OfvHrEc4PUm'\n        WHEN name = 'Volobe' THEN 'Of3RKah61zN'\n        WHEN name = 'Ambalatenina' THEN 'oGHeOkEeRX4'\n        WHEN name = 'Ambodivoahangy' THEN 'oGFYiNvJoKq'\n        WHEN name = 'Ambohinihaonana' THEN 'oggU0fLUjzL'\n        WHEN name = 'Ampasimadinika' THEN 'OGGNqW5Z7eI'\n        WHEN name = 'Ampasimbola' THEN 'OguUmVFlHfm'\n        WHEN name = 'Androrangavola' THEN 'oGOl60l0MDv'\n        WHEN name = 'Anivorano I' THEN 'OgJSbzgoHcW'\n        WHEN name = 'Mahadonaka' THEN 'ogLJYw7UH90'\n        WHEN name = 'Ambalahasina' THEN 'oFXNYfgs7ah'\n        WHEN name = 'Ambalatenina Sud' THEN 'OgduqkLlJqA'\n        WHEN name = 'Ambodilafakely' THEN 'oG4LitxhDRg'\n        WHEN name = 'Ambohimalaza' THEN 'og0B6ViN7XU'\n        WHEN name = 'Ampasinambo' THEN 'OfXHpVngipd'\n        WHEN name = 'Lavakianja Est' THEN 'ogA0vbCykAM'\n        WHEN name = 'Sahandraty' THEN 'ogA9stUDEyB'\n        WHEN name = 'Vatoatody' THEN 'og5kYgRcUew'\n        WHEN name = 'Ambodimanga' THEN 'ODztprfCPuo'\n        WHEN name = 'Ambodirotra' THEN 'Oe6bmw60ByA'\n        WHEN name = 'Ampasimbola' THEN 'oduPwBQYBok'\n        WHEN name = 'Andara' THEN 'OdUFjSjfBSX'\n        WHEN name = 'Andranohambana' THEN 'oebuwGYpoZv'\n        WHEN name = 'Ankaranambo' THEN 'oe0TAy7iLyP'\n        WHEN name = 'Maintimbato' THEN 'ODzPONR1Ueg'\n        WHEN name = 'Ambalafary' THEN 'OJ1TaDJpaPf'\n        WHEN name = 'Ambalakafe' THEN 'OiyEKtp0ruf'\n        WHEN name = 'Ambatomasina' THEN 'Oj7JQ96JaBP'\n        WHEN name = 'Ambodimanga IV' THEN 'OjayLq84TrN'\n        WHEN name = 'Analila' THEN 'oiynNEPGEiK'\n        WHEN name = 'Androrangavola' THEN 'OITKE4uwNAI'\n        WHEN name = 'Antanandava' THEN 'oiW1eC5W5Gi'\n        WHEN name = 'Antanandehibe' THEN 'Oj0Mni1lVWk'\n        WHEN name = 'Sandranamba' THEN 'oiWb99fKHDx'\n        WHEN name = 'Vohimasina II' THEN 'OIzm5LetkoM'\n        WHEN name = 'Ambinanindrano I' THEN 'oH6uvNDBxNs'\n        WHEN name = 'Ambinanindrano II' THEN 'OH9UMXIrWeV'\n        WHEN name = 'Ambohitsara IV' THEN 'oHc5Tm7MJyY'\n        WHEN name = 'Ampasimadinika IV' THEN 'OHFBuslBJ24'\n        WHEN name = 'Angodongodona' THEN 'OGVW5XXhidx'\n        WHEN name = 'Antrobaka' THEN 'Oh5VGAG882C'\n        WHEN name = 'Morafeno' THEN 'OgX8hXTt9LA'\n        WHEN name = 'Tsaraseranana' THEN 'ogZQNxli89K'\n        WHEN name = 'Ambodiriana' THEN 'ohIyHVBGpOW'\n        WHEN name = 'Ambohitsara' THEN 'OHkqnvh6eMJ'\n        WHEN name = 'Androrangavola' THEN 'oHt73WbPUCg'\n        WHEN name = 'Ankerana' THEN 'ohqq8O32RZe'\n        WHEN name = 'Antanambao I' THEN 'ohHiAxB6vrI'\n        WHEN name = 'Antanjomanga' THEN 'OhKjTQXn6W8'\n        WHEN name = 'Mahatsara' THEN 'oHPt4Jx3zxt'\n        WHEN name = 'Ambalakafe' THEN 'ohVdOmdvopn'\n        WHEN name = 'Ambodinambalo' THEN 'ohz04MZhW3Y'\n        WHEN name = 'Ambodinonoka' THEN 'oI8e4R0Ixwt'\n        WHEN name = 'Ambodipaiso' THEN 'oiEU0QaJww9'\n        WHEN name = 'AmbohimIlanja' THEN 'OI134LdoyAa'\n        WHEN name = 'Ambohipeno' THEN 'oibVWQYjIJN'\n        WHEN name = 'Ampasimbola' THEN 'ohzWqRGPO8u'\n        WHEN name = 'Analamarina' THEN 'OIeQM1R2YyV'\n        WHEN name = 'Andrambotsivelezina' THEN 'OhydNKssHI6'\n        WHEN name = 'Befody' THEN 'ohuWI3c5hsA'\n        WHEN name = 'Mahatsara' THEN 'OhxecPrpFzZ'\n        WHEN name = 'Vohitrarivo' THEN 'oHWvCOyr1Ii'\n        WHEN name = 'Ambalafamafa' THEN 'oK2QXuR0QtE'\n        WHEN name = 'Ambohimahasoa' THEN 'oKhdnAL8B2m'\n        WHEN name = 'Andranomahitsy' THEN 'Ok6Wh1oZrgT'\n        WHEN name = 'Ankosilamba' THEN 'okcpqjdO01M'\n        WHEN name = 'Antanatrambana' THEN 'OKLRA15bBQ3'\n        WHEN name = 'Antanihady' THEN 'oK4gkG2CueO'\n        WHEN name = 'Fanivelona' THEN 'oJYwI2wPwvM'\n        WHEN name = 'Mahatsinjo' THEN 'OKhcQd86MT2'\n        WHEN name = 'Sahandrotra' THEN 'OkbjPIM3G7G'\n        WHEN name = 'Saherana' THEN 'ok8we5pJAEe'\n        WHEN name = 'Sarina I' THEN 'ojzHARZw0rJ'\n        WHEN name = 'Sarina II' THEN 'oK2lZVPDNGT'\n        WHEN name = 'Ambalahady' THEN 'oKTmR8Id9qS'\n        WHEN name = 'Ambalamanasa' THEN 'OKxVMvHn1jA'\n        WHEN name = 'Ambarisasy' THEN 'olCI72tphEW'\n        WHEN name = 'Ambatoafo' THEN 'oL6jazHG9pO'\n        WHEN name = 'Analamarina' THEN 'OL6FiMf1adW'\n        WHEN name = 'Andonaka' THEN 'okrInp7JMCO'\n        WHEN name = 'Andranomahita' THEN 'oKzPr5xwbHm'\n        WHEN name = 'Andranotsara' THEN 'oKU7bvSgM9e'\n        WHEN name = 'Fiadanana' THEN 'OKmJI6MRSH2'\n        WHEN name = 'Fihaonana' THEN 'olaw4c77inp'\n        WHEN name = 'Mahadio' THEN 'oL4wBGWAoG3'\n        WHEN name = 'Mahatsra I' THEN 'OKytw5n9phR'\n        WHEN name = 'Manakana' THEN 'OLc9FEMPFch'\n        WHEN name = 'Sakalava' THEN 'oKrt0NitSiO'\n        WHEN name = 'Tanatrambana' THEN 'ol9SLRMt7Il'\n        WHEN name = 'Tsarahonenana' THEN 'OlbWk5VtiIx'\n        WHEN name = 'Vohitromby' THEN 'OKsplLxr7UP'\n        WHEN name = 'Ambodiharamy' THEN 'OjSka4dOqI5'\n        WHEN name = 'Ambodisana' THEN 'ojX0jwp7W1w'\n        WHEN name = 'Ampahomanitra' THEN 'oJRFeyETPUw'\n        WHEN name = 'Fenoarivo Ambazato' THEN 'OjVXxIzB37Z'\n        WHEN name = 'Masindranokely' THEN 'ojYC3i17eTM'\n        WHEN name = 'Ambinany Sakaleona' THEN 'OJeCWQXvCAn'\n        WHEN name = 'Ambodisaina Sahafary' THEN 'OJPbdM9aHxY'\n        WHEN name = 'Ambohitsara' THEN 'Ojhd05UvcM4'\n        WHEN name = 'Andonaka' THEN 'OjKcIZpKSxE'\n        WHEN name = 'Bebozaka' THEN 'oJPAGnV8YbN'\n        WHEN name = 'Ifasina' THEN 'OJmdPuFDFvt'\n        WHEN name = 'Mahafitodika' THEN 'ojLTZTyfnMc'\n        WHEN name = 'Mandanivatsy' THEN 'OjnEehAWx3s'\n        WHEN name = 'Sahabe' THEN 'OJlgE1fJB3p'\n        WHEN name = 'Tanambao Berano' THEN 'ojPUNJmGEIX'\n        WHEN name = 'Tsararivotra' THEN 'oJcCsfC71UQ'\n        WHEN name = 'Ambatobe II' THEN 'OONdJdmRLTK'\n        WHEN name = 'Ambatoina' THEN 'ONZKV3ObLQ9'\n        WHEN name = 'Ambatomivarina' THEN 'ONPjy4NsQy8'\n        WHEN name = 'Ambavan Isahavato' THEN 'ONmN0pNQsie'\n        WHEN name = 'Ambazato' THEN 'oOThq6hVUS7'\n        WHEN name = 'Ambodihasina I' THEN 'onRmMpbQnB2'\n        WHEN name = 'Ambodimanga I' THEN 'onxcHWzEFKw'\n        WHEN name = 'Ambodiramiavona' THEN 'oNk05ivLA1I'\n        WHEN name = 'Ambodiroranga' THEN 'oOJXZmW7U3V'\n        WHEN name = 'Ambodivandrika' THEN 'ooKxWBUfRCY'\n        WHEN name = 'Ampasimaniona' THEN 'OoMUnioTNN1'\n        WHEN name = 'Ampasimazava' THEN 'OObzLJ11szc'\n        WHEN name = 'Ampiranambo' THEN 'ONgyu6QbWbO'\n        WHEN name = 'Ampitamalandy' THEN 'ONhFvQSXSA4'\n        WHEN name = 'Ampitsahambe' THEN 'OP1M9ongv7O'\n        WHEN name = 'Andibodiboka' THEN 'OOhfY4Ad7ZO'\n        WHEN name = 'Andranokopy' THEN 'oOLxYadBx5m'\n        WHEN name = 'Andranotsara I' THEN 'oO9DprUEH4R'\n        WHEN name = 'Befotaka' THEN 'OObUSJv1ovc'\n        WHEN name = 'Lakamandrorona' THEN 'OOz1fa0INO8'\n        WHEN name = 'Malimalina' THEN 'oOa3cOt6pYM'\n        WHEN name = 'Manakana I' THEN 'OO1ZV64HsTE'\n        WHEN name = 'Morarano' THEN 'oo5YyrrWjrN'\n        WHEN name = 'Niarovana' THEN 'oo5FZraTLYm'\n        WHEN name = 'Sahanofa' THEN 'onLu4auaJ3b'\n        WHEN name = 'Sahapiana' THEN 'onovEQXguUI'\n        WHEN name = 'Vazahalava' THEN 'OoH4duijNHN'\n        WHEN name = 'Vohitromby' THEN 'ooWdUwPNByx'\n        WHEN name = 'Ambalakondro' THEN 'OQO4QOYiKPk'\n        WHEN name = 'Ambalavia' THEN 'OqXc8NATIP6'\n        WHEN name = 'Ambinanihafotra' THEN 'oqrreI9gb49'\n        WHEN name = 'Ambodilafakely' THEN 'OqP5d7eQWxO'\n        WHEN name = 'Andapa' THEN 'OqXPZAjjUZI'\n        WHEN name = 'Mahadonaka' THEN 'oQoUpPdjTVT'\n        WHEN name = 'Vohimena' THEN 'oQOcDYUckqL'\n        WHEN name = 'Ambodivoahangy' THEN 'Oqkg1WPl4JL'\n        WHEN name = 'Ambohimalaza' THEN 'Oqj1NXR50IJ'\n        WHEN name = 'Ampasimbola' THEN 'OqdMLcCE4qm'\n        WHEN name = 'Analamazava I' THEN 'OqepmoUOgAO'\n        WHEN name = 'Marosika' THEN 'oQGtwxKlAWT'\n        WHEN name = 'Vohijanahary' THEN 'oqixZFCLLyt'\n        WHEN name = 'Ambalavero I' THEN 'OPaUG8F5nq3'\n        WHEN name = 'Ambalavero II' THEN 'OpgSrVNaHmh'\n        WHEN name = 'Ambaninambato' THEN 'oPIEc2pufvh'\n        WHEN name = 'Ambodibakoly' THEN 'OQd2DYDTr0f'\n        WHEN name = 'Ampasimanoina' THEN 'oPKuGETWKW9'\n        WHEN name = 'Ampitabe I' THEN 'opMo1pOyH9Q'\n        WHEN name = 'Ampitamalandy' THEN 'OqCZqicgDko'\n        WHEN name = 'Andranobe I' THEN 'OPmZ0sJdGnE'\n        WHEN name = 'Betampona' THEN 'opOifJ4kEyl'\n        WHEN name = 'Manakana I' THEN 'opqnHg7ATUu'\n        WHEN name = 'Maroharatra' THEN 'opw3ktLtvXa'\n        WHEN name = 'Marovato II' THEN 'OpcY30I1uWJ'\n        WHEN name = 'Sahamahitsy I' THEN 'OpsseRAKsp2'\n        WHEN name = 'Sahandrarezina' THEN 'OpQOnoQesMz'\n        WHEN name = 'Sahanimborona' THEN 'opqU3IgGCh2'\n        WHEN name = 'Soavina' THEN 'OP8e54ORQC8'\n        WHEN name = 'Tsaralazaina' THEN 'Oq2MLLXgI3z'\n        WHEN name = 'Vohibola' THEN 'oq8lIDD7NC7'\n        WHEN name = 'Vohidahy' THEN 'OQcbNsAtHbc'\n        WHEN name = 'Ambalafary' THEN 'oMCWm5kPBVz'\n        WHEN name = 'Ambinanindrano' THEN 'omiekod7qTh'\n        WHEN name = 'Ambohitsara' THEN 'OmGw1Ghzu3x'\n        WHEN name = 'Anivorano' THEN 'OMEzj7ruSEl'\n        WHEN name = 'Mijazahatsara' THEN 'OmcD1PY2kgZ'\n        WHEN name = 'Tsaravinany' THEN 'OMDZd9V2JC0'\n        WHEN name = 'Vohidroa' THEN 'oMcAJtRnquz'\n        WHEN name = 'Vohitsara' THEN 'oMIlYf0lhNf'\n        WHEN name = 'Ambatoharanana' THEN 'onGfX807YfJ'\n        WHEN name = 'Ambohimiritika' THEN 'Ondcic1D8cE'\n        WHEN name = 'Andranomavo' THEN 'On4mC6xtqC3'\n        WHEN name = 'Fiadanana' THEN 'ON8ivUuMrQP'\n        WHEN name = 'Tsarahonenana' THEN 'OnD6OXSRdVc'\n        WHEN name = 'Ambandrika' THEN 'OmzVZBthCmC'\n        WHEN name = 'Ambodibakoly' THEN 'oMWk50aGxMX'\n        WHEN name = 'Amboditavia' THEN 'oMymJyogvCq'\n        WHEN name = 'Antanjondrano' THEN 'OMXevLdq9os'\n        WHEN name = 'Fenoarivo' THEN 'omUxpGNGdWC'\n        WHEN name = 'Mahatsara' THEN 'on2PVmd8Zox'\n        WHEN name = 'Vohilava' THEN 'omUEpk5qS4t'\n        WHEN name = 'Vohipahy' THEN 'oMxUk8WGAsD'\n        WHEN name = 'Vohitromby' THEN 'oMY5oJCmUMJ'\n        WHEN name = 'Ambatoseza' THEN 'oMAVVZnTlH7'\n        WHEN name = 'Manakana' THEN 'OMc7EUjWibz'\n        WHEN name = 'Mandroromody' THEN 'Om9GJPg8Cma'\n        WHEN name = 'Morarano I' THEN 'OmBUPby9k5E'\n        WHEN name = 'Ambatolampy' THEN 'OLHfIp4NXBr'\n        WHEN name = 'Ambinanindrano' THEN 'OLEDwkH3nbw'\n        WHEN name = 'Ambodiara' THEN 'oLVpXDr3tYV'\n        WHEN name = 'Ambohipeno' THEN 'olwSpfNCMXU'\n        WHEN name = 'Androrangavola' THEN 'oLmJEYfzNe8'\n        WHEN name = 'Mahafihetsika' THEN 'olOsHNTV5bC'\n        WHEN name = 'Mahajanjina' THEN 'OM9d5fVtmjq'\n        WHEN name = 'Malazamasina' THEN 'OllGX7gqByO'\n        WHEN name = 'Maroharatra' THEN 'Oly2XVdXWwI'\n        WHEN name = 'Marosika' THEN 'olgTEKNR1wW'\n        WHEN name = 'Morarano II' THEN 'OlUvLlGCl6y'\n        WHEN name = 'Tanambao I' THEN 'oLI5fcHwpKa'\n        WHEN name = 'Tsarahonenana' THEN 'Om1GymsIojl'\n        WHEN name = 'Tsaramiakatra' THEN 'oM2Eb7jLXPP'\n        WHEN name = 'Vohidamba' THEN 'OLKei8q4Ods'\n        WHEN name = 'Vohitrandriana' THEN 'OleDQnMdcVK'\n        WHEN name = 'Vohitrarivo' THEN 'Om6CfHeHS5a'\n    END);\nSET SQL_SAFE_UPDATES = 1;\n\n\nUPDATE care_center\nSET orgunit = 'bnMM4PwDm3F'\nWHERE id=541;\n\n\nUPDATE care_center\nSET name = 'Ambodirian \\'Isahafary'\nWHERE id=641;\n\nUPDATE care_center\nSET orgunit = 'A38WhL0NPsX'\nWHERE id=549;\n\nSELECT * from care_center;\n",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.mySql",
+          "typeVersion": 2.5,
+          "position": [
+            -64,
+            0
+          ],
+          "id": "8a93264d-9920-48eb-9886-4ce52054a0c1",
+          "name": "Execute a SQL query",
+          "credentials": {
+            "mySql": {
+              "id": "glFz7x6x646ZUEVE",
+              "name": "con_Base_pvt_locale"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "command": "/bin/sh /home/node/n8n-workflows/executer-ssh-final.sh",
+            "cwd": "",
+            "timeout": 600000,
+            "additionalOptions": {}
+          },
+          "type": "n8n-nodes-custom-exec.customExecNode",
+          "typeVersion": 1,
+          "position": [
+            -64,
+            208
+          ],
+          "id": "14151217-a24e-4b76-bce2-4ed63290c8e6",
+          "name": "Custom Exec",
+          "alwaysOutputData": true
+        }
+      ],
+      "connections": {
+        "When clicking ‘Execute workflow’": {
+          "main": [
+            [
+              {
+                "node": "create_base",
+                "type": "main",
+                "index": 0
+              },
+              {
+                "node": "backup_base",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "create_base": {
+          "main": [
+            [
+              {
+                "node": "restore_base",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "restore_base": {
+          "main": [
+            [
+              {
+                "node": "Execute a SQL query",
+                "type": "main",
+                "index": 0
+              },
+              {
+                "node": "Custom Exec",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Execute a SQL query": {
+          "main": [
+            []
+          ]
+        }
+      },
+      "settings": {
+        "executionOrder": "v1",
+        "binaryMode": "separate",
+        "availableInMCP": false
+      },
+      "staticData": null,
+      "meta": {
+        "templateCredsSetupCompleted": true
+      },
+      "pinData": {},
+      "versionId": "d969adb8-8966-4081-9789-cb93234dd223",
+      "activeVersionId": null,
+      "triggerCount": 0,
+      "shared": [
+        {
+          "updatedAt": "2026-03-03T13:27:25.731Z",
+          "createdAt": "2026-03-03T13:27:25.731Z",
+          "role": "workflow:owner",
+          "workflowId": "grO7uRY70aIXmXK1",
+          "projectId": "ALqsZgjbH7k1av6W"
+        }
+      ],
+      "activeVersion": null,
+      "tags": []
+    },
+    {
+      "updatedAt": "2026-03-05T06:21:51.567Z",
+      "createdAt": "2026-03-04T13:27:44.755Z",
+      "id": "nGSCFYeofkQrYmXp",
+      "name": "Demande_Hajarison_Finance",
+      "active": false,
+      "isArchived": false,
+      "nodes": [
+        {
+          "parameters": {},
+          "type": "n8n-nodes-base.manualTrigger",
+          "typeVersion": 1,
+          "position": [
+            -656,
+            16
+          ],
+          "id": "f3e7fd83-bd3b-434b-929b-9dd4ba5a8d85",
+          "name": "When clicking ‘Execute workflow’"
+        },
+        {
+          "parameters": {
+            "operation": "executeQuery",
+            "query": "SELECT \n    cc.name AS 'Centre hospitalière',\n    rpse.name AS Service,\n    p.numero AS Numero,\n    p.name AS 'Nom et prénom',\n    IF(p.gender = 2, 'Masculin', 'Féminin') AS Sexe,\n    p.age AS Age,\n    CASE p.age_unity\n        WHEN 0 THEN 'Jour'\n        WHEN 1 THEN 'Mois'\n        WHEN 2 THEN 'Ans'\n    END AS 'Unite d\\'age',\n    c.name AS Commune,\n    f.name AS fokontany,\n    rpst.name AS 'Statut PEC',\n    ccr.name AS 'Centre transferant',\n    rpe.motif AS 'Motif d\\'entree',\n    rps.diagnosticFinal AS 'Diagnostic final',\n    rpts.name AS 'Type de sortie',\n    DATE(rpc.dateEntree) AS 'Date d\\'entrée controle',\n    DATE(rpc.dateSortie) AS 'Date de sortie controle',\n    rpc.numero AS 'Numero controle',\n    rpc.description AS 'Description controle',\n    rpc.dateSuiviControle AS 'Date suivi controle',\n    r.observation AS 'Observation',\n    rpe.info_medicale AS 'Information medicale'\nFROM\n    register AS r\n        LEFT JOIN\n    patient AS p ON p.id = r.patient_id\n        LEFT JOIN\n    fokontany AS f ON p.fokontany_id = f.id\n        LEFT JOIN\n    commune AS c ON f.commune_id = c.id\n        LEFT JOIN\n    register_pec_entry AS rpe ON rpe.register_id = r.id\n        LEFT JOIN\n    register_pec_sortie AS rps ON rps.register_id = r.id\n        LEFT JOIN\n    register_pec_type_sortie AS rpts ON rpts.id = rps.type_sortie_id\n        LEFT JOIN\n    register_pec_service AS rpse ON rpse.id = rpe.service_id\n        LEFT JOIN\n    register_pec_statut AS rpst ON rpst.id = rpe.statut_id\n        LEFT JOIN\n    care_center_projet AS ccp ON r.care_center_projet_id = ccp.id\n        LEFT JOIN\n    projet AS pr ON ccp.projet_id = pr.id\n        LEFT JOIN\n    program AS pg ON pg.id = pr.program_id\n        LEFT JOIN\n    care_center AS cc ON ccp.care_center_id = cc.id\n        LEFT JOIN\n    chrd AS ch ON ch.care_center_id = cc.id\n        LEFT JOIN\n    district AS d ON d.id = ch.district_id\n        LEFT JOIN\n    register_pec_reference AS rpr ON rpr.entry_id = rpe.id\n        LEFT JOIN\n    care_center AS ccr ON rpr.care_center_transferant_id = ccr.id\n        LEFT JOIN\n    register_pec_controle AS rpc ON rpc.sortie_id = rps.id\nWHERE\n    pr.name LIKE 'Couverture médicale CHRD'\n     AND YEAR(rpc.dateEntree) = YEAR(CURRENT_DATE)\n\t AND MONTH(rpc.dateEntree) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)\n     and cc.name = 'Ifanadiana'\nORDER BY rpc.dateEntree ASC",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.mySql",
+          "typeVersion": 2.5,
+          "position": [
+            -336,
+            -176
+          ],
+          "id": "4cc2b489-fdd6-4088-9749-8c998ee9b568",
+          "name": "controle_PEC_CHRD",
+          "alwaysOutputData": true,
+          "credentials": {
+            "mySql": {
+              "id": "VgQwKJZhAPgiv1Pu",
+              "name": "Con_base_distance"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "operation": "executeQuery",
+            "query": "SELECT \n    cc.name AS 'Centre hospitalière',\n    rpse.name AS Service,\n    p.numero AS Numero,\n    p.name AS 'Nom et prénom',\n    IF(p.gender = 2, 'Masculin', 'Féminin') AS Sexe,\n    p.age AS Age,\n    CASE p.age_unity\n        WHEN 0 THEN 'Jour'\n        WHEN 1 THEN 'Mois'\n        WHEN 2 THEN 'Ans'\n    END AS 'Unite d\\'age',\n    f.name AS fokontany,\n    c.name AS Commune,\n    DATE(rpe.date) AS 'Date d\\'entrée',\n    DATE(rps.date) AS 'Date de sortie',\n    rpst.name AS 'Statut PEC',\n    IF(rpe.is_refered = 1, 'Oui', 'Non') AS 'Referée ?',\n    ccr.name AS 'Centre transferant',\n    rpmt.name AS 'Moyen de transport',\n    rpe.motif AS 'Motif d\\'entree',\n    rps.diagnosticFinal AS 'Diagnostic final',\n    rpts.name AS 'Type de sortie',\n    rps.dateFirstControl AS 'Date controle',\n    r.observation AS 'Observation',\n    rpe.info_medicale AS 'Information medicale'\nFROM\n    register AS r\n        LEFT JOIN\n    patient AS p ON p.id = r.patient_id\n        LEFT JOIN\n    fokontany AS f ON p.fokontany_id = f.id\n        LEFT JOIN\n    commune AS c ON f.commune_id = c.id\n        LEFT JOIN\n    register_pec_entry AS rpe ON rpe.register_id = r.id\n        LEFT JOIN\n    register_pec_sortie AS rps ON rps.register_id = r.id\n        LEFT JOIN\n    register_pec_type_sortie AS rpts ON rpts.id = rps.type_sortie_id\n        LEFT JOIN\n    register_pec_service AS rpse ON rpse.id = rpe.service_id\n        LEFT JOIN\n    register_pec_statut AS rpst ON rpst.id = rpe.statut_id\n        LEFT JOIN\n    register_pec_reference AS ref ON ref.entry_id = rpe.id\n        LEFT JOIN\n    register_pec_moyen_transport AS rpmt ON rpmt.id = ref.moyen_transport_id\n        LEFT JOIN\n    care_center_projet AS ccp ON r.care_center_projet_id = ccp.id\n        LEFT JOIN\n    projet AS pr ON ccp.projet_id = pr.id\n        LEFT JOIN\n    program AS pg ON pg.id = pr.program_id\n        LEFT JOIN\n    care_center AS cc ON ccp.care_center_id = cc.id\n        LEFT JOIN\n    chrd AS ch ON ch.care_center_id = cc.id\n        LEFT JOIN\n    district AS d ON d.id = ch.district_id\n        LEFT JOIN\n    register_pec_reference AS rpr ON rpr.entry_id = rpe.id\n        LEFT JOIN\n    care_center AS ccr ON rpr.care_center_transferant_id = ccr.id\nWHERE\n    pr.name LIKE 'Couverture médicale CHRD'\n  AND YEAR(rpe.date) = YEAR(CURRENT_DATE)\n  AND MONTH(rpe.date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)\n  and cc.name = 'Ifanadiana'",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.mySql",
+          "typeVersion": 2.5,
+          "position": [
+            -336,
+            16
+          ],
+          "id": "8b2fccd1-8419-4261-a650-c30663365012",
+          "name": "Patient_PEC_CHRD_Entre",
+          "credentials": {
+            "mySql": {
+              "id": "VgQwKJZhAPgiv1Pu",
+              "name": "Con_base_distance"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "operation": "executeQuery",
+            "query": "SELECT \n    cc.name AS 'Centre hospitalière',\n    rpse.name AS Service,\n    p.numero AS Numero,\n    p.name AS 'Nom et prénom',\n    IF(p.gender = 2, 'Masculin', 'Féminin') AS Sexe,\n    p.age AS Age,\n    CASE p.age_unity\n        WHEN 0 THEN 'Jour'\n        WHEN 1 THEN 'Mois'\n        WHEN 2 THEN 'Ans'\n    END AS 'Unite d\\'age',\n    f.name AS fokontany,\n    c.name AS Commune,\n    DATE(rpe.date) AS 'Date d\\'entrée',\n    DATE(rps.date) AS 'Date de sortie',\n    rpst.name AS 'Statut PEC',\n    IF(rpe.is_refered = 1, 'Oui', 'Non') AS 'Referée ?',\n    ccr.name AS 'Centre transferant',\n    rpmt.name AS 'Moyen de transport',\n    rpe.motif AS 'Motif d\\'entree',\n    rps.diagnosticFinal AS 'Diagnostic final',\n    rpts.name AS 'Type de sortie',\n    rps.dateFirstControl AS 'Date controle',\n    r.observation AS 'Observation',\n    rpe.info_medicale AS 'Information medicale'\nFROM\n    register AS r\n        LEFT JOIN\n    patient AS p ON p.id = r.patient_id\n        LEFT JOIN\n    fokontany AS f ON p.fokontany_id = f.id\n        LEFT JOIN\n    commune AS c ON f.commune_id = c.id\n        LEFT JOIN\n    register_pec_entry AS rpe ON rpe.register_id = r.id\n        LEFT JOIN\n    register_pec_sortie AS rps ON rps.register_id = r.id\n        LEFT JOIN\n    register_pec_type_sortie AS rpts ON rpts.id = rps.type_sortie_id\n        LEFT JOIN\n    register_pec_service AS rpse ON rpse.id = rpe.service_id\n        LEFT JOIN\n    register_pec_statut AS rpst ON rpst.id = rpe.statut_id\n        LEFT JOIN\n    register_pec_reference AS ref ON ref.entry_id = rpe.id\n        LEFT JOIN\n    register_pec_moyen_transport AS rpmt ON rpmt.id = ref.moyen_transport_id\n        LEFT JOIN\n    care_center_projet AS ccp ON r.care_center_projet_id = ccp.id\n        LEFT JOIN\n    projet AS pr ON ccp.projet_id = pr.id\n        LEFT JOIN\n    program AS pg ON pg.id = pr.program_id\n        LEFT JOIN\n    care_center AS cc ON ccp.care_center_id = cc.id\n        LEFT JOIN\n    chrd AS ch ON ch.care_center_id = cc.id\n        LEFT JOIN\n    district AS d ON d.id = ch.district_id\n        LEFT JOIN\n    register_pec_reference AS rpr ON rpr.entry_id = rpe.id\n        LEFT JOIN\n    care_center AS ccr ON rpr.care_center_transferant_id = ccr.id\nWHERE\n    pr.name LIKE 'Couverture médicale CHRD'\n     AND YEAR(rps.date) = YEAR(CURRENT_DATE)\n\t AND MONTH(rps.date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)\n     and cc.name = 'Ifanadiana'\n     ",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.mySql",
+          "typeVersion": 2.5,
+          "position": [
+            -336,
+            208
+          ],
+          "id": "e007c934-d31b-4c89-9317-ef873972af80",
+          "name": "Patient_PEC_CHRD_Sortie",
+          "credentials": {
+            "mySql": {
+              "id": "VgQwKJZhAPgiv1Pu",
+              "name": "Con_base_distance"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "operation": "xlsx",
+            "binaryPropertyName": "=data",
+            "options": {
+              "fileName": "=Controle_PEC_CHRD_{{ new Date(new Date().setMonth(new Date().getMonth() - 1)).getFullYear() }}_{{ (new Date(new Date().setMonth(new Date().getMonth() - 1)).getMonth() + 1).toString().padStart(2, '0') }}.xlsx"
+            }
+          },
+          "type": "n8n-nodes-base.convertToFile",
+          "typeVersion": 1.1,
+          "position": [
+            -80,
+            -176
+          ],
+          "id": "d759e37c-8de4-4869-a2a0-e492ca3192a1",
+          "name": "Convert to File",
+          "alwaysOutputData": true
+        },
+        {
+          "parameters": {
+            "operation": "xlsx",
+            "binaryPropertyName": "=data_1",
+            "options": {
+              "fileName": "=Patient_PEC_CHRD_Entre_{{ new Date(new Date().setMonth(new Date().getMonth() - 1)).getFullYear() }}_{{ (new Date(new Date().setMonth(new Date().getMonth() - 1)).getMonth() + 1).toString().padStart(2, '0') }}.xlsx"
+            }
+          },
+          "type": "n8n-nodes-base.convertToFile",
+          "typeVersion": 1.1,
+          "position": [
+            -80,
+            16
+          ],
+          "id": "15937d62-3395-46bf-96ff-39107d6020a8",
+          "name": "Convert to File1"
+        },
+        {
+          "parameters": {
+            "operation": "xlsx",
+            "binaryPropertyName": "=data_2",
+            "options": {
+              "fileName": "=Patient_PEC_CHRD_Sortie_{{ new Date(new Date().setMonth(new Date().getMonth() - 1)).getFullYear() }}_{{ (new Date(new Date().setMonth(new Date().getMonth() - 1)).getMonth() + 1).toString().padStart(2, '0') }}.xlsx"
+            }
+          },
+          "type": "n8n-nodes-base.convertToFile",
+          "typeVersion": 1.1,
+          "position": [
+            -64,
+            208
+          ],
+          "id": "f9301685-4c07-42f1-9bc9-53ccbca3e6d6",
+          "name": "Convert to File2"
+        },
+        {
+          "parameters": {
+            "sendTo": "a.herinomena11@gmail.com",
+            "subject": "=Données Mois de {{ DateTime.now().minus({ months: 1 }).setLocale('fr').toFormat('MMMM yyyy') }}",
+            "emailType": "text",
+            "message": "=Bonjour Hajarison.\n\nVoilà les données que vous m'avez demandées pour le mois de {{ DateTime.now().minus({ months: 1 }).toFormat('MM-yyyy') }}. \n\nCordialement. \nHerinomena",
+            "options": {
+              "attachmentsUi": {
+                "attachmentsBinary": [
+                  {
+                    "property": "data,data_1,data_2"
+                  }
+                ]
+              }
+            }
+          },
+          "type": "n8n-nodes-base.gmail",
+          "typeVersion": 2.2,
+          "position": [
+            480,
+            32
+          ],
+          "id": "aa4f1ffe-378d-4006-8276-f2666fc4575b",
+          "name": "Send a message",
+          "webhookId": "33caf1de-c8e3-40aa-925d-4bde13cff2bd",
+          "credentials": {
+            "gmailOAuth2": {
+              "id": "JLUOnFkRnPFAVX6O",
+              "name": "Gmail account"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "mode": "combine",
+            "combineBy": "combineByPosition",
+            "numberInputs": 3,
+            "options": {}
+          },
+          "type": "n8n-nodes-base.merge",
+          "typeVersion": 3.2,
+          "position": [
+            288,
+            16
+          ],
+          "id": "3fc33a8b-5c65-41ad-b6a2-5d3721bb4956",
+          "name": "Merge",
+          "alwaysOutputData": true
+        }
+      ],
+      "connections": {
+        "When clicking ‘Execute workflow’": {
+          "main": [
+            [
+              {
+                "node": "controle_PEC_CHRD",
+                "type": "main",
+                "index": 0
+              },
+              {
+                "node": "Patient_PEC_CHRD_Entre",
+                "type": "main",
+                "index": 0
+              },
+              {
+                "node": "Patient_PEC_CHRD_Sortie",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "controle_PEC_CHRD": {
+          "main": [
+            [
+              {
+                "node": "Convert to File",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Patient_PEC_CHRD_Sortie": {
+          "main": [
+            [
+              {
+                "node": "Convert to File2",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Patient_PEC_CHRD_Entre": {
+          "main": [
+            [
+              {
+                "node": "Convert to File1",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Convert to File": {
+          "main": [
+            [
+              {
+                "node": "Merge",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Convert to File1": {
+          "main": [
+            [
+              {
+                "node": "Merge",
+                "type": "main",
+                "index": 1
+              }
+            ]
+          ]
+        },
+        "Convert to File2": {
+          "main": [
+            [
+              {
+                "node": "Merge",
+                "type": "main",
+                "index": 2
+              }
+            ]
+          ]
+        },
+        "Send a message": {
+          "main": [
+            []
+          ]
+        },
+        "Merge": {
+          "main": [
+            [
+              {
+                "node": "Send a message",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "settings": {
+        "executionOrder": "v1",
+        "binaryMode": "separate",
+        "availableInMCP": false
+      },
+      "staticData": null,
+      "meta": {
+        "templateCredsSetupCompleted": true
+      },
+      "pinData": {},
+      "versionId": "de70fb6b-c145-42e2-9b28-80e4f5595b52",
+      "activeVersionId": null,
+      "triggerCount": 0,
+      "shared": [
+        {
+          "updatedAt": "2026-03-04T13:27:44.757Z",
+          "createdAt": "2026-03-04T13:27:44.757Z",
+          "role": "workflow:owner",
+          "workflowId": "nGSCFYeofkQrYmXp",
+          "projectId": "ALqsZgjbH7k1av6W"
+        }
+      ],
+      "activeVersion": null,
+      "tags": []
+    },
+    {
+      "updatedAt": "2026-03-04T13:23:32.925Z",
+      "createdAt": "2026-03-04T13:09:41.406Z",
+      "id": "wqdftbXLycL0Lhbj",
+      "name": "Integration_analytics_Commune",
+      "active": false,
+      "isArchived": false,
+      "nodes": [
+        {
+          "parameters": {
+            "jsCode": "const dataSetId = \"qNTxFeMEaKj\";   // ton dataset cible\nconst completeDate = null;        // ← maintenant null\n\nconst dataValues = [];\nlet globalOrgUnit = null;\n\nfor (const item of $input.all()) {\n\n    const rows = item.json.rows || [];\n\n    for (const row of rows) {\n\n        const dataElement = row[0];\n        const orgUnit = row[1];\n        const period = row[2];\n        const value = row[3];\n\n        globalOrgUnit = orgUnit; \n\n        dataValues.push({\n            dataElement,\n            period,\n            orgUnit,\n            value\n        });\n    }\n}\n\nreturn [\n  {\n    json: {\n      dataSet: dataSetId,\n      completeDate: completeDate,\n      orgUnit: globalOrgUnit,\n      dataValues: dataValues\n    }\n  }\n];"
+          },
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            224,
+            352
+          ],
+          "id": "bbd874c1-f09e-4b69-ba03-f07e0d4e1393",
+          "name": "Code3"
+        },
+        {
+          "parameters": {
+            "jsCode": "const dataSetId = \"qNTxFeMEaKj\";   // ton dataset cible\nconst completeDate = null;        // ← maintenant null\n\nconst dataValues = [];\nlet globalOrgUnit = null;\n\nfor (const item of $input.all()) {\n\n    const rows = item.json.rows || [];\n\n    for (const row of rows) {\n\n        const dataElement = row[0];\n        const orgUnit = row[1];\n        const period = row[2];\n        const value = row[3];\n\n        globalOrgUnit = orgUnit; \n\n        dataValues.push({\n            dataElement,\n            period,\n            orgUnit,\n            value\n        });\n    }\n}\n\nreturn [\n  {\n    json: {\n      dataSet: dataSetId,\n      completeDate: completeDate,\n      orgUnit: globalOrgUnit,\n      dataValues: dataValues\n    }\n  }\n];"
+          },
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            224,
+            0
+          ],
+          "id": "bb2e93ac-6789-44ab-9c0b-cd89f2387fa8",
+          "name": "Code"
+        },
+        {
+          "parameters": {},
+          "type": "n8n-nodes-base.manualTrigger",
+          "typeVersion": 1,
+          "position": [
+            -816,
+            192
+          ],
+          "id": "683ee0fd-8444-4e8f-b085-7f6809cd4e94",
+          "name": "When clicking ‘Test workflow’"
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{$json}}",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            464,
+            352
+          ],
+          "id": "9ebeef09-d969-4431-b5fd-c012b5413232",
+          "name": "DHIS2_Pivot2",
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "UVeaJ4eIQxUebty4",
+              "name": "Conn_DHIS2_Pivot"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{$json}}",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            464,
+            0
+          ],
+          "id": "1ec1fa41-90f4-4543-8d12-bdcc476f0a57",
+          "name": "DHIS2_Pivot",
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "UVeaJ4eIQxUebty4",
+              "name": "Conn_DHIS2_Pivot"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "batchSize": 6,
+            "options": {}
+          },
+          "type": "n8n-nodes-base.splitInBatches",
+          "typeVersion": 3,
+          "position": [
+            -304,
+            192
+          ],
+          "id": "8515da1d-b248-4726-8147-8f53755fcdba",
+          "name": "Loop Over Items"
+        },
+        {
+          "parameters": {
+            "jsCode": "const results = [];\nconst today = new Date();\n\nfor (let i = 1; i <= 6; i++) {  // on commence à 1 pour exclure le mois courant\n    const date = new Date(today.getFullYear(), today.getMonth() - i, 1);\n\n    const year = date.getFullYear();\n    const month = String(date.getMonth() + 1).padStart(2, '0');\n\n    results.push({\n        json: {\n            period: `${year}${month}`\n        }\n    });\n}\n\nreturn results;"
+          },
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            -528,
+            192
+          ],
+          "id": "a2871c52-00c6-47db-8335-6dbdef3cdc8c",
+          "name": "Periode"
+        },
+        {
+          "parameters": {
+            "url": "=https://ministere-sante.mg/api/analytics?dimension=dx:lq38tLcfEi7&dimension=ou:k3WrjJA0lAl;EJAuqgyM0TQ;WALimJEIpus;sE1tC31Jr1Z;LTkwgna8nWH;ETF5u6dEzRV;lcJ6Bn6Xwbr;vhRYxLPJeDi;usKgUaPXahQ;LgRsvkPQthm;tHhNGMv20B3;v0y8WKasENm;s5v62m0wukR;zCTwJPToyHS;fSMfRSl9h7r&dimension=pe:{{ $json.period }}",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            0,
+            0
+          ],
+          "id": "3c7cb9e0-16bc-4874-b532-dfd97650de4c",
+          "name": "DHIS2_Min_Commune_Ifanadiana",
+          "alwaysOutputData": true,
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "pmwseXFBUqiCkCYK",
+              "name": "conn_DHIS2_Ministere"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "url": "=https://ministere-sante.mg/api/analytics?dimension=dx:lq38tLcfEi7&dimension=ou:GYSCXYZyrek;IT92EGQN5FN;U00nCsiYB9S;QPACPpUC77X;erOl0D2daik;YoyYA1sPIr0;BQHvkzmyffh;mE5xB9TUGss;dQ4aXQtXbVx;cGXqEpgBovt;E6eLYKByJmd;hzZzd9siYaF;YTN1CUuKUUl;N5y82gledGB;Z2QJL736a3b;P1AKBUXiEsA;e0nxoW7wh5M;CQOywOI6An4;U5nHlgKm1fe&dimension=pe:{{ $json.period }}",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            0,
+            352
+          ],
+          "id": "3cd6262f-cf4f-46c3-8593-46b48465aa86",
+          "name": "DHIS2_Min_Commune_Nosy varika",
+          "alwaysOutputData": true,
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "pmwseXFBUqiCkCYK",
+              "name": "conn_DHIS2_Ministere"
+            }
+          }
+        }
+      ],
+      "connections": {
+        "Code3": {
+          "main": [
+            [
+              {
+                "node": "DHIS2_Pivot2",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Code": {
+          "main": [
+            [
+              {
+                "node": "DHIS2_Pivot",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "When clicking ‘Test workflow’": {
+          "main": [
+            [
+              {
+                "node": "Periode",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Loop Over Items": {
+          "main": [
+            [],
+            [
+              {
+                "node": "DHIS2_Min_Commune_Ifanadiana",
+                "type": "main",
+                "index": 0
+              },
+              {
+                "node": "DHIS2_Min_Commune_Nosy varika",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Periode": {
+          "main": [
+            [
+              {
+                "node": "Loop Over Items",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Min_Commune_Ifanadiana": {
+          "main": [
+            [
+              {
+                "node": "Code",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Min_Commune_Nosy varika": {
+          "main": [
+            [
+              {
+                "node": "Code3",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "settings": {
+        "executionOrder": "v1",
+        "binaryMode": "separate",
+        "availableInMCP": false
+      },
+      "staticData": null,
+      "meta": null,
+      "pinData": {},
+      "versionId": "5c73cb84-c806-48b1-b851-d385316c05fd",
+      "activeVersionId": null,
+      "triggerCount": 0,
+      "shared": [
+        {
+          "updatedAt": "2026-03-04T13:09:41.407Z",
+          "createdAt": "2026-03-04T13:09:41.407Z",
+          "role": "workflow:owner",
+          "workflowId": "wqdftbXLycL0Lhbj",
+          "projectId": "ALqsZgjbH7k1av6W"
+        }
+      ],
+      "activeVersion": null,
+      "tags": []
+    },
+    {
+      "updatedAt": "2026-03-04T13:20:06.760Z",
+      "createdAt": "2026-03-04T13:10:11.916Z",
+      "id": "y8ACrKIFY6AD0hbN",
+      "name": "Integration_analytics_District",
+      "active": false,
+      "isArchived": false,
+      "nodes": [
+        {
+          "parameters": {},
+          "type": "n8n-nodes-base.manualTrigger",
+          "typeVersion": 1,
+          "position": [
+            -784,
+            192
+          ],
+          "id": "c7bcd22e-11c8-4480-a92f-3c8d8ae910a4",
+          "name": "When clicking ‘Test workflow’"
+        },
+        {
+          "parameters": {
+            "jsCode": "const results = [];\nconst today = new Date();\n\nfor (let i = 1; i <= 3; i++) {  // on commence à 1 pour exclure le mois courant\n    const date = new Date(today.getFullYear(), today.getMonth() - i, 1);\n\n    const year = date.getFullYear();\n    const month = String(date.getMonth() + 1).padStart(2, '0');\n\n    results.push({\n        json: {\n            period: `${year}${month}`\n        }\n    });\n}\n\nreturn results;"
+          },
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            -496,
+            192
+          ],
+          "id": "a1d03b98-163f-4883-b001-dc7ea0e276fc",
+          "name": "Periode"
+        },
+        {
+          "parameters": {
+            "batchSize": 3,
+            "options": {}
+          },
+          "type": "n8n-nodes-base.splitInBatches",
+          "typeVersion": 3,
+          "position": [
+            -288,
+            192
+          ],
+          "id": "bf4c83d2-bf04-42cd-bbe0-8456b02249a9",
+          "name": "Loop Over Items"
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{$json}}",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            528,
+            0
+          ],
+          "id": "ba989604-e4f3-49e6-9079-f7b98bca661c",
+          "name": "DHIS2_Pivot",
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "UVeaJ4eIQxUebty4",
+              "name": "Conn_DHIS2_Pivot"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{$json}}",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            544,
+            208
+          ],
+          "id": "0dfacab7-143c-4c61-8b3e-c484019fe48e",
+          "name": "DHIS2_Pivot1",
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "UVeaJ4eIQxUebty4",
+              "name": "Conn_DHIS2_Pivot"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "https://www.dhis2-pivot.org/prod/api/dataValueSets",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={{$json}}",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            544,
+            400
+          ],
+          "id": "0fc4b72e-b067-4f0f-9f99-8cea0f92f4d0",
+          "name": "DHIS2_Pivot2",
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "UVeaJ4eIQxUebty4",
+              "name": "Conn_DHIS2_Pivot"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "url": "https://ministere-sante.mg/api/dataValueSets?",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendQuery": true,
+            "queryParameters": {
+              "parameters": [
+                {
+                  "name": "dataSet",
+                  "value": "XH4MSdxFKe5"
+                },
+                {
+                  "name": "period",
+                  "value": "={{ $json.period }}"
+                },
+                {
+                  "name": "orgUnit",
+                  "value": "GDBYpa6pDOe"
+                }
+              ]
+            },
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            0,
+            0
+          ],
+          "id": "055c68f6-d6e7-45f4-b2a2-18c491c69985",
+          "name": "DHIS2_Min_Ifanadiana",
+          "alwaysOutputData": true,
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "pmwseXFBUqiCkCYK",
+              "name": "conn_DHIS2_Ministere"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "url": "https://ministere-sante.mg/api/dataValueSets?",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendQuery": true,
+            "queryParameters": {
+              "parameters": [
+                {
+                  "name": "dataSet",
+                  "value": "XH4MSdxFKe5"
+                },
+                {
+                  "name": "period",
+                  "value": "={{ $json.period }}"
+                },
+                {
+                  "name": "orgUnit",
+                  "value": "cPkdD7UhXmn"
+                }
+              ]
+            },
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            0,
+            208
+          ],
+          "id": "dd265bd4-664f-41da-8387-9f2fdf00b2fe",
+          "name": "DHIS2_Min_Manajary",
+          "alwaysOutputData": true,
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "pmwseXFBUqiCkCYK",
+              "name": "conn_DHIS2_Ministere"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "url": "https://ministere-sante.mg/api/dataValueSets?",
+            "authentication": "genericCredentialType",
+            "genericAuthType": "httpBasicAuth",
+            "sendQuery": true,
+            "queryParameters": {
+              "parameters": [
+                {
+                  "name": "dataSet",
+                  "value": "XH4MSdxFKe5"
+                },
+                {
+                  "name": "period",
+                  "value": "={{ $json.period }}"
+                },
+                {
+                  "name": "orgUnit",
+                  "value": "GM6MGTic1DQ"
+                }
+              ]
+            },
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.2,
+          "position": [
+            0,
+            400
+          ],
+          "id": "9cd811d3-5e6c-47e9-8ef9-81459ab66f8d",
+          "name": "DHIS2_Min_Nosy_varika",
+          "alwaysOutputData": true,
+          "credentials": {
+            "httpBasicAuth": {
+              "id": "pmwseXFBUqiCkCYK",
+              "name": "conn_DHIS2_Ministere"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "jsCode": "return items.map(item => {\n\n    const newItem = { ...item.json };\n\n    // Modifier dataSet\n    newItem.dataSet = \"sTdqwhFX0qj\";\n\n    // Mettre completeDate à null\n    newItem.completeDate = null;\n\n    // Si dataValues existe, on peut aussi modifier dedans si nécessaire\n    if (newItem.dataValues && Array.isArray(newItem.dataValues)) {\n        newItem.dataValues = newItem.dataValues.map(dv => ({\n            ...dv\n        }));\n    }\n\n    return {\n        json: newItem\n    };\n});"
+          },
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            272,
+            0
+          ],
+          "id": "5aa149d8-fa4d-4cc8-84bf-3ce0a4a9d026",
+          "name": "Code"
+        },
+        {
+          "parameters": {
+            "jsCode": "return items.map(item => {\n\n    const newItem = { ...item.json };\n\n    // Modifier dataSet\n    newItem.dataSet = \"sTdqwhFX0qj\";\n\n    // Mettre completeDate à null\n    newItem.completeDate = null;\n\n    // Si dataValues existe, on peut aussi modifier dedans si nécessaire\n    if (newItem.dataValues && Array.isArray(newItem.dataValues)) {\n        newItem.dataValues = newItem.dataValues.map(dv => ({\n            ...dv\n        }));\n    }\n\n    return {\n        json: newItem\n    };\n});"
+          },
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            288,
+            208
+          ],
+          "id": "d0d3ca92-7158-45c0-aaa4-bcf0c5e125d8",
+          "name": "Code1"
+        },
+        {
+          "parameters": {
+            "jsCode": "return items.map(item => {\n\n    const newItem = { ...item.json };\n\n    // Modifier dataSet\n    newItem.dataSet = \"sTdqwhFX0qj\";\n\n    // Mettre completeDate à null\n    newItem.completeDate = null;\n\n    // Si dataValues existe, on peut aussi modifier dedans si nécessaire\n    if (newItem.dataValues && Array.isArray(newItem.dataValues)) {\n        newItem.dataValues = newItem.dataValues.map(dv => ({\n            ...dv\n        }));\n    }\n\n    return {\n        json: newItem\n    };\n});"
+          },
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            288,
+            400
+          ],
+          "id": "84f8ee03-91a6-4779-8829-bdc79cad04cd",
+          "name": "Code2"
+        }
+      ],
+      "connections": {
+        "When clicking ‘Test workflow’": {
+          "main": [
+            [
+              {
+                "node": "Periode",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Periode": {
+          "main": [
+            [
+              {
+                "node": "Loop Over Items",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Loop Over Items": {
+          "main": [
+            [],
+            [
+              {
+                "node": "DHIS2_Min_Ifanadiana",
+                "type": "main",
+                "index": 0
+              },
+              {
+                "node": "DHIS2_Min_Manajary",
+                "type": "main",
+                "index": 0
+              },
+              {
+                "node": "DHIS2_Min_Nosy_varika",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Min_Ifanadiana": {
+          "main": [
+            [
+              {
+                "node": "Code",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Min_Manajary": {
+          "main": [
+            [
+              {
+                "node": "Code1",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "DHIS2_Min_Nosy_varika": {
+          "main": [
+            [
+              {
+                "node": "Code2",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Code": {
+          "main": [
+            [
+              {
+                "node": "DHIS2_Pivot",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Code1": {
+          "main": [
+            [
+              {
+                "node": "DHIS2_Pivot1",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Code2": {
+          "main": [
+            [
+              {
+                "node": "DHIS2_Pivot2",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "settings": {
+        "executionOrder": "v1",
+        "binaryMode": "separate",
+        "availableInMCP": false
+      },
+      "staticData": null,
+      "meta": null,
+      "pinData": {},
+      "versionId": "b7df8c7f-55f3-4f1a-86f6-1e9a9bc04397",
+      "activeVersionId": null,
+      "triggerCount": 0,
+      "shared": [
+        {
+          "updatedAt": "2026-03-04T13:10:11.918Z",
+          "createdAt": "2026-03-04T13:10:11.918Z",
+          "role": "workflow:owner",
+          "workflowId": "y8ACrKIFY6AD0hbN",
+          "projectId": "ALqsZgjbH7k1av6W"
+        }
+      ],
+      "activeVersion": null,
+      "tags": []
+    }
+  ],
+  "nextCursor": null
+}
