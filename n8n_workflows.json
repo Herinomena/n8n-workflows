@@ -447,6 +447,314 @@
       "tags": []
     },
     {
+      "updatedAt": "2026-03-05T06:58:12.178Z",
+      "createdAt": "2026-03-05T06:57:54.373Z",
+      "id": "55HuGich99UG4lk8",
+      "name": "autre_trigger",
+      "active": false,
+      "isArchived": false,
+      "nodes": [
+        {
+          "parameters": {},
+          "type": "n8n-nodes-base.manualTrigger",
+          "typeVersion": 1,
+          "position": [
+            -528,
+            176
+          ],
+          "id": "f0328a0e-4722-4081-9c20-a91dbb237706",
+          "name": "When clicking ‘Execute workflow’"
+        },
+        {
+          "parameters": {
+            "operation": "executeQuery",
+            "query": "SELECT \n    cc.name AS 'Centre hospitalière',\n    rpse.name AS Service,\n    p.numero AS Numero,\n    p.name AS 'Nom et prénom',\n    IF(p.gender = 2, 'Masculin', 'Féminin') AS Sexe,\n    p.age AS Age,\n    CASE p.age_unity\n        WHEN 0 THEN 'Jour'\n        WHEN 1 THEN 'Mois'\n        WHEN 2 THEN 'Ans'\n    END AS 'Unite d\\'age',\n    c.name AS Commune,\n    f.name AS fokontany,\n    rpst.name AS 'Statut PEC',\n    ccr.name AS 'Centre transferant',\n    rpe.motif AS 'Motif d\\'entree',\n    rps.diagnosticFinal AS 'Diagnostic final',\n    rpts.name AS 'Type de sortie',\n    DATE(rpc.dateEntree) AS 'Date d\\'entrée controle',\n    DATE(rpc.dateSortie) AS 'Date de sortie controle',\n    rpc.numero AS 'Numero controle',\n    rpc.description AS 'Description controle',\n    rpc.dateSuiviControle AS 'Date suivi controle',\n    r.observation AS 'Observation',\n    rpe.info_medicale AS 'Information medicale'\nFROM\n    register AS r\n        LEFT JOIN\n    patient AS p ON p.id = r.patient_id\n        LEFT JOIN\n    fokontany AS f ON p.fokontany_id = f.id\n        LEFT JOIN\n    commune AS c ON f.commune_id = c.id\n        LEFT JOIN\n    register_pec_entry AS rpe ON rpe.register_id = r.id\n        LEFT JOIN\n    register_pec_sortie AS rps ON rps.register_id = r.id\n        LEFT JOIN\n    register_pec_type_sortie AS rpts ON rpts.id = rps.type_sortie_id\n        LEFT JOIN\n    register_pec_service AS rpse ON rpse.id = rpe.service_id\n        LEFT JOIN\n    register_pec_statut AS rpst ON rpst.id = rpe.statut_id\n        LEFT JOIN\n    care_center_projet AS ccp ON r.care_center_projet_id = ccp.id\n        LEFT JOIN\n    projet AS pr ON ccp.projet_id = pr.id\n        LEFT JOIN\n    program AS pg ON pg.id = pr.program_id\n        LEFT JOIN\n    care_center AS cc ON ccp.care_center_id = cc.id\n        LEFT JOIN\n    chrd AS ch ON ch.care_center_id = cc.id\n        LEFT JOIN\n    district AS d ON d.id = ch.district_id\n        LEFT JOIN\n    register_pec_reference AS rpr ON rpr.entry_id = rpe.id\n        LEFT JOIN\n    care_center AS ccr ON rpr.care_center_transferant_id = ccr.id\n        LEFT JOIN\n    register_pec_controle AS rpc ON rpc.sortie_id = rps.id\nWHERE\n    pr.name LIKE 'Couverture médicale CHRD'\n     AND YEAR(rpc.dateEntree) = YEAR(CURRENT_DATE)\n\t AND MONTH(rpc.dateEntree) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)\n     and cc.name = 'Ifanadiana'\nORDER BY rpc.dateEntree ASC",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.mySql",
+          "typeVersion": 2.5,
+          "position": [
+            -208,
+            -16
+          ],
+          "id": "06a08c8f-6108-48fa-bce8-03e537a26301",
+          "name": "controle_PEC_CHRD",
+          "alwaysOutputData": true,
+          "credentials": {
+            "mySql": {
+              "id": "VgQwKJZhAPgiv1Pu",
+              "name": "Con_base_distance"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "operation": "executeQuery",
+            "query": "SELECT \n    cc.name AS 'Centre hospitalière',\n    rpse.name AS Service,\n    p.numero AS Numero,\n    p.name AS 'Nom et prénom',\n    IF(p.gender = 2, 'Masculin', 'Féminin') AS Sexe,\n    p.age AS Age,\n    CASE p.age_unity\n        WHEN 0 THEN 'Jour'\n        WHEN 1 THEN 'Mois'\n        WHEN 2 THEN 'Ans'\n    END AS 'Unite d\\'age',\n    f.name AS fokontany,\n    c.name AS Commune,\n    DATE(rpe.date) AS 'Date d\\'entrée',\n    DATE(rps.date) AS 'Date de sortie',\n    rpst.name AS 'Statut PEC',\n    IF(rpe.is_refered = 1, 'Oui', 'Non') AS 'Referée ?',\n    ccr.name AS 'Centre transferant',\n    rpmt.name AS 'Moyen de transport',\n    rpe.motif AS 'Motif d\\'entree',\n    rps.diagnosticFinal AS 'Diagnostic final',\n    rpts.name AS 'Type de sortie',\n    rps.dateFirstControl AS 'Date controle',\n    r.observation AS 'Observation',\n    rpe.info_medicale AS 'Information medicale'\nFROM\n    register AS r\n        LEFT JOIN\n    patient AS p ON p.id = r.patient_id\n        LEFT JOIN\n    fokontany AS f ON p.fokontany_id = f.id\n        LEFT JOIN\n    commune AS c ON f.commune_id = c.id\n        LEFT JOIN\n    register_pec_entry AS rpe ON rpe.register_id = r.id\n        LEFT JOIN\n    register_pec_sortie AS rps ON rps.register_id = r.id\n        LEFT JOIN\n    register_pec_type_sortie AS rpts ON rpts.id = rps.type_sortie_id\n        LEFT JOIN\n    register_pec_service AS rpse ON rpse.id = rpe.service_id\n        LEFT JOIN\n    register_pec_statut AS rpst ON rpst.id = rpe.statut_id\n        LEFT JOIN\n    register_pec_reference AS ref ON ref.entry_id = rpe.id\n        LEFT JOIN\n    register_pec_moyen_transport AS rpmt ON rpmt.id = ref.moyen_transport_id\n        LEFT JOIN\n    care_center_projet AS ccp ON r.care_center_projet_id = ccp.id\n        LEFT JOIN\n    projet AS pr ON ccp.projet_id = pr.id\n        LEFT JOIN\n    program AS pg ON pg.id = pr.program_id\n        LEFT JOIN\n    care_center AS cc ON ccp.care_center_id = cc.id\n        LEFT JOIN\n    chrd AS ch ON ch.care_center_id = cc.id\n        LEFT JOIN\n    district AS d ON d.id = ch.district_id\n        LEFT JOIN\n    register_pec_reference AS rpr ON rpr.entry_id = rpe.id\n        LEFT JOIN\n    care_center AS ccr ON rpr.care_center_transferant_id = ccr.id\nWHERE\n    pr.name LIKE 'Couverture médicale CHRD'\n  AND YEAR(rpe.date) = YEAR(CURRENT_DATE)\n  AND MONTH(rpe.date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)\n  and cc.name = 'Ifanadiana'",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.mySql",
+          "typeVersion": 2.5,
+          "position": [
+            -208,
+            176
+          ],
+          "id": "f3f08664-16d7-40f3-8035-80fd423ad00e",
+          "name": "Patient_PEC_CHRD_Entre",
+          "credentials": {
+            "mySql": {
+              "id": "VgQwKJZhAPgiv1Pu",
+              "name": "Con_base_distance"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "operation": "executeQuery",
+            "query": "SELECT \n    cc.name AS 'Centre hospitalière',\n    rpse.name AS Service,\n    p.numero AS Numero,\n    p.name AS 'Nom et prénom',\n    IF(p.gender = 2, 'Masculin', 'Féminin') AS Sexe,\n    p.age AS Age,\n    CASE p.age_unity\n        WHEN 0 THEN 'Jour'\n        WHEN 1 THEN 'Mois'\n        WHEN 2 THEN 'Ans'\n    END AS 'Unite d\\'age',\n    f.name AS fokontany,\n    c.name AS Commune,\n    DATE(rpe.date) AS 'Date d\\'entrée',\n    DATE(rps.date) AS 'Date de sortie',\n    rpst.name AS 'Statut PEC',\n    IF(rpe.is_refered = 1, 'Oui', 'Non') AS 'Referée ?',\n    ccr.name AS 'Centre transferant',\n    rpmt.name AS 'Moyen de transport',\n    rpe.motif AS 'Motif d\\'entree',\n    rps.diagnosticFinal AS 'Diagnostic final',\n    rpts.name AS 'Type de sortie',\n    rps.dateFirstControl AS 'Date controle',\n    r.observation AS 'Observation',\n    rpe.info_medicale AS 'Information medicale'\nFROM\n    register AS r\n        LEFT JOIN\n    patient AS p ON p.id = r.patient_id\n        LEFT JOIN\n    fokontany AS f ON p.fokontany_id = f.id\n        LEFT JOIN\n    commune AS c ON f.commune_id = c.id\n        LEFT JOIN\n    register_pec_entry AS rpe ON rpe.register_id = r.id\n        LEFT JOIN\n    register_pec_sortie AS rps ON rps.register_id = r.id\n        LEFT JOIN\n    register_pec_type_sortie AS rpts ON rpts.id = rps.type_sortie_id\n        LEFT JOIN\n    register_pec_service AS rpse ON rpse.id = rpe.service_id\n        LEFT JOIN\n    register_pec_statut AS rpst ON rpst.id = rpe.statut_id\n        LEFT JOIN\n    register_pec_reference AS ref ON ref.entry_id = rpe.id\n        LEFT JOIN\n    register_pec_moyen_transport AS rpmt ON rpmt.id = ref.moyen_transport_id\n        LEFT JOIN\n    care_center_projet AS ccp ON r.care_center_projet_id = ccp.id\n        LEFT JOIN\n    projet AS pr ON ccp.projet_id = pr.id\n        LEFT JOIN\n    program AS pg ON pg.id = pr.program_id\n        LEFT JOIN\n    care_center AS cc ON ccp.care_center_id = cc.id\n        LEFT JOIN\n    chrd AS ch ON ch.care_center_id = cc.id\n        LEFT JOIN\n    district AS d ON d.id = ch.district_id\n        LEFT JOIN\n    register_pec_reference AS rpr ON rpr.entry_id = rpe.id\n        LEFT JOIN\n    care_center AS ccr ON rpr.care_center_transferant_id = ccr.id\nWHERE\n    pr.name LIKE 'Couverture médicale CHRD'\n     AND YEAR(rps.date) = YEAR(CURRENT_DATE)\n\t AND MONTH(rps.date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)\n     and cc.name = 'Ifanadiana'\n     ",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.mySql",
+          "typeVersion": 2.5,
+          "position": [
+            -208,
+            368
+          ],
+          "id": "e36e7ed5-8037-4ac5-860d-450192244dce",
+          "name": "Patient_PEC_CHRD_Sortie",
+          "credentials": {
+            "mySql": {
+              "id": "VgQwKJZhAPgiv1Pu",
+              "name": "Con_base_distance"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "operation": "xlsx",
+            "binaryPropertyName": "=data",
+            "options": {
+              "fileName": "=Controle_PEC_CHRD_{{ new Date(new Date().setMonth(new Date().getMonth() - 1)).getFullYear() }}_{{ (new Date(new Date().setMonth(new Date().getMonth() - 1)).getMonth() + 1).toString().padStart(2, '0') }}.xlsx"
+            }
+          },
+          "type": "n8n-nodes-base.convertToFile",
+          "typeVersion": 1.1,
+          "position": [
+            48,
+            -16
+          ],
+          "id": "e9c4a907-6dec-48f3-9976-fb564797ab27",
+          "name": "Convert to File",
+          "alwaysOutputData": true
+        },
+        {
+          "parameters": {
+            "operation": "xlsx",
+            "binaryPropertyName": "=data_1",
+            "options": {
+              "fileName": "=Patient_PEC_CHRD_Entre_{{ new Date(new Date().setMonth(new Date().getMonth() - 1)).getFullYear() }}_{{ (new Date(new Date().setMonth(new Date().getMonth() - 1)).getMonth() + 1).toString().padStart(2, '0') }}.xlsx"
+            }
+          },
+          "type": "n8n-nodes-base.convertToFile",
+          "typeVersion": 1.1,
+          "position": [
+            48,
+            176
+          ],
+          "id": "7c23f050-1267-4501-899f-aae2e8add86d",
+          "name": "Convert to File1"
+        },
+        {
+          "parameters": {
+            "operation": "xlsx",
+            "binaryPropertyName": "=data_2",
+            "options": {
+              "fileName": "=Patient_PEC_CHRD_Sortie_{{ new Date(new Date().setMonth(new Date().getMonth() - 1)).getFullYear() }}_{{ (new Date(new Date().setMonth(new Date().getMonth() - 1)).getMonth() + 1).toString().padStart(2, '0') }}.xlsx"
+            }
+          },
+          "type": "n8n-nodes-base.convertToFile",
+          "typeVersion": 1.1,
+          "position": [
+            64,
+            368
+          ],
+          "id": "4c68bc3e-2da8-40e3-84fc-00a9583c5797",
+          "name": "Convert to File2"
+        },
+        {
+          "parameters": {
+            "sendTo": "a.herinomena11@gmail.com",
+            "subject": "=Données Mois de {{ DateTime.now().minus({ months: 1 }).setLocale('fr').toFormat('MMMM yyyy') }}",
+            "emailType": "text",
+            "message": "=Bonjour Hajarison.\n\nVoilà les données que vous m'avez demandées pour le mois de {{ DateTime.now().minus({ months: 1 }).toFormat('MM-yyyy') }}. \n\nCordialement. \nHerinomena",
+            "options": {
+              "attachmentsUi": {
+                "attachmentsBinary": [
+                  {
+                    "property": "data,data_1,data_2"
+                  }
+                ]
+              }
+            }
+          },
+          "type": "n8n-nodes-base.gmail",
+          "typeVersion": 2.2,
+          "position": [
+            608,
+            192
+          ],
+          "id": "4bfbca9a-e75f-4a44-a77a-c3a58ac98ff3",
+          "name": "Send a message",
+          "webhookId": "33caf1de-c8e3-40aa-925d-4bde13cff2bd",
+          "credentials": {
+            "gmailOAuth2": {
+              "id": "JLUOnFkRnPFAVX6O",
+              "name": "Gmail account"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "mode": "combine",
+            "combineBy": "combineByPosition",
+            "numberInputs": 3,
+            "options": {}
+          },
+          "type": "n8n-nodes-base.merge",
+          "typeVersion": 3.2,
+          "position": [
+            416,
+            176
+          ],
+          "id": "16ab476e-bbeb-4e59-a132-b7e8906c384f",
+          "name": "Merge",
+          "alwaysOutputData": true
+        }
+      ],
+      "connections": {
+        "When clicking ‘Execute workflow’": {
+          "main": [
+            [
+              {
+                "node": "controle_PEC_CHRD",
+                "type": "main",
+                "index": 0
+              },
+              {
+                "node": "Patient_PEC_CHRD_Entre",
+                "type": "main",
+                "index": 0
+              },
+              {
+                "node": "Patient_PEC_CHRD_Sortie",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "controle_PEC_CHRD": {
+          "main": [
+            [
+              {
+                "node": "Convert to File",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Patient_PEC_CHRD_Entre": {
+          "main": [
+            [
+              {
+                "node": "Convert to File1",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Patient_PEC_CHRD_Sortie": {
+          "main": [
+            [
+              {
+                "node": "Convert to File2",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Convert to File": {
+          "main": [
+            [
+              {
+                "node": "Merge",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Convert to File1": {
+          "main": [
+            [
+              {
+                "node": "Merge",
+                "type": "main",
+                "index": 1
+              }
+            ]
+          ]
+        },
+        "Convert to File2": {
+          "main": [
+            [
+              {
+                "node": "Merge",
+                "type": "main",
+                "index": 2
+              }
+            ]
+          ]
+        },
+        "Merge": {
+          "main": [
+            [
+              {
+                "node": "Send a message",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "settings": {
+        "executionOrder": "v1",
+        "binaryMode": "separate",
+        "availableInMCP": false
+      },
+      "staticData": null,
+      "meta": null,
+      "pinData": {},
+      "versionId": "bdd0ec42-1d3f-4313-9038-c6f02c20ba20",
+      "activeVersionId": null,
+      "triggerCount": 0,
+      "shared": [
+        {
+          "updatedAt": "2026-03-05T06:57:54.380Z",
+          "createdAt": "2026-03-05T06:57:54.380Z",
+          "role": "workflow:owner",
+          "workflowId": "55HuGich99UG4lk8",
+          "projectId": "ALqsZgjbH7k1av6W"
+        }
+      ],
+      "activeVersion": null,
+      "tags": []
+    },
+    {
       "updatedAt": "2026-03-04T13:09:02.263Z",
       "createdAt": "2026-03-04T13:09:02.263Z",
       "id": "6hXq57ceCkztXSFj",
@@ -823,6 +1131,189 @@
           "createdAt": "2026-03-04T13:09:02.264Z",
           "role": "workflow:owner",
           "workflowId": "6hXq57ceCkztXSFj",
+          "projectId": "ALqsZgjbH7k1av6W"
+        }
+      ],
+      "activeVersion": null,
+      "tags": []
+    },
+    {
+      "updatedAt": "2026-03-06T06:51:29.240Z",
+      "createdAt": "2026-03-06T06:34:06.185Z",
+      "id": "EgB9miOvqJ64aksU",
+      "name": "NPL to MySQL Agent",
+      "active": false,
+      "isArchived": false,
+      "nodes": [
+        {
+          "parameters": {
+            "options": {}
+          },
+          "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+          "typeVersion": 1.1,
+          "position": [
+            -64,
+            -64
+          ],
+          "id": "2e6ca198-3f33-4745-9ac0-3695eabf3b14",
+          "name": "Chat Trigger",
+          "webhookId": "fbef37c4-d5f3-4fec-bb94-e1bfe42eaff3"
+        },
+        {
+          "parameters": {
+            "options": {
+              "systemMessage": "Tu es un agent IA expert en bases de données MySQL.\nTon rôle est de traduire les requêtes en langage naturel de l'utilisateur en requêtes SQL valides pour la base de données MySQL fournie.\nEnsuite, tu vas utiliser tes outils pour exécuter la requête dans la base de données, analyser le résultat, et formuler une réponse claire et naturelle à l'utilisateur.\n\nRègles :\n- Ne supprime ou ne modifie jamais les données si l'utilisateur ne l'a pas explicitement demandé avec une forte insistance (évite les DROP ou DELETE autant que possible pour des raisons de sécurité).\n- Si la question de l'utilisateur n'est pas liée à la base de données, explique poliment que ce n'est pas ton rôle."
+            }
+          },
+          "type": "@n8n/n8n-nodes-langchain.agent",
+          "typeVersion": 1.7,
+          "position": [
+            160,
+            -64
+          ],
+          "id": "a7273ee4-da72-4f17-b2ff-7453c8391b94",
+          "name": "AI Agent"
+        },
+        {
+          "parameters": {
+            "model": "gpt-5-chat-latest",
+            "options": {}
+          },
+          "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+          "typeVersion": 1,
+          "position": [
+            16,
+            160
+          ],
+          "id": "0d05bd20-803c-4c85-bd04-eb185e1314dc",
+          "name": "OpenAI Chat Model",
+          "credentials": {
+            "openAiApi": {
+              "id": "AULY4lMtyR9vOuTb",
+              "name": "OpenAi account"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "operation": "executeQuery",
+            "query": "{{ $fromAI('query', 'La requête SQL à exécuter dans MySQL') }}",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.mySql",
+          "typeVersion": 2.3,
+          "position": [
+            592,
+            -64
+          ],
+          "id": "fd87bde8-1d45-4a08-b796-fac063d0607e",
+          "name": "MySQL",
+          "credentials": {
+            "mySql": {
+              "id": "glFz7x6x646ZUEVE",
+              "name": "con_Base_pvt_locale"
+            }
+          }
+        },
+        {
+          "parameters": {
+            "name": "Executer_Requete_MySQL",
+            "description": "Outil qui permet d'exécuter une requête SQL dans la base de données MySQL. Fournis la requête SQL en argument.",
+            "requireParam": true,
+            "parameters": [
+              {
+                "name": "query",
+                "type": "string",
+                "description": "La requête SQL valide à exécuter dans la base de données."
+              }
+            ]
+          },
+          "type": "@n8n/n8n-nodes-langchain.tool",
+          "typeVersion": 1.2,
+          "position": [
+            368,
+            176
+          ],
+          "id": "d4d34cda-8b60-41ff-bf2f-1686285f6648",
+          "name": "Tool: Exec SQL"
+        },
+        {
+          "parameters": {},
+          "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+          "typeVersion": 1.2,
+          "position": [
+            176,
+            144
+          ],
+          "id": "be7fc590-1f74-4e90-a8ce-7482dbb9e7d0",
+          "name": "Window Buffer Memory"
+        }
+      ],
+      "connections": {
+        "Chat Trigger": {
+          "main": [
+            [
+              {
+                "node": "AI Agent",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Window Buffer Memory": {
+          "ai_memory": [
+            [
+              {
+                "node": "AI Agent",
+                "type": "ai_memory",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "OpenAI Chat Model": {
+          "ai_languageModel": [
+            [
+              {
+                "node": "AI Agent",
+                "type": "ai_languageModel",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "AI Agent": {
+          "main": [
+            [
+              {
+                "node": "MySQL",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "settings": {
+        "executionOrder": "v1",
+        "binaryMode": "separate",
+        "availableInMCP": false
+      },
+      "staticData": null,
+      "meta": {
+        "templateCredsSetupCompleted": true
+      },
+      "pinData": {},
+      "versionId": "4999caa9-1225-422b-9851-3e3472b0c50c",
+      "activeVersionId": null,
+      "triggerCount": 0,
+      "shared": [
+        {
+          "updatedAt": "2026-03-06T06:34:06.187Z",
+          "createdAt": "2026-03-06T06:34:06.187Z",
+          "role": "workflow:owner",
+          "workflowId": "EgB9miOvqJ64aksU",
           "projectId": "ALqsZgjbH7k1av6W"
         }
       ],
@@ -1449,6 +1940,289 @@
           "createdAt": "2026-03-04T13:09:24.012Z",
           "role": "workflow:owner",
           "workflowId": "Vbo7lBZEqhleh2Vq",
+          "projectId": "ALqsZgjbH7k1av6W"
+        }
+      ],
+      "activeVersion": null,
+      "tags": []
+    },
+    {
+      "updatedAt": "2026-03-05T10:59:46.838Z",
+      "createdAt": "2026-03-05T08:09:49.481Z",
+      "id": "XROOIQsQVYFyKVne",
+      "name": "My workflow",
+      "active": false,
+      "isArchived": false,
+      "nodes": [
+        {
+          "parameters": {
+            "options": {}
+          },
+          "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+          "typeVersion": 1.4,
+          "position": [
+            -240,
+            0
+          ],
+          "id": "163e35ec-baa1-4781-b2b8-8101889ee26f",
+          "name": "When chat message received",
+          "webhookId": "c0fff55f-49e9-48e5-aaba-a3a91434225a"
+        },
+        {
+          "parameters": {
+            "method": "POST",
+            "url": "http://172.17.0.1:11434/api/chat",
+            "sendBody": true,
+            "specifyBody": "json",
+            "jsonBody": "={\n  \"model\": \"codellama:latest\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"{{ $json.chatInput }}\"\n    }\n  ],\n  \"stream\": false\n}",
+            "options": {}
+          },
+          "type": "n8n-nodes-base.httpRequest",
+          "typeVersion": 4.4,
+          "position": [
+            -16,
+            0
+          ],
+          "id": "df918721-6df1-41b9-acd4-dffaf6f931ce",
+          "name": "HTTP Request"
+        },
+        {
+          "parameters": {
+            "jsCode": "const response = $input.first().json;\nreturn {\n  response: response.message.content\n};"
+          },
+          "type": "n8n-nodes-base.code",
+          "typeVersion": 2,
+          "position": [
+            192,
+            0
+          ],
+          "id": "9f450b64-f8cf-4eb6-b41b-d39b08926c80",
+          "name": "Code in JavaScript"
+        }
+      ],
+      "connections": {
+        "When chat message received": {
+          "main": [
+            [
+              {
+                "node": "HTTP Request",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "HTTP Request": {
+          "main": [
+            [
+              {
+                "node": "Code in JavaScript",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "settings": {
+        "executionOrder": "v1",
+        "binaryMode": "separate",
+        "availableInMCP": false
+      },
+      "staticData": null,
+      "meta": {
+        "templateCredsSetupCompleted": true
+      },
+      "pinData": {},
+      "versionId": "b2b1655e-7f84-435f-bc76-2e390658be76",
+      "activeVersionId": null,
+      "triggerCount": 0,
+      "shared": [
+        {
+          "updatedAt": "2026-03-05T08:09:49.484Z",
+          "createdAt": "2026-03-05T08:09:49.484Z",
+          "role": "workflow:owner",
+          "workflowId": "XROOIQsQVYFyKVne",
+          "projectId": "ALqsZgjbH7k1av6W"
+        }
+      ],
+      "activeVersion": null,
+      "tags": []
+    },
+    {
+      "updatedAt": "2026-03-05T14:00:21.057Z",
+      "createdAt": "2026-03-05T14:00:21.057Z",
+      "id": "fVFVtuy3AvQWcJw4",
+      "name": "Chat with a database using AI",
+      "active": false,
+      "isArchived": false,
+      "nodes": [
+        {
+          "parameters": {
+            "content": "## Try me out\nClick the 'chat' button at the bottom of the canvas and paste in:\n\n_Which tables are available?_"
+          },
+          "id": "d08a2559-17fd-4bdb-a976-795c3823a88a",
+          "name": "Sticky Note",
+          "type": "n8n-nodes-base.stickyNote",
+          "position": [
+            368,
+            240
+          ],
+          "typeVersion": 1
+        },
+        {
+          "parameters": {
+            "content": "This workflow uses a Postgres DB, but you could swap it for a MySQL or SQLite one",
+            "height": 505,
+            "width": 677,
+            "color": 7
+          },
+          "id": "3019b559-6100-4ead-8e1a-a7dece2a6982",
+          "name": "Sticky Note1",
+          "type": "n8n-nodes-base.stickyNote",
+          "position": [
+            512,
+            -64
+          ],
+          "typeVersion": 1
+        },
+        {
+          "parameters": {
+            "options": {}
+          },
+          "id": "73786411-5383-4921-82ee-06b3b582bab7",
+          "name": "When chat message received",
+          "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+          "position": [
+            576,
+            48
+          ],
+          "webhookId": "1c0d08f0-abd0-4bdc-beef-370c27aae1a0",
+          "typeVersion": 1.1
+        },
+        {
+          "parameters": {
+            "operation": "executeQuery",
+            "query": "{{ $fromAI('sql_statement') }}",
+            "options": {}
+          },
+          "id": "e65a1558-e0c0-4c4a-a306-90dc6dcb618a",
+          "name": "Postgres",
+          "type": "n8n-nodes-base.postgresTool",
+          "position": [
+            1040,
+            272
+          ],
+          "typeVersion": 2.5
+        },
+        {
+          "parameters": {},
+          "id": "9df537e7-3ca2-4e72-bc85-ae0d944fbdd1",
+          "name": "Simple Memory",
+          "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+          "position": [
+            896,
+            272
+          ],
+          "typeVersion": 1.3
+        },
+        {
+          "parameters": {
+            "options": {}
+          },
+          "id": "57b2b959-9f25-475f-b6bb-842139725411",
+          "name": "AI Agent",
+          "type": "@n8n/n8n-nodes-langchain.agent",
+          "position": [
+            800,
+            48
+          ],
+          "typeVersion": 1.8
+        },
+        {
+          "parameters": {
+            "model": {
+              "__rl": true,
+              "mode": "list",
+              "value": "gpt-4o-mini"
+            },
+            "options": {}
+          },
+          "id": "f21ac2dc-56ff-4ea6-a29e-168e7dfaf3fa",
+          "name": "OpenAI Chat Model",
+          "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+          "position": [
+            736,
+            272
+          ],
+          "typeVersion": 1.2
+        }
+      ],
+      "connections": {
+        "Postgres": {
+          "ai_tool": [
+            [
+              {
+                "node": "AI Agent",
+                "type": "ai_tool",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "Simple Memory": {
+          "ai_memory": [
+            [
+              {
+                "node": "AI Agent",
+                "type": "ai_memory",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "OpenAI Chat Model": {
+          "ai_languageModel": [
+            [
+              {
+                "node": "AI Agent",
+                "type": "ai_languageModel",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "When chat message received": {
+          "main": [
+            [
+              {
+                "node": "AI Agent",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "settings": {
+        "executionOrder": "v1",
+        "binaryMode": "separate",
+        "availableInMCP": false
+      },
+      "staticData": null,
+      "meta": {
+        "templateId": "2090"
+      },
+      "pinData": {},
+      "versionId": "0732858e-18bc-45b2-a6b5-d25c818e3397",
+      "activeVersionId": null,
+      "triggerCount": 0,
+      "shared": [
+        {
+          "updatedAt": "2026-03-05T14:00:21.061Z",
+          "createdAt": "2026-03-05T14:00:21.061Z",
+          "role": "workflow:owner",
+          "workflowId": "fVFVtuy3AvQWcJw4",
           "projectId": "ALqsZgjbH7k1av6W"
         }
       ],
